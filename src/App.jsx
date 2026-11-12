@@ -22,6 +22,7 @@ import Footer from './components/Footer.jsx';
 import LegalDialog from './components/LegalDialog.jsx';
 import { useReveal } from './hooks/useReveal.js';
 import { useStructuredData } from './hooks/useStructuredData.js';
+import { useSeoHead } from './hooks/useSeoHead.js';
 
 export default function App() {
   /**
@@ -35,6 +36,7 @@ export default function App() {
 
   useReveal();
   useStructuredData();
+  useSeoHead();
 
   const choosePackage = useCallback((id) => {
     setSelectedPackage(id);

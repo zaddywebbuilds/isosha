@@ -40,7 +40,7 @@
 /* --------------------------------------------------------------------- */
 
 export const hero = {
-  eyebrow: 'Herbal eye-wellness supplement · Made for Nigeria',
+  eyebrow: 'Eye-wellness supplement · Nigeria',
   // PROBLEM. The moment of recognition, which almost every adult past forty
   // has had, and which nobody else in this market opens with. The body then
   // stacks three more recognitions so the reader is nodding before the

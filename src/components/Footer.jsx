@@ -16,7 +16,7 @@ function ContactLine({ icon, label, value, href }) {
         <Icon name={icon} className="w-4 h-4 mt-1 shrink-0" />
         <span className="text-[0.85rem]">
           {label}
-          <span className="block text-[0.72rem] italic mt-0.5">
+          <span className="block text-[0.74rem] italic mt-0.5">
             To be supplied by the client
           </span>
         </span>
@@ -76,7 +76,7 @@ export default function Footer({ onOpenLegal }) {
               </span>
               <span className="leading-none">
                 <span className="block font-serif text-xl">Netwill</span>
-                <span className="block eyebrow text-[0.56rem] text-gold mt-1">
+                <span className="block eyebrow text-[0.7rem] text-gold mt-1">
                   Herbals
                 </span>
               </span>
@@ -126,13 +126,13 @@ export default function Footer({ onOpenLegal }) {
 
           {/* Navigation */}
           <nav aria-label="Footer">
-            <h2 className="eyebrow text-[0.62rem] text-gold">Explore</h2>
-            <ul className="mt-5 space-y-2.5">
+            <h2 className="eyebrow text-[0.7rem] text-gold">Explore</h2>
+            <ul className="mt-2">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-[0.88rem] text-white/70 hover:text-gold transition-colors"
+                    className="inline-flex min-h-[2.75rem] items-center text-[0.88rem] text-white/70 hover:text-gold transition-colors"
                   >
                     {link.label}
                   </a>
@@ -141,7 +141,7 @@ export default function Footer({ onOpenLegal }) {
               <li>
                 <a
                   href="#order"
-                  className="text-[0.88rem] text-white/70 hover:text-gold transition-colors"
+                  className="inline-flex min-h-[2.75rem] items-center text-[0.88rem] text-white/70 hover:text-gold transition-colors"
                 >
                   Order
                 </a>
@@ -151,18 +151,18 @@ export default function Footer({ onOpenLegal }) {
 
           {/* Legal */}
           <div>
-            <h2 className="eyebrow text-[0.62rem] text-gold">Legal</h2>
-            <ul className="mt-5 space-y-2.5">
+            <h2 className="eyebrow text-[0.7rem] text-gold">Legal</h2>
+            <ul className="mt-2">
               {legalDocuments.map((doc) => (
                 <li key={doc.id}>
                   <button
                     type="button"
                     onClick={() => onOpenLegal(doc.id)}
-                    className="text-left text-[0.88rem] text-white/70 hover:text-gold transition-colors"
+                    className="inline-flex min-h-[2.75rem] items-center text-left text-[0.88rem] text-white/70 hover:text-gold transition-colors"
                   >
                     {doc.title}
                     {doc.draft && (
-                      <span className="ml-1.5 text-[0.65rem] text-gold/60 align-middle">
+                      <span className="ml-1.5 text-[0.7rem] text-gold/60 align-middle">
                         (draft)
                       </span>
                     )}
@@ -174,7 +174,7 @@ export default function Footer({ onOpenLegal }) {
 
           {/* Contact */}
           <div>
-            <h2 className="eyebrow text-[0.62rem] text-gold">Contact</h2>
+            <h2 className="eyebrow text-[0.7rem] text-gold">Contact</h2>
             <ul className="mt-5 space-y-3.5">
               <ContactLine
                 icon="phone"
@@ -205,7 +205,7 @@ export default function Footer({ onOpenLegal }) {
 
         {/* Regulatory strip */}
         <div className="mt-10 pt-6 border-t border-white/12">
-          <p className="text-[0.78rem] text-white/50 leading-relaxed max-w-4xl">
+          <p className="text-[0.8rem] text-white/50 leading-relaxed max-w-4xl">
             NAFDAC number supplied by the manufacturer:{' '}
             <span className="font-mono text-white/70">
               {regulatory.nafdacNumber}
@@ -214,7 +214,7 @@ export default function Footer({ onOpenLegal }) {
             . {regulatory.disclaimer}
           </p>
 
-          <div className="mt-7 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[0.78rem] text-white/45">
+          <div className="mt-7 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[0.8rem] text-white/45">
             <p>
               &copy; {year} {brand.name}. All rights reserved.
             </p>

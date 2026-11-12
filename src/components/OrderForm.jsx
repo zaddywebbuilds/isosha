@@ -139,7 +139,7 @@ export default function OrderForm({ selected, onSelect }) {
           <Eyebrow>{sections.order.eyebrow}</Eyebrow>
           <h2
             id="order-heading"
-            className="mt-5 text-[2.1rem] sm:text-4xl lg:text-[2.9rem] text-forest"
+            className="mt-5 text-[clamp(1.65rem,7.4vw,2.1rem)] sm:text-4xl lg:text-[2.9rem] text-forest"
           >
             {sections.order.headline}
           </h2>
@@ -174,7 +174,7 @@ export default function OrderForm({ selected, onSelect }) {
             className="reveal card p-6 sm:p-8"
           >
             <fieldset className="border-0 p-0 m-0">
-              <legend className="eyebrow text-[0.65rem] text-forest-line mb-4">
+              <legend className="eyebrow text-[0.7rem] text-forest-line mb-4">
                 Your package
               </legend>
 
@@ -209,7 +209,7 @@ export default function OrderForm({ selected, onSelect }) {
                       <span className="block mt-1 font-serif text-[1.3rem] text-forest leading-none">
                         {formatPrice(p.price)}
                       </span>
-                      <span className="block mt-1 text-[0.72rem] text-ink-soft">
+                      <span className="block mt-1 text-[0.74rem] text-ink-soft">
                         {p.title}
                       </span>
                     </button>
@@ -236,7 +236,7 @@ export default function OrderForm({ selected, onSelect }) {
                     ),
                   )}
                 </select>
-                <p className="mt-1.5 text-[0.75rem] text-ink-soft">
+                <p className="mt-1.5 text-[0.8rem] text-ink-soft">
                   Each unit is one whole {pkg.title.toLowerCase()}. Package
                   prices are not recombined.
                 </p>
@@ -246,7 +246,7 @@ export default function OrderForm({ selected, onSelect }) {
             <hr className="my-7 border-forest/10" />
 
             <fieldset className="border-0 p-0 m-0">
-              <legend className="eyebrow text-[0.65rem] text-forest-line mb-4">
+              <legend className="eyebrow text-[0.7rem] text-forest-line mb-4">
                 Your details
               </legend>
 
@@ -354,7 +354,7 @@ export default function OrderForm({ selected, onSelect }) {
                     value={values.notes}
                     onChange={update('notes')}
                   />
-                  <p className="mt-1.5 text-[0.75rem] text-ink-soft">
+                  <p className="mt-1.5 text-[0.8rem] text-ink-soft">
                     Please do not include medical or health information here.
                   </p>
                 </div>
@@ -383,7 +383,7 @@ export default function OrderForm({ selected, onSelect }) {
               </label>
               <p
                 id="consent-note"
-                className="mt-2.5 pl-8 text-[0.75rem] text-ink-soft leading-relaxed"
+                className="mt-2.5 pl-8 text-[0.8rem] text-ink-soft leading-relaxed"
               >
                 Your details are used only to process this order enquiry. See
                 the Privacy Policy for how information is handled.
@@ -440,11 +440,11 @@ export default function OrderForm({ selected, onSelect }) {
               </div>
 
               <div className="mt-5 pt-5 border-t border-white/20">
-                <p className="eyebrow text-[0.6rem] text-gold">Total</p>
+                <p className="eyebrow text-[0.7rem] text-gold">Total</p>
                 <p className="mt-1.5 font-serif text-[2.4rem] leading-none">
                   {formatPrice(total)}
                 </p>
-                <p className="mt-2.5 text-[0.76rem] text-white/60 leading-relaxed">
+                <p className="mt-2.5 text-[0.8rem] text-white/60 leading-relaxed">
                   Delivery is not included. The delivery charge for your
                   location is confirmed by the seller before dispatch.
                 </p>
@@ -467,8 +467,8 @@ export default function OrderForm({ selected, onSelect }) {
               <p className="mt-4 rounded-xl border border-dashed border-gold-deep bg-[#fdf8e3] p-3.5 text-[0.8rem] text-[#5b4a05] leading-relaxed">
                 A WhatsApp ordering button appears here once the client&rsquo;s
                 real WhatsApp number is added to{' '}
-                <code className="font-mono text-[0.85em]">contact.whatsapp</code>{' '}
-                in <code className="font-mono text-[0.85em]">src/config/site.js</code>.
+                <code className="font-mono text-[0.92em]">contact.whatsapp</code>{' '}
+                in <code className="font-mono text-[0.92em]">src/config/site.js</code>.
                 No placeholder number is shown, so no stranger is called by
                 mistake.
               </p>
@@ -495,7 +495,7 @@ function Req() {
 function FieldError({ id, message, className = '' }) {
   if (!message) return null;
   return (
-    <p id={id} className={`mt-1.5 text-[0.78rem] font-medium text-red-700 ${className}`}>
+    <p id={id} className={`mt-1.5 text-[0.8rem] font-medium text-red-700 ${className}`}>
       {message}
     </p>
   );

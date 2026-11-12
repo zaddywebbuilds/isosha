@@ -121,7 +121,7 @@ export default function TrustInformation() {
           <Eyebrow>{sections.trust.eyebrow}</Eyebrow>
           <h2
             id="trust-heading"
-            className="mt-5 text-[2.1rem] sm:text-4xl lg:text-[2.9rem] text-forest"
+            className="mt-5 text-[clamp(1.65rem,7.4vw,2.1rem)] sm:text-4xl lg:text-[2.9rem] text-forest"
           >
             {sections.trust.headline}
           </h2>

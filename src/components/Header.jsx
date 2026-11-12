@@ -30,7 +30,7 @@ function Logo({ compact = false }) {
       </span>
       <span className="leading-none">
         <span className="block font-serif text-lg text-white">Netwill</span>
-        <span className="block eyebrow text-[0.58rem] text-gold mt-0.5">
+        <span className="block eyebrow text-[0.7rem] text-gold mt-0.5">
           Herbals
         </span>
       </span>
@@ -101,7 +101,7 @@ export default function Header() {
           <button
             ref={toggleRef}
             type="button"
-            className="lg:hidden grid place-items-center w-11 h-11 rounded-full border border-white/25 text-white"
+            className="lg:hidden grid place-items-center w-11 h-11 shrink-0 rounded-full border border-white/25 text-white"
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? 'Close menu' : 'Open menu'}

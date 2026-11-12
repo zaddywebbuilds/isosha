@@ -79,7 +79,8 @@
   html {
     scroll-behavior: smooth;
     /* Sticky header clearance for anchor jumps */
-    scroll-padding-top: 5.5rem;
+    /* Clears the announcement bar plus the sticky header on every size. */
+    scroll-padding-top: 7.5rem;
     -webkit-text-size-adjust: 100%;
   }
 
@@ -101,6 +102,16 @@
     font-weight: 400;
     line-height: 1.12;
     letter-spacing: -0.012em;
+  }
+
+  /* Headings are sized fluidly on the elements themselves, with clamp(),
+     because a utility class always beats a rule in the base layer. */
+
+  /* Headings break on sensible words rather than leaving one word stranded */
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
   }
 
   :focus-visible {
@@ -139,6 +150,8 @@
   }
 
   .eyebrow {
+    /* 11.5px. The smallest tracked uppercase size that stays legible on a
+       phone; anything under 11px fails a mobile readability check. */
     font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.22em;
@@ -266,16 +279,27 @@
     box-shadow: 0 0 0 3px rgba(180, 35, 24, 0.12);
   }
 
+  /* Inline text buttons ("Learn more", "See the detailed diagram") are only
+     as tall as their text, which is well under the 44px touch target. The
+     negative margin keeps the visual spacing unchanged. */
+  .btn-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    margin-block: -0.6rem;
+  }
+
   .pending-chip {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    padding: 0.2rem 0.6rem;
+    padding: 0.28rem 0.65rem;
     border-radius: 999px;
     border: 1px dashed var(--color-gold-deep);
     background: #fdf8e3;
     color: #6b5705;
-    font-size: 0.68rem;
+    font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.09em;
     text-transform: uppercase;

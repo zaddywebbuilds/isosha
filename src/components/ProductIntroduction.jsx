@@ -30,7 +30,7 @@ export default function ProductIntroduction() {
             <span className="font-serif text-3xl leading-none">
               {product.capsulesPerBottle}
             </span>
-            <span className="eyebrow text-[0.52rem] text-gold mt-1">
+            <span className="eyebrow text-[0.7rem] text-gold mt-1">
               Capsules
             </span>
           </div>
@@ -41,7 +41,7 @@ export default function ProductIntroduction() {
           <Eyebrow>{about.eyebrow}</Eyebrow>
           <h2
             id="about-heading"
-            className="mt-5 text-[2.1rem] sm:text-4xl lg:text-[2.9rem] text-forest"
+            className="mt-5 text-[clamp(1.65rem,7.4vw,2.1rem)] sm:text-4xl lg:text-[2.9rem] text-forest"
           >
             {about.headline}
           </h2>

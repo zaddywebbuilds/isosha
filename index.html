@@ -14,12 +14,16 @@
     <meta name="keywords" content="eye supplement Nigeria, herbal eye supplement, vitamins for eye health, Isosha, Netwill Herbals, eye care supplement Lagos" />
 
     <!--
-      CANONICAL URL: add the live domain before launch, e.g.
-      <link rel="canonical" href="https://isosha.ng/" />
-      Also set `seo.canonical` in src/config/site.js so the structured data matches.
+      The canonical URL and every absolute social URL come from `siteUrl`
+      in src/config/site.js. Change that one constant when a custom domain
+      is connected and these tags, the sitemap and the structured data all
+      follow. The absolute URLs below are rewritten at runtime by
+      src/hooks/useSeoHead.js.
     -->
 
     <!-- Open Graph -->
+    <link rel="canonical" href="https://zaddywebbuilds.github.io/isosha/" />
+    <meta property="og:url" content="https://zaddywebbuilds.github.io/isosha/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Netwill Herbals" />
     <meta property="og:locale" content="en_NG" />
@@ -28,7 +32,7 @@
       property="og:description"
       content="The daily eye-wellness capsule for Nigerian adults over 30. Four botanicals, four vitamins, one capsule a day. 30 capsules per bottle, from ₦21,500 with delivery nationwide."
     />
-    <meta property="og:image" content="assets/images/isosha-bottle-display-1200.webp" />
+    <meta property="og:image" content="https://zaddywebbuilds.github.io/isosha/assets/images/isosha-bottle-display-1200.webp" />
     <meta property="og:image:alt" content="A bottle of Isosha Herbal Capsules by Netwill Herbals, 30 capsules per bottle" />
 
     <!-- X / Twitter -->
@@ -38,7 +42,17 @@
       name="twitter:description"
       content="The daily eye-wellness capsule for Nigerian adults over 30. Four botanicals, four vitamins, one capsule a day. 30 capsules per bottle, from ₦21,500 with delivery nationwide."
     />
-    <meta name="twitter:image" content="assets/images/isosha-bottle-display-1200.webp" />
+    <meta name="twitter:image" content="https://zaddywebbuilds.github.io/isosha/assets/images/isosha-bottle-display-1200.webp" />
+
+    <!-- LCP: the hero bottle. Preloaded at the width phones actually fetch. -->
+    <link
+      rel="preload"
+      as="image"
+      href="assets/images/isosha-bottle-display-500.webp"
+      imagesrcset="assets/images/isosha-bottle-display-500.webp 500w, assets/images/isosha-bottle-display-900.webp 900w, assets/images/isosha-bottle-display-1200.webp 1200w"
+      imagesizes="(min-width: 1024px) 38vw, (min-width: 640px) 60vw, 82vw"
+      fetchpriority="high"
+    />
 
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="favicon.svg" />

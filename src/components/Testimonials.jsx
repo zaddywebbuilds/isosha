@@ -27,7 +27,7 @@ export default function Testimonials() {
             <Eyebrow>Customer feedback</Eyebrow>
             <h2
               id="reviews-heading"
-              className="mt-5 text-[2.1rem] sm:text-4xl text-forest"
+              className="mt-5 text-[clamp(1.65rem,7.4vw,2.1rem)] sm:text-4xl text-forest"
             >
               {hasReviews ? 'What customers say' : 'Reviews, once they are real'}
             </h2>
@@ -70,7 +70,7 @@ export default function Testimonials() {
                     <span className="block h-2.5 rounded-full bg-forest/8 w-[78%]" />
                     <span className="block h-2.5 rounded-full bg-forest/8 w-[55%]" />
                   </div>
-                  <p className="mt-5 pt-4 border-t border-forest/10 text-[0.78rem] text-ink-soft">
+                  <p className="mt-5 pt-4 border-t border-forest/10 text-[0.8rem] text-ink-soft">
                     {i === 0
                       ? 'A verified customer review will appear here.'
                       : 'Reserved for a verified review.'}

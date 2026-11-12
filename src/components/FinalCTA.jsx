@@ -37,7 +37,7 @@ export default function FinalCTA() {
             <div className="w-14 h-px bg-gold mb-7" aria-hidden="true" />
             <h2
               id="final-cta-heading"
-              className="text-[2.2rem] sm:text-4xl lg:text-[3.1rem] leading-[1.08]"
+              className="text-[clamp(1.7rem,7.8vw,2.2rem)] sm:text-4xl lg:text-[3.1rem] leading-[1.08]"
             >
               {sections.finalCta.headlineLead}
               <br />

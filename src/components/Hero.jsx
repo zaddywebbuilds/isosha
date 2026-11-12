@@ -36,7 +36,7 @@ export default function Hero() {
 
             <h1
               id="hero-heading"
-              className="mt-5 text-[2.6rem] leading-[1.06] sm:text-5xl lg:text-[4.1rem] text-white"
+              className="mt-5 text-[clamp(2rem,9.6vw,2.6rem)] leading-[1.06] sm:text-5xl lg:text-[4.1rem] text-white"
             >
               {hero.headlineLead}
               <br />
@@ -62,7 +62,7 @@ export default function Hero() {
 
             <dl className="mt-8 grid grid-cols-3 gap-4 max-w-md border-t border-white/15 pt-6">
               <div>
-                <dt className="eyebrow text-[0.6rem] text-gold/80">Per bottle</dt>
+                <dt className="eyebrow text-[0.7rem] text-gold/80">Per bottle</dt>
                 <dd className="mt-1.5 font-serif text-2xl">
                   {product.capsulesPerBottle}
                   <span className="text-sm font-sans text-white/60 ml-1.5">
@@ -71,13 +71,13 @@ export default function Hero() {
                 </dd>
               </div>
               <div>
-                <dt className="eyebrow text-[0.6rem] text-gold/80">Dosage</dt>
+                <dt className="eyebrow text-[0.7rem] text-gold/80">Dosage</dt>
                 <dd className="mt-1.5 font-serif text-2xl">
                   1<span className="text-sm font-sans text-white/60 ml-1.5">daily</span>
                 </dd>
               </div>
               <div>
-                <dt className="eyebrow text-[0.6rem] text-gold/80">Vitamins</dt>
+                <dt className="eyebrow text-[0.7rem] text-gold/80">Vitamins</dt>
                 <dd className="mt-1.5 font-serif text-2xl leading-none">
                   A<span className="text-white/35">·</span>B2
                   <span className="text-white/35">·</span>C

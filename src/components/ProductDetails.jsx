@@ -70,7 +70,7 @@ export default function ProductDetails() {
           <Eyebrow>{sections.details.eyebrow}</Eyebrow>
           <h2
             id="details-heading"
-            className="mt-5 text-[2.1rem] sm:text-4xl lg:text-[2.9rem] text-forest"
+            className="mt-5 text-[clamp(1.65rem,7.4vw,2.1rem)] sm:text-4xl lg:text-[2.9rem] text-forest"
           >
             {sections.details.headline}
           </h2>
@@ -87,14 +87,14 @@ export default function ProductDetails() {
                 key={fact.label}
                 className="py-4 border-b border-forest/10"
               >
-                <dt className="eyebrow text-[0.6rem] text-forest-line">
+                <dt className="eyebrow text-[0.7rem] text-forest-line">
                   {fact.label}
                 </dt>
                 <dd className="mt-1.5 text-[1rem] text-ink font-medium">
                   {fact.value}
                 </dd>
                 {fact.note && (
-                  <dd className="text-[0.78rem] text-ink-soft mt-0.5">
+                  <dd className="text-[0.8rem] text-ink-soft mt-0.5">
                     {fact.note}
                   </dd>
                 )}
@@ -110,7 +110,7 @@ export default function ProductDetails() {
           </p>
 
           <div className="mt-10">
-            <h3 className="eyebrow text-[0.65rem] text-forest-line mb-1">
+            <h3 className="eyebrow text-[0.7rem] text-forest-line mb-1">
               Further label information
             </h3>
             {productInfoPanels.map((panel) => (

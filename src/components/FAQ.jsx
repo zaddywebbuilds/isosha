@@ -69,7 +69,7 @@ export default function FAQ() {
           <Eyebrow>{sections.faq.eyebrow}</Eyebrow>
           <h2
             id="faq-heading"
-            className="mt-5 text-[2.1rem] sm:text-4xl lg:text-[2.9rem] text-forest"
+            className="mt-5 text-[clamp(1.65rem,7.4vw,2.1rem)] sm:text-4xl lg:text-[2.9rem] text-forest"
           >
             {sections.faq.headline}
           </h2>

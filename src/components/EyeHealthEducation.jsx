@@ -95,7 +95,7 @@ function ConditionCard({ item, index }) {
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-controls={panelId}
-          className="mt-5 inline-flex items-center gap-2 self-start text-[0.85rem] font-bold text-forest hover:text-leaf transition-colors"
+          className="btn-inline mt-6 self-start text-[0.85rem] font-bold text-forest hover:text-leaf transition-colors"
         >
           {open ? 'Show less' : 'Learn more'}
           <Icon
@@ -121,7 +121,7 @@ function AnatomyFigure() {
         className="w-full"
       />
       <figcaption className="p-6 sm:p-8 border-t border-forest/10">
-        <p className="eyebrow text-[0.62rem] text-forest-line">
+        <p className="eyebrow text-[0.7rem] text-forest-line">
           The eye, labelled
         </p>
         <p className="mt-2.5 text-[0.9rem] text-ink-soft leading-relaxed">
@@ -136,7 +136,7 @@ function AnatomyFigure() {
           onClick={() => setDetail((v) => !v)}
           aria-expanded={detail}
           aria-controls="anatomy-detail"
-          className="mt-5 inline-flex items-center gap-2 text-[0.85rem] font-bold text-forest hover:text-leaf transition-colors"
+          className="btn-inline mt-6 text-[0.85rem] font-bold text-forest hover:text-leaf transition-colors"
         >
           {detail ? 'Hide the detailed diagram' : 'See the detailed diagram'}
           <Icon
@@ -175,7 +175,7 @@ export default function EyeHealthEducation() {
           <Eyebrow>{eyeHealth.eyebrow}</Eyebrow>
           <h2
             id="eye-health-heading"
-            className="mt-5 text-[2.1rem] sm:text-4xl lg:text-[2.9rem] leading-[1.08] text-forest"
+            className="mt-5 text-[clamp(1.65rem,7.4vw,2.1rem)] sm:text-4xl lg:text-[2.9rem] leading-[1.08] text-forest"
           >
             {eyeHealth.headline}
           </h2>

@@ -31,7 +31,7 @@ export default function ProductHighlights() {
                 <p className="font-semibold text-[0.9rem] sm:text-[0.95rem] leading-snug">
                   {item.label}
                 </p>
-                <p className="text-[0.75rem] sm:text-[0.78rem] text-white/55 leading-snug mt-0.5">
+                <p className="text-[0.8rem] sm:text-[0.8rem] text-white/55 leading-snug mt-0.5">
                   {item.detail}
                 </p>
               </div>

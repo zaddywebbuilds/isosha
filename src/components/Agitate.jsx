@@ -27,7 +27,7 @@ export default function Agitate() {
           <Eyebrow>{agitate.eyebrow}</Eyebrow>
           <h2
             id="agitate-heading"
-            className="mt-5 text-[2rem] sm:text-4xl lg:text-[2.75rem] leading-[1.08] text-forest"
+            className="mt-5 text-[clamp(1.6rem,7.2vw,2rem)] sm:text-4xl lg:text-[2.75rem] leading-[1.08] text-forest"
           >
             {agitate.headline}
           </h2>
@@ -72,7 +72,7 @@ export default function Agitate() {
             <div className="relative grid lg:grid-cols-[0.85fr_1.15fr] gap-8 lg:gap-12 items-start">
               <div>
                 <Eyebrow tone="gold">{agitate.turn.eyebrow}</Eyebrow>
-                <h3 className="mt-4 text-[1.7rem] sm:text-[2.1rem] leading-[1.1]">
+                <h3 className="mt-4 text-[clamp(1.45rem,6.2vw,1.7rem)] sm:text-[2.1rem] leading-[1.1]">
                   {agitate.turn.headline}
                 </h3>
               </div>

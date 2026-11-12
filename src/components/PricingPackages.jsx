@@ -25,7 +25,7 @@ function PackArt({ bottles }) {
       />
       <p className="absolute bottom-3 left-3 inline-flex items-baseline gap-1.5 rounded-full border border-gold/60 bg-forest-deep/85 px-3.5 py-1.5 text-white backdrop-blur-[2px]">
         <span className="font-serif text-lg leading-none">&times;{bottles}</span>
-        <span className="text-[0.68rem] font-bold tracking-[0.12em] uppercase text-gold">
+        <span className="text-[0.7rem] font-bold tracking-[0.12em] uppercase text-gold">
           bottle{bottles > 1 ? 's' : ''}
         </span>
       </p>
@@ -51,7 +51,7 @@ function PackageCard({ pkg, selected, onSelect }) {
       } ${isSelected ? 'ring-2 ring-leaf ring-offset-2 ring-offset-mist' : ''}`}
     >
       {pkg.badge && (
-        <p className="absolute top-4 right-4 z-10 rounded-full bg-gold px-3 py-1 text-[0.6rem] font-extrabold tracking-[0.18em] text-forest-deep">
+        <p className="absolute top-4 right-4 z-10 rounded-full bg-gold px-3 py-1 text-[0.7rem] font-extrabold tracking-[0.18em] text-forest-deep">
           {pkg.badge}
         </p>
       )}
@@ -144,7 +144,7 @@ export default function PricingPackages({ selected, onSelect }) {
           <Eyebrow>{copy.eyebrow}</Eyebrow>
           <h2
             id="packages-heading"
-            className="mt-5 text-[2.1rem] sm:text-4xl lg:text-[2.9rem] text-forest"
+            className="mt-5 text-[clamp(1.65rem,7.4vw,2.1rem)] sm:text-4xl lg:text-[2.9rem] text-forest"
           >
             {copy.headline}
           </h2>

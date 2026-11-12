@@ -85,13 +85,30 @@ export const formIntegration = {
 /* SEO                                                                   */
 /* --------------------------------------------------------------------- */
 
+/**
+ * The live origin, with no trailing slash.
+ *
+ * This must be absolute. Facebook, WhatsApp and X all refuse relative
+ * og:image paths, so a relative one means link previews show no picture at
+ * all, which matters here because WhatsApp is the main sharing channel.
+ *
+ * Change this one line when a custom domain is connected and the canonical
+ * URL, the Open Graph tags, the sitemap and the structured data all follow.
+ */
+export const siteUrl = 'https://zaddywebbuilds.github.io/isosha';
+
+/** Turns any site-relative asset path into an absolute URL. */
+export const absoluteUrl = (path = '') =>
+  `${siteUrl}/${String(path).replace(/^\/+/, '')}`;
+
 export const seo = {
   title: 'Isosha Herbal Capsules | Eye Wellness Supplement Nigeria',
   description:
     'Isosha Herbal Capsules: a daily eye-wellness supplement with turmeric, clove, ginger and black pepper, plus vitamins A and B2, which contribute to the maintenance of normal vision. 30 capsules per bottle. Delivery across Nigeria.',
-  // Set this to the live domain before launch, e.g. 'https://isosha.ng'
-  canonical: '',
+  canonical: `${siteUrl}/`,
   ogImage: 'assets/images/isosha-bottle-display-1200.webp',
+  ogImageAlt:
+    'A bottle of Isosha Herbal Capsules by Netwill Herbals, 30 capsules per bottle',
   locale: 'en_NG',
 };
 
@@ -313,4 +330,9 @@ export const navLinks = [
   { label: 'FAQs', href: '#faqs' },
 ];
 
+/**
+ * The long form wraps to two lines on a 320px screen, which costs 45px of a
+ * 720px viewport before the page has said anything. Phones get the short one.
+ */
 export const announcement = 'ISOSHA HERBAL CAPSULES · AVAILABLE IN NIGERIA';
+export const announcementShort = 'AVAILABLE ACROSS NIGERIA';

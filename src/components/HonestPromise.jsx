@@ -32,7 +32,7 @@ export default function HonestPromise() {
             <Eyebrow tone="gold">{promise.eyebrow}</Eyebrow>
             <h2
               id="promise-heading"
-              className="mt-5 text-[2rem] sm:text-[2.5rem] lg:text-[3rem] leading-[1.06]"
+              className="mt-5 text-[clamp(1.6rem,7.2vw,2rem)] sm:text-[2.5rem] lg:text-[3rem] leading-[1.06]"
             >
               {promise.headline}
             </h2>
@@ -55,7 +55,7 @@ export default function HonestPromise() {
                     // it is set as display type rather than body copy. Index 2
                     // because a bridging paragraph now opens the section.
                     i === 2
-                      ? 'font-serif text-[1.6rem] sm:text-[1.9rem] leading-snug text-white py-1'
+                      ? 'font-serif text-[clamp(1.35rem,5.8vw,1.6rem)] sm:text-[1.9rem] leading-snug text-white py-1'
                       : undefined
                   }
                 >

@@ -43,7 +43,7 @@ function BotanicalCard({ item, index }) {
         <h3 className="text-[1.5rem] leading-tight text-forest">
           {item.commonName}
         </h3>
-        <p className="mt-1 font-sans text-[0.78rem] italic tracking-wide text-gold-deep">
+        <p className="mt-1 font-sans text-[0.8rem] italic tracking-wide text-gold-deep">
           {item.botanicalName}
         </p>
 
@@ -122,7 +122,7 @@ function VitaminBand() {
                 />
               </div>
               <p className="mt-3 font-semibold text-[0.95rem]">{v.name}</p>
-              <p className="eyebrow mt-1 text-[0.58rem] text-leaf-soft">
+              <p className="eyebrow mt-1 text-[0.7rem] text-leaf-soft">
                 {v.role}
               </p>
               <p className="mt-3 text-[0.84rem] leading-relaxed text-white/60">
@@ -154,7 +154,7 @@ function CompoundCard({ item, index }) {
         <h4 className="font-sans font-bold text-[0.98rem] leading-snug text-forest">
           {item.name}
         </h4>
-        <p className="mt-1 text-[0.72rem] font-medium uppercase tracking-[0.1em] text-gold-deep">
+        <p className="mt-1 text-[0.74rem] font-medium uppercase tracking-[0.1em] text-gold-deep">
           Shown: {item.shows}
         </p>
         <p className="mt-2.5 text-[0.82rem] leading-relaxed text-ink-soft">
@@ -188,7 +188,7 @@ export default function Ingredients() {
           <Eyebrow>What&rsquo;s inside Isosha?</Eyebrow>
           <h2
             id="ingredients-heading"
-            className="mt-5 text-[2.1rem] sm:text-4xl lg:text-[3rem] leading-[1.08] text-forest"
+            className="mt-5 text-[clamp(1.65rem,7.4vw,2.1rem)] sm:text-4xl lg:text-[3rem] leading-[1.08] text-forest"
           >
             Nature-inspired ingredients,
             <br className="hidden sm:block" /> thoughtfully combined.
