@@ -119,3 +119,64 @@ for (const file of files) {
 }
 
 console.log(`\nImage set rebuilt: ${written} files.`);
+
+/* ------------------------------------------------------------------ */
+/* Social preview card                                                 */
+/*                                                                     */
+/* Built as a 1200x630 JPEG rather than reusing a product WebP.        */
+/* Two reasons: the product shot is portrait, so link previews crop it */
+/* badly, and WhatsApp's scraper is unreliable with WebP. WhatsApp is  */
+/* the main sharing channel for this product, so the card is a plain   */
+/* JPEG at the standard Open Graph ratio.                              */
+/* ------------------------------------------------------------------ */
+
+const OG_W = 1200;
+const OG_H = 630;
+
+const source = path.join(SRC, 'isosha-bottle-display.png');
+
+// A heavily blurred, darkened cover crop of the same photograph forms the
+// backdrop. Compositing the sharp bottle over it avoids the hard seam that
+// a flat colour panel leaves against the photo's own background.
+const backdrop = await sharp(source)
+  .resize({ width: OG_W, height: OG_H, fit: 'cover', position: 'centre' })
+  .blur(38)
+  .modulate({ brightness: 0.62, saturation: 1.1 })
+  .toBuffer();
+
+const INSET = Math.round(OG_H * 0.07);
+const cardH = OG_H - INSET * 2;
+
+const bottle = await sharp(source)
+  .resize({ height: cardH, fit: 'inside' })
+  .toBuffer();
+const bottleMeta = await sharp(bottle).metadata();
+
+// The product shot is a rectangular photograph, not a cut-out, so laying it
+// straight onto the backdrop leaves a hard edge where its own background
+// stops. Rounding the corners turns that edge into a deliberate frame, the
+// same treatment the hero uses on the site.
+const radius = 32;
+const mask = Buffer.from(
+  `<svg width="${bottleMeta.width}" height="${bottleMeta.height}">` +
+    `<rect x="0" y="0" width="${bottleMeta.width}" height="${bottleMeta.height}" ` +
+    `rx="${radius}" ry="${radius}" fill="#fff"/></svg>`,
+);
+
+const card = await sharp(bottle)
+  .composite([{ input: mask, blend: 'dest-in' }])
+  .png()
+  .toBuffer();
+
+await sharp(backdrop)
+  .composite([
+    {
+      input: card,
+      top: INSET,
+      left: Math.round(OG_W - bottleMeta.width - INSET * 1.4),
+    },
+  ])
+  .jpeg({ quality: 86, progressive: true, mozjpeg: true })
+  .toFile(path.join(OUT, 'isosha-social-card.jpg'));
+
+console.log('wrote', path.join(OUT, 'isosha-social-card.jpg'), '(1200x630 JPEG)');

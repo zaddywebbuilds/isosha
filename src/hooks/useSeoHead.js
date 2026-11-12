@@ -42,7 +42,8 @@ export function useSeoHead() {
     setMeta('meta[property="og:image"]', 'content', ogImage);
     setMeta('meta[property="og:image:alt"]', 'content', seo.ogImageAlt);
     setMeta('meta[property="og:image:width"]', 'content', '1200');
-    setMeta('meta[property="og:image:height"]', 'content', '1313');
+    setMeta('meta[property="og:image:height"]', 'content', '630');
+    setMeta('meta[property="og:image:type"]', 'content', 'image/jpeg');
     setMeta('meta[name="twitter:image"]', 'content', ogImage);
     setMeta('meta[name="twitter:image:alt"]', 'content', seo.ogImageAlt);
   }, []);

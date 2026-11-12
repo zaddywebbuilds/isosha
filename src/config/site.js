@@ -106,7 +106,14 @@ export const seo = {
   description:
     'Isosha Herbal Capsules: a daily eye-wellness supplement with turmeric, clove, ginger and black pepper, plus vitamins A and B2, which contribute to the maintenance of normal vision. 30 capsules per bottle. Delivery across Nigeria.',
   canonical: `${siteUrl}/`,
-  ogImage: 'assets/images/isosha-bottle-display-1200.webp',
+  /**
+   * A dedicated 1200x630 JPEG, not a product WebP. The product shot is
+   * portrait, so link previews crop it badly, and WhatsApp's scraper is
+   * unreliable with WebP. WhatsApp is the main sharing channel here, so the
+   * card is a plain progressive JPEG at the standard Open Graph ratio.
+   * Rebuilt by `npm run images`.
+   */
+  ogImage: 'assets/images/isosha-social-card.jpg',
   ogImageAlt:
     'A bottle of Isosha Herbal Capsules by Netwill Herbals, 30 capsules per bottle',
   locale: 'en_NG',
