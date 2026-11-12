@@ -230,6 +230,70 @@ export const images = {
     lifestyle: true,
     alt: 'A couple at home marking dates on a desk calendar together',
   },
+  /* ----------------------------------------------------------------- */
+  /* Ingredients                                                       */
+  /*                                                                   */
+  /* One coordinated set: square studio shots on the same cream sweep. */
+  /* Keys are referenced by `image` in src/config/ingredients.js, as    */
+  /* `ingredient-<id>` and `compound-<id>`.                            */
+  /* ----------------------------------------------------------------- */
+  'ingredient-turmeric': {
+    src: `${base}/ingredient-turmeric-760.webp`,
+    srcSet: `${base}/ingredient-turmeric-420.webp 420w, ${base}/ingredient-turmeric-760.webp 760w`,
+    width: 760,
+    height: 760,
+    alt: 'Fresh turmeric rhizomes with cut slices showing their deep orange flesh, beside green leaves',
+  },
+  'ingredient-clove': {
+    src: `${base}/ingredient-clove-760.webp`,
+    srcSet: `${base}/ingredient-clove-420.webp 420w, ${base}/ingredient-clove-760.webp 760w`,
+    width: 760,
+    height: 760,
+    alt: 'A pile of whole dried cloves beside two green leaves',
+  },
+  'ingredient-ginger': {
+    src: `${base}/ingredient-ginger-760.webp`,
+    srcSet: `${base}/ingredient-ginger-420.webp 420w, ${base}/ingredient-ginger-760.webp 760w`,
+    width: 760,
+    height: 760,
+    alt: 'Fresh ginger rhizomes with cut slices showing their pale yellow flesh, beside green leaves',
+  },
+  'ingredient-black-pepper': {
+    src: `${base}/ingredient-black-pepper-760.webp`,
+    srcSet: `${base}/ingredient-black-pepper-420.webp 420w, ${base}/ingredient-black-pepper-760.webp 760w`,
+    width: 760,
+    height: 760,
+    alt: 'Black peppercorns spilling from a small wooden scoop, with pepper vine leaves alongside',
+  },
+  'compound-lignans': {
+    src: `${base}/compound-lignans-560.webp`,
+    srcSet: `${base}/compound-lignans-320.webp 320w, ${base}/compound-lignans-560.webp 560w`,
+    width: 560,
+    height: 560,
+    alt: 'Bowls of brown flaxseed and pale sesame seed with flax flowers, shown as an illustration of lignans',
+  },
+  'compound-flavonoids': {
+    src: `${base}/compound-flavonoids-560.webp`,
+    srcSet: `${base}/compound-flavonoids-320.webp 320w, ${base}/compound-flavonoids-560.webp 560w`,
+    width: 560,
+    height: 560,
+    alt: 'Halved citrus fruit with grapes, berries and strawberries, shown as an illustration of flavonoids',
+  },
+  'compound-tannins': {
+    src: `${base}/compound-tannins-560.webp`,
+    srcSet: `${base}/compound-tannins-320.webp 320w, ${base}/compound-tannins-560.webp 560w`,
+    width: 560,
+    height: 560,
+    alt: 'Dark grapes, dried tea leaves and pieces of bark, shown as an illustration of tannins',
+  },
+  'compound-iridoid-glycosides': {
+    src: `${base}/compound-iridoid-glycosides-560.webp`,
+    srcSet: `${base}/compound-iridoid-glycosides-320.webp 320w, ${base}/compound-iridoid-glycosides-560.webp 560w`,
+    width: 560,
+    height: 560,
+    alt: 'Gardenia and honeysuckle flowers with noni fruit and goji berries, shown as an illustration of iridoid glycosides',
+  },
+
   coupleDecision: {
     src: `${base}/lifestyle-couple-decision-1400.webp`,
     srcSet: `${base}/lifestyle-couple-decision-800.webp 800w, ${base}/lifestyle-couple-decision-1400.webp 1400w`,

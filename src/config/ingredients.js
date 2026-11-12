@@ -3,50 +3,67 @@
  * -------------------------
  * Only the ingredient names supplied by the client appear here.
  * No quantities, percentages or strengths are stated anywhere, because none
- * have been supplied. Descriptions are botanical and factual. They do not
- * attribute a health outcome to the ingredient as used in this product.
+ * have been supplied. Descriptions say what the plant or compound class is.
+ * They never attribute a health outcome to the ingredient as used in this
+ * product.
+ *
+ * `photography` on each entry says what its image actually shows:
+ *
+ *   'ingredient'   A photograph of the botanical named on the card.
+ *   'illustrative' A photograph of plants commonly associated with that
+ *                  class of compound. It is NOT a photograph of the source
+ *                  material used in Isosha, and the site says so in the
+ *                  section itself, not only in this comment.
  */
 
 export const botanicals = [
   {
     id: 'turmeric',
+    image: 'turmeric',
+    photography: 'ingredient',
     botanicalName: 'Curcuma longa L.',
     commonName: 'Turmeric',
     description:
-      'Turmeric is a botanical ingredient obtained from the rhizome of Curcuma longa, a plant in the ginger family long used in cooking and traditional preparations across West Africa and Asia.',
+      'Turmeric is the rhizome of Curcuma longa, a plant in the ginger family. Its deep orange root has been used in cooking and traditional preparations across West Africa and Asia for centuries.',
     confirmed: true,
   },
   {
     id: 'clove',
+    image: 'clove',
+    photography: 'ingredient',
     botanicalName: 'Syzygium aromaticum',
     commonName: 'Clove',
     description:
-      'Clove comes from the dried flower buds of Syzygium aromaticum, an aromatic botanical recognised for its distinctive plant compounds.',
+      'Clove is the dried flower bud of Syzygium aromaticum, an evergreen tree. The buds are picked before they open and dried whole, which is what gives them their familiar aroma.',
     confirmed: true,
   },
   {
-    id: 'zingiber',
+    id: 'ginger',
+    image: 'ginger',
+    photography: 'ingredient',
     botanicalName: 'Zingiber',
-    commonName: 'Commonly associated with ginger',
+    commonName: 'Ginger',
     description:
-      'The ingredient declaration supplied by the manufacturer reads "Zingiber". Zingiber is a plant genus. The full botanical name is awaited from Netwill Herbals before the species is stated here.',
+      'Ginger is the rhizome of a plant in the genus Zingiber. The manufacturer’s declaration reads simply "Zingiber", so the full botanical name is awaited before the species is stated here.',
     confirmed: false,
-    pendingNote: 'Full botanical name pending confirmation',
+    pendingNote: 'Botanical species pending confirmation',
   },
   {
     id: 'black-pepper',
+    image: 'black-pepper',
+    photography: 'ingredient',
     botanicalName: 'Piper nigrum L.',
-    commonName: 'Black pepper',
+    commonName: 'Black Pepper',
     description:
-      'Black pepper is obtained from the dried fruit of Piper nigrum and carries naturally occurring plant compounds including piperine.',
+      'Black pepper is the dried unripe fruit of the Piper nigrum vine. The dried corns carry the plant compound piperine, which gives pepper its characteristic sharpness.',
     confirmed: true,
   },
 ];
 
 /**
- * Vitamin descriptions below are general nutrition facts about the vitamin,
- * drawn from standard nutritional references. They are deliberately NOT
- * phrased as outcomes this product delivers.
+ * Vitamin descriptions are general nutrition facts about the vitamin, drawn
+ * from standard nutritional references. They are deliberately NOT phrased as
+ * outcomes this product delivers, and no vitamin is given an image.
  */
 export const vitamins = [
   {
@@ -54,53 +71,76 @@ export const vitamins = [
     name: 'Vitamin A',
     role: 'Normal vision',
     description:
-      'Vitamin A is an essential nutrient. It contributes to the maintenance of normal vision and to the normal function of the immune system.',
+      'An essential nutrient that contributes to the maintenance of normal vision and to the normal function of the immune system.',
   },
   {
     id: 'vitamin-b2',
     name: 'Vitamin B2',
     role: 'Riboflavin',
     description:
-      'Riboflavin is a B-group vitamin. It contributes to the maintenance of normal vision and to normal energy-yielding metabolism.',
+      'A B-group vitamin that contributes to the maintenance of normal vision and to normal energy-yielding metabolism.',
   },
   {
     id: 'vitamin-c',
     name: 'Vitamin C',
     role: 'Antioxidant nutrient',
     description:
-      'Vitamin C is a water-soluble vitamin. It contributes to the protection of cells from oxidative stress and to normal collagen formation.',
+      'A water-soluble vitamin that contributes to the protection of cells from oxidative stress and to normal collagen formation.',
   },
   {
     id: 'vitamin-e',
     name: 'Vitamin E',
     role: 'Antioxidant nutrient',
     description:
-      'Vitamin E is a fat-soluble nutrient that contributes to the protection of cells from oxidative stress.',
+      'A fat-soluble nutrient that contributes to the protection of cells from oxidative stress.',
   },
 ];
 
 /**
- * Listed formulation components. These are classes of plant compounds rather
- * than dosed declarations, so they are presented as listed components only.
+ * Listed formulation components.
+ *
+ * These are classes of naturally occurring plant compounds, not individual
+ * plants. Each image shows plants that are well known sources of that class
+ * in general. None of them is a photograph of the source material used in
+ * Isosha, and the section states that plainly on the page.
  */
 export const compounds = [
   {
-    name: 'Lignan',
-    note: 'A class of plant compounds found in a range of seeds and botanicals.',
+    id: 'lignans',
+    image: 'lignans',
+    photography: 'illustrative',
+    name: 'Lignans',
+    shows: 'Flaxseed and sesame seed',
+    note: 'A class of plant compounds found in the seeds, grains and woody tissue of many plants.',
   },
   {
+    id: 'flavonoids',
+    image: 'flavonoids',
+    photography: 'illustrative',
     name: 'Flavonoids',
-    note: 'A large group of plant compounds widely present in fruits, vegetables and herbs.',
+    shows: 'Citrus fruit and berries',
+    note: 'A large family of plant compounds responsible for much of the colour in fruits, vegetables and flowers.',
   },
   {
+    id: 'tannins',
+    image: 'tannins',
+    photography: 'illustrative',
     name: 'Tannins',
-    note: 'Naturally occurring plant polyphenols found in many botanical materials.',
+    shows: 'Tea leaf, grape and bark',
+    note: 'Plant polyphenols found in tea, grape skins, bark and many other botanical materials.',
   },
   {
-    name: 'Iridoid glycosides',
-    note: 'A class of plant compounds occurring in several botanical families.',
+    id: 'iridoid-glycosides',
+    image: 'iridoid-glycosides',
+    photography: 'illustrative',
+    name: 'Iridoid Glycosides',
+    shows: 'Gardenia, honeysuckle, noni and goji',
+    note: 'A class of plant compounds occurring across several botanical families, among them Rubiaceae and Caprifoliaceae.',
   },
 ];
+
+export const illustrativeNote =
+  'Lignans, flavonoids, tannins and iridoid glycosides are classes of naturally occurring plant compounds rather than individual plants. The photographs above show plants commonly associated with each class. They are illustrative and are not photographs of the source materials used in Isosha.';
 
 export const quantitiesNote =
   'Ingredient quantities have not been supplied by the manufacturer and are therefore not stated. The full quantitative declaration appears on the approved product label.';

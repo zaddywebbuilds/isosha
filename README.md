@@ -90,11 +90,14 @@ Fill the value in and the real thing appears.
 Drop a corrected render into `original-assets/` under the same filename and
 re-run it. The originals total about 6 MB; the served set is about 0.9 MB.
 
-The ingredient cards use drawn botanical marks
-(`src/components/BotanicalMarks.jsx`) rather than stock photography, because
-no licensed turmeric, clove or pepper photographs were supplied and the brief
-rules out unrelated imagery. Swap them for an `<Img>` if real macro
-photography is supplied; the card layout does not need to change.
+The "Inside Isosha" section runs three tiers of decreasing visual weight: the
+four confirmed botanicals as large white cards with edge-to-edge photography,
+the four vitamins as a deep-green typographic band with no imagery, and the
+four classes of plant compounds as a compact row. The hierarchy is
+deliberate. The compound photographs illustrate a class of compound and are
+not photographs of the source material used in Isosha, so they do not carry
+the same weight as a confirmed ingredient. Each one is labelled with what it
+actually shows, and the section says so in full underneath.
 
 ---
 

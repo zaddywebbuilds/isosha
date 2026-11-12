@@ -67,9 +67,18 @@ in `public/assets/images/`. `src/config/site.js` maps each one to its place.
 | `eyecare-portrait-a` | Eye care in practice, second portrait |
 | `lifestyle-daily-routine` | Product information section |
 | `lifestyle-couple-decision` | Closing call to action |
+| `ingredient-turmeric` / `-clove` / `-ginger` / `-black-pepper` | The four large botanical cards in "Inside Isosha" |
+| `compound-lignans` / `-flavonoids` / `-tannins` / `-iridoid-glycosides` | The compact plant-compound row |
 
 Every photograph of a person is captioned or framed as lifestyle or
 educational photography, and never as a result from using the product.
+
+The four plant-compound photographs are labelled on the page with what each
+one actually shows ("Shown: flaxseed and sesame seed"), and the section states
+in full that they illustrate a class of compound and are not photographs of
+the source materials used in Isosha. Lignans, flavonoids, tannins and iridoid
+glycosides are classes of compounds, not single plants, so they are presented
+in a visually lighter tier than the four confirmed botanicals.
 
 ### One supplied image is deliberately not published
 
@@ -100,9 +109,6 @@ arrangements that do not exist. Worth supplying:
 - A **transparent cut-out** of the bottle (PNG with alpha) for flexible
   placement.
 - A genuine **two-bottle** and **three-bottle** photograph.
-- **Ingredient macro photography** (turmeric, clove, black pepper). The
-  ingredient cards currently use drawn botanical marks in the brand palette,
-  because the brief rules out unrelated stock ingredient photography.
 
 Keep the bottle label exactly as the manufacturer produced it. Do not
 regenerate the label text; composite the approved artwork onto a render and

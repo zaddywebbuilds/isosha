@@ -48,6 +48,19 @@ const RECIPES = {
   'lifestyle-daily-routine': [{ suffix: '', widths: [700, 1200] }],
   'lifestyle-couple-decision': [{ suffix: '', widths: [800, 1400] }],
 
+  // Ingredients ----------------------------------------------------------
+  // All eight are square studio shots on the same cream sweep, so they read
+  // as one coordinated set. Two widths each: the large botanical cards and
+  // the compact plant-compound row.
+  'ingredient-turmeric': [{ suffix: '', widths: [420, 760], aspect: 1 }],
+  'ingredient-clove': [{ suffix: '', widths: [420, 760], aspect: 1 }],
+  'ingredient-ginger': [{ suffix: '', widths: [420, 760], aspect: 1 }],
+  'ingredient-black-pepper': [{ suffix: '', widths: [420, 760], aspect: 1 }],
+  'compound-lignans': [{ suffix: '', widths: [320, 560], aspect: 1 }],
+  'compound-flavonoids': [{ suffix: '', widths: [320, 560], aspect: 1 }],
+  'compound-tannins': [{ suffix: '', widths: [320, 560], aspect: 1 }],
+  'compound-iridoid-glycosides': [{ suffix: '', widths: [320, 560], aspect: 1 }],
+
   /**
    * marketing-collage-NOT-FOR-SITE is deliberately absent.
    *
