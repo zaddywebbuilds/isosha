@@ -51,8 +51,10 @@ export default function HonestPromise() {
                 <p
                   key={i}
                   className={
-                    // The one-line refusal is the hinge of the whole page.
-                    i === 1
+                    // The one-line refusal is the hinge of the whole page, so
+                    // it is set as display type rather than body copy. Index 2
+                    // because a bridging paragraph now opens the section.
+                    i === 2
                       ? 'font-serif text-[1.6rem] sm:text-[1.9rem] leading-snug text-white py-1'
                       : undefined
                   }

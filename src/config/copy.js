@@ -41,24 +41,32 @@
 
 export const hero = {
   eyebrow: 'Herbal eye-wellness supplement · Made for Nigeria',
-  // The moment of recognition. Almost every adult over 40 has had it, and
-  // nobody else in this market opens with it.
+  // PROBLEM. The moment of recognition, which almost every adult past forty
+  // has had, and which nobody else in this market opens with. The body then
+  // stacks three more recognitions so the reader is nodding before the
+  // product is mentioned at all.
   headlineLead: 'You noticed it',
   headlineAccent: 'while reading.',
-  body: 'The light is never quite enough. You hold the page a little further away. Isosha Herbal Capsules is the daily eye-wellness supplement for Nigerian adults who have decided not to ignore it: a botanical formula with vitamins A and B2, which contribute to the maintenance of normal vision.',
+  body: 'First it was the small print. Then the phone, held a little further away. Then headlights at night, scattering more than they used to.',
+  bodyTwo:
+    'Your eyes have been telling you something for a while now. Most Nigerian adults wait years before they listen, and the waiting is the part that costs.',
   primaryCta: 'See Prices and Order',
-  secondaryCta: 'What is inside',
+  secondaryCta: 'Why it is happening',
 };
 
 /* --------------------------------------------------------------------- */
-/* THE POSITIONING SECTION                                                */
-/* This is the conversion engine of the page.                             */
+/* OBJECTION                                                              */
+/*                                                                        */
+/* PAS stage three, and the conversion engine of the page. It sits after  */
+/* Agitate because that is where the reader's doubt actually appears: not */
+/* "do I have a problem" but "is this another one of the lying ones".     */
 /* --------------------------------------------------------------------- */
 
 export const promise = {
-  eyebrow: 'Read this before you buy anything',
+  eyebrow: 'And then what?',
   headline: 'What Isosha will not tell you.',
   paragraphs: [
+    'So you book the examination. Then, like most people, you start looking for something you can do every day in between. That is the moment this market has been waiting for, and it is where the trouble starts.',
     'You have seen the adverts. Cure glaucoma in thirty days. Throw away your glasses. Dissolve cataract naturally. Perhaps you have already paid for one of them.',
     'Isosha is not going to say any of that.',
     'Glaucoma, cataract and myopia are medical conditions. They are found with equipment, by professionals, and they are managed by professionals. No capsule, herbal or otherwise, replaces your eye drops, your surgery or your prescription glasses. Anyone who tells you differently is selling you something, and it is not your sight.',
@@ -90,34 +98,63 @@ export const promise = {
 /* WHY NOW                                                                */
 /* --------------------------------------------------------------------- */
 
-export const whyNow = {
-  eyebrow: 'Why now',
-  headline: 'Your eyes are doing more work than they were built for.',
-  body: 'Nothing about modern Nigerian life is gentle on eyes. The pressures below are ordinary, daily and cumulative, and most of them are not going away.',
-  reasons: [
+/* --------------------------------------------------------------------- */
+/* AGITATE                                                                */
+/*                                                                        */
+/* Two movements. First the daily cost, which the reader already feels    */
+/* and has never seen written down. Then the reason waiting is expensive, */
+/* which is education, not a threat.                                      */
+/*                                                                        */
+/* The call to action of the second movement is "book an eye examination",*/
+/* not "buy this". That is deliberate. Pointing the reader at a           */
+/* professional at the exact moment they are most worried is the single   */
+/* most trust-building thing this page does, and it is the opposite of    */
+/* what every competitor does with the same fear.                         */
+/* --------------------------------------------------------------------- */
+
+export const agitate = {
+  eyebrow: 'The part nobody warns you about',
+  headline: 'It never announces itself. It just gets harder to ignore.',
+  body: 'There is no single morning you wake up and your sight has changed. It arrives as a series of small adjustments, each one small enough to explain away. You have probably made most of these already.',
+
+  // Each one is a specific, physical moment. No abstractions.
+  frictions: [
     {
-      icon: 'sun',
-      title: 'The strongest daylight on earth',
-      body: 'Nigeria sits close to the equator. Ultraviolet exposure is a recognised factor in how eyes age, and most people here get a great deal of it without ever thinking about it.',
+      icon: 'doc',
+      title: 'The arm stretch',
+      body: 'Holding your phone, a newspaper or your Bible further away than you used to, and turning the brightness up to find the words.',
+    },
+    {
+      icon: 'lens',
+      title: 'Headlights that scatter',
+      body: 'Driving at night takes more concentration than it did. Oncoming lights spread instead of staying where they should.',
     },
     {
       icon: 'focus',
-      title: 'Screens, all day',
-      body: 'Phones, laptops, POS terminals, late nights on WhatsApp. Close focus for hours is a demand on the eyes that simply did not exist a generation ago.',
+      title: 'The afternoon ache',
+      body: 'That tightness behind the eyes after a long stretch on a laptop or a POS terminal, and the headache that follows it home.',
     },
     {
-      icon: 'eye',
-      title: 'Examinations almost nobody has',
-      body: 'A great many Nigerian adults have never had a proper eye examination. Conditions that are easiest to manage early are the ones found late.',
-    },
-    {
-      icon: 'leaf',
-      title: 'Diets heavy on starch',
-      body: 'Eyes draw on nutrients that a starch-led diet does not always supply in quantity, vitamin A among them.',
+      icon: 'sun',
+      title: 'Never enough light',
+      body: 'Reading indoors means moving towards a window. In the evening you simply stop trying.',
     },
   ],
-  close:
-    'You cannot move the sun or give up your phone. What you can do is be deliberate about the part that is actually in your hands.',
+
+  // Second movement: why waiting is the expensive choice.
+  turn: {
+    eyebrow: 'Why waiting costs more than acting',
+    headline: 'The conditions that matter most are the quietest ones.',
+    points: [
+      'Glaucoma, the leading cause of irreversible blindness in Nigeria, usually causes no pain and no obvious symptom until a great deal of sight has already gone.',
+      'It runs in families, and it is both more common and often more aggressive among people of West African descent than almost anywhere else in the world.',
+      'Sight lost to it does not come back. What is caught early can be managed for decades.',
+      'And a great many Nigerian adults have never had a single proper eye examination.',
+    ],
+    closing:
+      'So here is the one thing on this page we would say even if we were not selling anything: book an eye examination. Not because of this product. Because you are over thirty, you live in Nigeria, and you have been putting it off.',
+    cta: 'Then come back and read the rest.',
+  },
 };
 
 /* --------------------------------------------------------------------- */

@@ -43,8 +43,11 @@ export default function Hero() {
               <span className="text-leaf-soft">{hero.headlineAccent}</span>
             </h1>
 
-            <p className="mt-6 text-white/75 text-[1.05rem] leading-relaxed max-w-lg">
+            <p className="mt-6 text-white/80 text-[1.08rem] leading-relaxed max-w-lg">
               {hero.body}
+            </p>
+            <p className="mt-3.5 text-white/60 text-[1.02rem] leading-relaxed max-w-lg">
+              {hero.bodyTwo}
             </p>
 
             <div className="mt-9 flex flex-col sm:flex-row gap-3">
@@ -52,7 +55,7 @@ export default function Hero() {
                 {hero.primaryCta}
                 <Icon name="arrow" className="w-4 h-4" />
               </a>
-              <a href="#ingredients" className="btn btn-ghost-light">
+              <a href="#why-now" className="btn btn-ghost-light">
                 {hero.secondaryCta}
               </a>
             </div>

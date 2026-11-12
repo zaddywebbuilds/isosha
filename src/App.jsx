@@ -4,7 +4,7 @@ import Header from './components/Header.jsx';
 import Hero from './components/Hero.jsx';
 import ProductHighlights from './components/ProductHighlights.jsx';
 import HonestPromise from './components/HonestPromise.jsx';
-import WhyNow from './components/WhyNow.jsx';
+import Agitate from './components/Agitate.jsx';
 import ProductIntroduction from './components/ProductIntroduction.jsx';
 import EyeHealthEducation from './components/EyeHealthEducation.jsx';
 import Ingredients from './components/Ingredients.jsx';
@@ -60,12 +60,21 @@ export default function App() {
       <Header />
 
       <main id="main">
+        {/*
+          PROBLEM -> AGITATE -> OBJECTION -> SOLUTION.
+
+          Hero states the problem in the reader's own experience. Agitate
+          makes the daily cost concrete and explains why waiting is
+          expensive. HonestPromise then answers the objection that stage
+          raises in this market, which is "every herbal product that
+          promises to fix this is lying". Only once that is answered does
+          the product get introduced. Moving HonestPromise above Agitate
+          would have it answering a doubt the reader has not felt yet.
+        */}
         <Hero />
         <ProductHighlights />
-        {/* The refusal comes before the pitch. That order is what makes the
-            pitch credible to a buyer who has been lied to before. */}
+        <Agitate />
         <HonestPromise />
-        <WhyNow />
         <ProductIntroduction />
         <EyeHealthEducation />
         <Ingredients />
