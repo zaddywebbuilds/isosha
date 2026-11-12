@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Add the live domain before launch, then uncomment:
+# Sitemap: https://example.com/sitemap.xml

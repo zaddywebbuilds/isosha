@@ -1,0 +1,24 @@
+{
+  "name": "isosha-herbal-capsules",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Product website for Isosha Herbal Capsules by Netwill Herbals",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "images": "node scripts/optimize-images.mjs"
+  },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.1.11",
+    "@vitejs/plugin-react": "4.3.4",
+    "sharp": "0.33.5",
+    "tailwindcss": "4.1.11",
+    "vite": "6.0.11"
+  }
+}
