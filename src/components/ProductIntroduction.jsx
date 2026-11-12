@@ -13,10 +13,10 @@ export default function ProductIntroduction() {
   return (
     <section
       id="about"
-      className="bg-cream py-16 md:py-24"
+      className="bg-cream py-12 md:py-16"
       aria-labelledby="about-heading"
     >
-      <div className="shell grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+      <div className="shell grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         {/* Image */}
         <figure className="reveal relative">
           <div className="overflow-hidden rounded-[1.5rem] border border-forest/10 bg-mist">

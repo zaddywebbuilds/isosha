@@ -51,10 +51,10 @@ export default function ProductDetails() {
   return (
     <section
       id="product-information"
-      className="bg-cream py-16 md:py-24"
+      className="bg-cream py-12 md:py-16"
       aria-labelledby="details-heading"
     >
-      <div className="shell grid lg:grid-cols-[0.85fr_1.15fr] gap-10 lg:gap-16 items-start">
+      <div className="shell grid lg:grid-cols-[0.85fr_1.15fr] gap-8 lg:gap-12 items-start">
         <figure className="reveal lg:sticky lg:top-28">
           <div className="overflow-hidden rounded-[1.5rem] border border-forest/10">
             <Img
@@ -63,11 +63,6 @@ export default function ProductDetails() {
               className="w-full aspect-[4/3] object-cover"
             />
           </div>
-          <figcaption className="mt-4 text-[0.78rem] text-ink-soft leading-relaxed">
-            One capsule daily means one bottle covers{' '}
-            {product.daysPerBottle} days. Lifestyle photography; it does not
-            depict a result from using the product.
-          </figcaption>
         </figure>
 
         <div className="reveal">

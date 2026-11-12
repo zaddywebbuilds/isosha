@@ -112,7 +112,7 @@ export default function TrustInformation() {
   return (
     <section
       id="trust"
-      className="bg-mist py-16 md:py-24"
+      className="bg-mist py-12 md:py-16"
       aria-labelledby="trust-heading"
     >
       <div className="shell">
@@ -131,7 +131,7 @@ export default function TrustInformation() {
           </p>
         </div>
 
-        <ul className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <ul className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {items.map((item, i) => (
             <li
               key={item.title}
@@ -150,7 +150,7 @@ export default function TrustInformation() {
           ))}
         </ul>
 
-        <p className="reveal mt-9 rounded-xl border border-forest/12 bg-white p-5 text-[0.84rem] text-ink-soft leading-relaxed max-w-4xl">
+        <p className="reveal mt-7 rounded-xl border border-forest/12 bg-white p-5 text-[0.84rem] text-ink-soft leading-relaxed max-w-4xl">
           {regulatory.disclaimer}
         </p>
       </div>

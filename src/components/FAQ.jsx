@@ -60,10 +60,10 @@ export default function FAQ() {
   return (
     <section
       id="faqs"
-      className="bg-mist py-16 md:py-24"
+      className="bg-mist py-12 md:py-16"
       aria-labelledby="faq-heading"
     >
-      <div className="shell grid lg:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-16 items-start">
+      <div className="shell grid lg:grid-cols-[0.8fr_1.2fr] gap-8 lg:gap-12 items-start">
         <div className="reveal lg:sticky lg:top-28">
           <Eyebrow>Questions</Eyebrow>
           <h2

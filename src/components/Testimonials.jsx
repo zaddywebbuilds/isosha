@@ -18,7 +18,7 @@ export default function Testimonials() {
 
   return (
     <section
-      className="bg-cream py-16 md:py-20"
+      className="bg-cream py-12 md:py-16"
       aria-labelledby="reviews-heading"
     >
       <div className="shell">

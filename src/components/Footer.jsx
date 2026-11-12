@@ -46,7 +46,7 @@ export default function Footer({ onOpenLegal }) {
 
   return (
     <footer className="bg-forest-deep text-white">
-      <div className="shell py-14 md:py-16">
+      <div className="shell py-11 md:py-12">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="lg:col-span-1">
@@ -204,7 +204,7 @@ export default function Footer({ onOpenLegal }) {
         </div>
 
         {/* Regulatory strip */}
-        <div className="mt-12 pt-7 border-t border-white/12">
+        <div className="mt-10 pt-6 border-t border-white/12">
           <p className="text-[0.78rem] text-white/50 leading-relaxed max-w-4xl">
             NAFDAC number supplied by the manufacturer:{' '}
             <span className="font-mono text-white/70">

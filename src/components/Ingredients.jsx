@@ -1,10 +1,4 @@
-import {
-  botanicals,
-  vitamins,
-  compounds,
-  illustrativeNote,
-  quantitiesNote,
-} from '../config/ingredients.js';
+import { botanicals, vitamins, compounds } from '../config/ingredients.js';
 import { images } from '../config/site.js';
 import { Eyebrow, Icon, Img, Pending } from './ui.jsx';
 
@@ -74,7 +68,7 @@ function BotanicalCard({ item, index }) {
 
 function VitaminBand() {
   return (
-    <div className="reveal relative mt-16 overflow-hidden rounded-[1.5rem] bg-forest text-white">
+    <div className="reveal relative mt-10 overflow-hidden rounded-[1.5rem] bg-forest text-white">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
@@ -84,7 +78,7 @@ function VitaminBand() {
         }}
       />
 
-      <div className="relative px-6 py-10 sm:px-10 sm:py-12">
+      <div className="relative px-6 py-8 sm:px-10 sm:py-9">
         <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-3">
           <div>
             <Eyebrow tone="gold">Also in the formulation</Eyebrow>
@@ -175,7 +169,7 @@ export default function Ingredients() {
   return (
     <section
       id="ingredients"
-      className="relative overflow-hidden border-y border-forest/8 bg-white py-16 md:py-24"
+      className="relative overflow-hidden border-y border-forest/8 bg-white py-12 md:py-16"
       aria-labelledby="ingredients-heading"
     >
       {/* Soft botanical wash, kept to the approved greens */}
@@ -206,7 +200,7 @@ export default function Ingredients() {
         </div>
 
         {/* Tier 1: the four botanicals */}
-        <ul className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4 xl:gap-6">
+        <ul className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4 xl:gap-6">
           {botanicals.map((item, i) => (
             <BotanicalCard key={item.id} item={item} index={i} />
           ))}
@@ -216,7 +210,7 @@ export default function Ingredients() {
         <VitaminBand />
 
         {/* Tier 3: the plant-compound classes */}
-        <div className="mt-16">
+        <div className="mt-10">
           <div className="reveal flex flex-wrap items-end justify-between gap-x-8 gap-y-3">
             <div className="max-w-xl">
               <Eyebrow tone="forest">Listed plant compounds</Eyebrow>
@@ -227,26 +221,12 @@ export default function Ingredients() {
             <Pending>Specification pending</Pending>
           </div>
 
-          <ul className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {compounds.map((item, i) => (
               <CompoundCard key={item.id} item={item} index={i} />
             ))}
           </ul>
-
-          {/* The honesty note sits with the photographs it refers to */}
-          <p className="reveal mt-6 flex items-start gap-2.5 rounded-xl border border-forest/12 bg-white/70 p-4 text-[0.82rem] leading-relaxed text-ink-soft">
-            <Icon
-              name="doc"
-              className="mt-0.5 w-4 h-4 shrink-0 text-forest-line"
-            />
-            {illustrativeNote}
-          </p>
         </div>
-
-        <p className="reveal mt-6 flex items-start gap-2.5 text-[0.82rem] leading-relaxed text-ink-soft">
-          <Icon name="doc" className="mt-0.5 w-4 h-4 shrink-0 text-forest-line" />
-          {quantitiesNote}
-        </p>
       </div>
     </section>
   );

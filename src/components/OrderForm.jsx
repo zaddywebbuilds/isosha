@@ -130,7 +130,7 @@ export default function OrderForm({ selected, onSelect }) {
   return (
     <section
       id="order"
-      className="bg-cream py-16 md:py-24"
+      className="bg-cream py-12 md:py-16"
       aria-labelledby="order-heading"
     >
       <div className="shell">

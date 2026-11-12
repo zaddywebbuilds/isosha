@@ -28,7 +28,7 @@ export default function Hero() {
       />
 
       <div className="shell relative py-10 sm:py-14 md:py-20 lg:py-24">
-        <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 sm:gap-10 lg:gap-14 items-center">
+        <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 sm:gap-8 lg:gap-12 items-center">
           {/* Copy */}
           <div className="reveal max-w-xl">
             <Eyebrow tone="gold">{brand.name} presents</Eyebrow>
@@ -58,7 +58,7 @@ export default function Hero() {
               </a>
             </div>
 
-            <dl className="mt-11 grid grid-cols-3 gap-4 max-w-md border-t border-white/15 pt-6">
+            <dl className="mt-8 grid grid-cols-3 gap-4 max-w-md border-t border-white/15 pt-6">
               <div>
                 <dt className="eyebrow text-[0.6rem] text-gold/80">Per bottle</dt>
                 <dd className="mt-1.5 font-serif text-2xl">

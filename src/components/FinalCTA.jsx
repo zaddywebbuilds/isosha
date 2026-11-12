@@ -20,8 +20,8 @@ export default function FinalCTA() {
         className="pointer-events-none absolute left-1/2 -translate-x-1/2 top-10 w-[46rem] h-[46rem] rounded-full border border-gold/12"
       />
 
-      <div className="shell relative py-16 md:py-24">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+      <div className="shell relative py-12 md:py-16">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="reveal order-last lg:order-first">
             <div className="rounded-[1.5rem] overflow-hidden border border-white/12">
               <Img
@@ -30,10 +30,6 @@ export default function FinalCTA() {
                 className="w-full aspect-[4/3] object-cover"
               />
             </div>
-            <p className="mt-3 text-[0.76rem] text-white/45">
-              Lifestyle photography. It does not depict a result from using
-              Isosha.
-            </p>
           </div>
 
           <div className="reveal">

@@ -139,8 +139,8 @@ export const compounds = [
   },
 ];
 
-export const illustrativeNote =
-  'Lignans, flavonoids, tannins and iridoid glycosides are classes of naturally occurring plant compounds rather than individual plants. The photographs above show plants commonly associated with each class. They are illustrative and are not photographs of the source materials used in Isosha.';
-
-export const quantitiesNote =
-  'Ingredient quantities have not been supplied by the manufacturer and are therefore not stated. The full quantitative declaration appears on the approved product label.';
+/**
+ * Note on the compound photographs: each card carries a "Shown:" line naming
+ * exactly what is in its picture, which is what keeps a photograph of
+ * flaxseed from reading as an Isosha ingredient. Keep that line on the card.
+ */

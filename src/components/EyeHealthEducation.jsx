@@ -164,7 +164,7 @@ export default function EyeHealthEducation() {
   return (
     <section
       id="eye-health"
-      className="bg-mist py-16 md:py-24"
+      className="bg-mist py-12 md:py-16"
       aria-labelledby="eye-health-heading"
     >
       <div className="shell">
@@ -183,62 +183,43 @@ export default function EyeHealthEducation() {
         </div>
 
         {/* Opening band */}
-        <figure className="reveal mt-10 overflow-hidden rounded-[1.5rem] border border-forest/10">
+        <div className="reveal mt-8 overflow-hidden rounded-[1.5rem] border border-forest/10">
           <Img
             image={images.examWide}
             sizes="(min-width: 1280px) 76rem, 92vw"
             className="w-full aspect-[16/9] sm:aspect-[21/9] object-cover"
           />
-          <figcaption className="bg-forest text-white/75 px-6 py-4 text-[0.82rem]">
-            A routine eye examination. Photography on this page illustrates eye
-            care in general and is not a depiction of any result from using
-            Isosha.
-          </figcaption>
-        </figure>
+        </div>
 
         {/* Conditions */}
-        <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
+        <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
           {conditions.map((item, i) => (
             <ConditionCard key={item.id} item={item} index={i} />
           ))}
         </div>
 
         {/* Anatomy and eye care in practice */}
-        <div className="mt-10 grid lg:grid-cols-[1.35fr_0.65fr] gap-5 items-start">
+        <div className="mt-6 grid lg:grid-cols-[1.35fr_0.65fr] gap-5 items-start">
           <AnatomyFigure />
 
           <div className="grid grid-cols-2 lg:grid-cols-1 gap-5">
-            {[
-              {
-                key: 'carePortraitB',
-                caption:
-                  'An examination is a conversation as much as a measurement.',
-              },
-              {
-                key: 'carePortraitA',
-                caption:
-                  'Routine checks are how most eye conditions are found early.',
-              },
-            ].map((item, i) => (
-              <figure
-                key={item.key}
+            {['carePortraitB', 'carePortraitA'].map((key, i) => (
+              <div
+                key={key}
                 style={{ transitionDelay: `${i * 90}ms` }}
                 className="reveal card overflow-hidden"
               >
                 <Img
-                  image={images[item.key]}
+                  image={images[key]}
                   sizes="(min-width: 1024px) 24vw, 46vw"
                   className="w-full aspect-[4/5] object-cover"
                 />
-                <figcaption className="p-4 text-[0.8rem] text-ink-soft leading-snug">
-                  {item.caption}
-                </figcaption>
-              </figure>
+              </div>
             ))}
           </div>
         </div>
 
-        <p className="reveal mt-10 flex items-start gap-2.5 text-[0.82rem] text-ink-soft/90 max-w-3xl">
+        <p className="reveal mt-7 flex items-start gap-2.5 text-[0.82rem] text-ink-soft/90 max-w-3xl">
           <Icon name="doc" className="w-4 h-4 mt-0.5 shrink-0 text-forest-line" />
           Educational information only. Consult a qualified eye-care
           professional for diagnosis and treatment.

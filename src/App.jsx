@@ -10,7 +10,10 @@ import ProductDetails from './components/ProductDetails.jsx';
 import PricingPackages from './components/PricingPackages.jsx';
 import OrderForm from './components/OrderForm.jsx';
 import TrustInformation from './components/TrustInformation.jsx';
-import Testimonials from './components/Testimonials.jsx';
+// Reviews are not on the page while there are none to show: the placeholder
+// cards were empty skeletons that only added height. Re-add <Testimonials />
+// below <TrustInformation /> once real, authorised customer feedback exists,
+// and fill the `reviews` array in src/components/Testimonials.jsx.
 import FAQ from './components/FAQ.jsx';
 import FinalCTA from './components/FinalCTA.jsx';
 import Footer from './components/Footer.jsx';
@@ -70,7 +73,6 @@ export default function App() {
           onSelect={setSelectedPackage}
         />
         <TrustInformation />
-        <Testimonials />
         <FAQ />
         <FinalCTA />
       </main>

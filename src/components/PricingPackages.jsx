@@ -126,7 +126,7 @@ export default function PricingPackages({ selected, onSelect }) {
   return (
     <section
       id="packages"
-      className="bg-mist py-16 md:py-24"
+      className="bg-mist py-12 md:py-16"
       aria-labelledby="packages-heading"
     >
       <div className="shell">
@@ -146,7 +146,7 @@ export default function PricingPackages({ selected, onSelect }) {
           </p>
         </div>
 
-        <ul className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7 items-start">
+        <ul className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7 items-start">
           {packages.map((pkg) => (
             <PackageCard
               key={pkg.id}
