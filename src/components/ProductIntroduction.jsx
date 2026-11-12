@@ -2,12 +2,9 @@ import { product } from '../config/product.js';
 import { images } from '../config/site.js';
 import { Eyebrow, GoldRule, Icon, Img } from './ui.jsx';
 
-const points = [
-  'Contains selected herbal ingredients',
-  'Includes vitamins A, B2, C and E',
-  'Convenient capsule format',
-  '30 capsules per bottle',
-];
+import { sections } from '../config/copy.js';
+
+const { about } = sections;
 
 export default function ProductIntroduction() {
   return (
@@ -41,27 +38,20 @@ export default function ProductIntroduction() {
 
         {/* Copy */}
         <div className="reveal">
-          <Eyebrow>Meet Isosha</Eyebrow>
+          <Eyebrow>{about.eyebrow}</Eyebrow>
           <h2
             id="about-heading"
             className="mt-5 text-[2.1rem] sm:text-4xl lg:text-[2.9rem] text-forest"
           >
-            Botanical ingredients.
-            <br />
-            Thoughtfully presented.
+            {about.headline}
           </h2>
 
           <GoldRule className="mt-6 max-w-[8rem] !bg-gold" />
 
-          <p className="mt-6 text-ink-soft leading-relaxed">
-            Isosha Herbal Capsules brings together selected botanical
-            ingredients and vitamins in a convenient capsule format. Developed
-            for adults interested in maintaining an informed wellness routine,
-            each bottle contains {product.capsulesPerBottle} capsules.
-          </p>
+          <p className="mt-6 text-ink-soft leading-relaxed">{about.body}</p>
 
           <ul className="mt-8 grid sm:grid-cols-2 gap-x-6 gap-y-3.5">
-            {points.map((point) => (
+            {about.points.map((point) => (
               <li key={point} className="flex items-start gap-2.5">
                 <span
                   className="grid place-items-center w-5 h-5 mt-0.5 rounded-full bg-leaf-wash text-forest shrink-0"
@@ -75,7 +65,7 @@ export default function ProductIntroduction() {
           </ul>
 
           <a href="#packages" className="btn btn-forest mt-9">
-            View Available Packages
+            {about.cta}
             <Icon name="arrow" className="w-4 h-4" />
           </a>
         </div>

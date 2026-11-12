@@ -10,6 +10,7 @@ import { product } from '../config/product.js';
 import { nigerianStates } from '../config/states.js';
 import { contact, formIntegration } from '../config/site.js';
 import { useOrderSubmission } from '../hooks/useOrderSubmission.js';
+import { sections } from '../config/copy.js';
 import { Eyebrow, Icon } from './ui.jsx';
 
 const EMPTY = {
@@ -135,17 +136,15 @@ export default function OrderForm({ selected, onSelect }) {
     >
       <div className="shell">
         <div className="reveal max-w-2xl">
-          <Eyebrow>Order</Eyebrow>
+          <Eyebrow>{sections.order.eyebrow}</Eyebrow>
           <h2
             id="order-heading"
             className="mt-5 text-[2.1rem] sm:text-4xl lg:text-[2.9rem] text-forest"
           >
-            Complete your order enquiry
+            {sections.order.headline}
           </h2>
           <p className="mt-5 text-ink-soft leading-relaxed">
-            Select your preferred package and complete your order enquiry. A
-            member of the team confirms your order, the delivery charge for your
-            location and the payment arrangement before anything is dispatched.
+            {sections.order.body}
           </p>
         </div>
 

@@ -3,6 +3,8 @@ import AnnouncementBar from './components/AnnouncementBar.jsx';
 import Header from './components/Header.jsx';
 import Hero from './components/Hero.jsx';
 import ProductHighlights from './components/ProductHighlights.jsx';
+import HonestPromise from './components/HonestPromise.jsx';
+import WhyNow from './components/WhyNow.jsx';
 import ProductIntroduction from './components/ProductIntroduction.jsx';
 import EyeHealthEducation from './components/EyeHealthEducation.jsx';
 import Ingredients from './components/Ingredients.jsx';
@@ -60,6 +62,10 @@ export default function App() {
       <main id="main">
         <Hero />
         <ProductHighlights />
+        {/* The refusal comes before the pitch. That order is what makes the
+            pitch credible to a buyer who has been lied to before. */}
+        <HonestPromise />
+        <WhyNow />
         <ProductIntroduction />
         <EyeHealthEducation />
         <Ingredients />

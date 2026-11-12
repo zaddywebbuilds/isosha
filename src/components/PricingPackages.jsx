@@ -1,7 +1,10 @@
 import { packages, formatPrice, packageMath, singleBottlePrice } from '../config/pricing.js';
 import { product } from '../config/product.js';
 import { images } from '../config/site.js';
+import { sections } from '../config/copy.js';
 import { Eyebrow, Icon, Img } from './ui.jsx';
+
+const copy = sections.packages;
 
 /**
  * Pricing card artwork.
@@ -123,6 +126,13 @@ function PackageCard({ pkg, selected, onSelect }) {
 }
 
 export default function PricingPackages({ selected, onSelect }) {
+  // Cheapest per-day cost across the packages, derived not typed.
+  const perDay = Math.min(
+    ...packages.map((p) =>
+      Math.round(p.price / (p.bottles * product.capsulesPerBottle)),
+    ),
+  );
+
   return (
     <section
       id="packages"
@@ -131,19 +141,14 @@ export default function PricingPackages({ selected, onSelect }) {
     >
       <div className="shell">
         <div className="reveal max-w-2xl">
-          <Eyebrow>Packages</Eyebrow>
+          <Eyebrow>{copy.eyebrow}</Eyebrow>
           <h2
             id="packages-heading"
             className="mt-5 text-[2.1rem] sm:text-4xl lg:text-[2.9rem] text-forest"
           >
-            Choose your Isosha package
+            {copy.headline}
           </h2>
-          <p className="mt-5 text-ink-soft leading-relaxed">
-            Every package contains the same {product.capsulesPerBottle}-capsule
-            bottle. Larger packages lower the price per bottle. Supply duration
-            is simply {product.capsulesPerBottle} capsules divided by the stated
-            dosage of one capsule daily, not a recommended course of treatment.
-          </p>
+          <p className="mt-5 text-ink-soft leading-relaxed">{copy.body}</p>
         </div>
 
         <ul className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7 items-start">
@@ -157,10 +162,14 @@ export default function PricingPackages({ selected, onSelect }) {
           ))}
         </ul>
 
-        <p className="reveal mt-8 text-[0.8rem] text-ink-soft">
-          Savings are calculated against the single-bottle price of{' '}
-          {formatPrice(singleBottlePrice)}. Prices do not include delivery.
-          Delivery coverage and charges are confirmed by the seller.
+        {/* Cost reframe. The per-day figure is derived from the same config
+            as the cards, so it can never contradict the prices above. */}
+        <p className="reveal mt-8 max-w-3xl rounded-xl border border-forest/12 bg-white p-5 font-serif text-[1.15rem] leading-snug text-forest">
+          {copy.valueFraming.replace('{perDay}', formatPrice(perDay))}
+        </p>
+
+        <p className="reveal mt-4 text-[0.8rem] text-ink-soft">
+          {copy.footnote.replace('{single}', formatPrice(singleBottlePrice))}
         </p>
       </div>
     </section>

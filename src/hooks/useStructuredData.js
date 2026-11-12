@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { brand, product } from '../config/product.js';
 import { packages, currency, formatPrice } from '../config/pricing.js';
 import { seo } from '../config/site.js';
+import { faqs } from '../config/faqs.js';
 
 /**
  * Injects Product structured data built from the same config the page renders.
@@ -47,12 +48,31 @@ export function useStructuredData() {
 
     if (seo.canonical) data.url = seo.canonical;
 
-    const tag = document.createElement('script');
-    tag.type = 'application/ld+json';
-    tag.textContent = JSON.stringify(data);
-    tag.dataset.generated = 'isosha-product';
-    document.head.appendChild(tag);
+    /**
+     * FAQPage markup, built from the same array the accordion renders, so the
+     * answers in search results can never drift from the answers on the page.
+     * This is the single biggest organic-search lever here: these questions
+     * are the ones Nigerian buyers actually type.
+     */
+    const faqData = {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    };
 
-    return () => tag.remove();
+    const tags = [data, faqData].map((payload, i) => {
+      const tag = document.createElement('script');
+      tag.type = 'application/ld+json';
+      tag.textContent = JSON.stringify(payload);
+      tag.dataset.generated = i === 0 ? 'isosha-product' : 'isosha-faq';
+      document.head.appendChild(tag);
+      return tag;
+    });
+
+    return () => tags.forEach((tag) => tag.remove());
   }, []);
 }

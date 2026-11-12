@@ -1,4 +1,5 @@
-import { brand, product } from '../config/product.js';
+import { product } from '../config/product.js';
+import { hero } from '../config/copy.js';
 import { images } from '../config/site.js';
 import { Eyebrow, Icon, Img } from './ui.jsx';
 
@@ -31,30 +32,28 @@ export default function Hero() {
         <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 sm:gap-8 lg:gap-12 items-center">
           {/* Copy */}
           <div className="reveal max-w-xl">
-            <Eyebrow tone="gold">{brand.name} presents</Eyebrow>
+            <Eyebrow tone="gold">{hero.eyebrow}</Eyebrow>
 
             <h1
               id="hero-heading"
               className="mt-5 text-[2.6rem] leading-[1.06] sm:text-5xl lg:text-[4.1rem] text-white"
             >
-              Your eye wellness
+              {hero.headlineLead}
               <br />
-              <span className="text-leaf-soft">deserves attention.</span>
+              <span className="text-leaf-soft">{hero.headlineAccent}</span>
             </h1>
 
             <p className="mt-6 text-white/75 text-[1.05rem] leading-relaxed max-w-lg">
-              Discover Isosha Herbal Capsules, a botanical wellness supplement
-              formulated with selected plant ingredients and vitamins as part of
-              an eye-conscious wellness routine.
+              {hero.body}
             </p>
 
             <div className="mt-9 flex flex-col sm:flex-row gap-3">
               <a href="#packages" className="btn btn-gold">
-                Explore Packages
+                {hero.primaryCta}
                 <Icon name="arrow" className="w-4 h-4" />
               </a>
-              <a href="#about" className="btn btn-ghost-light">
-                Discover Isosha
+              <a href="#ingredients" className="btn btn-ghost-light">
+                {hero.secondaryCta}
               </a>
             </div>
 

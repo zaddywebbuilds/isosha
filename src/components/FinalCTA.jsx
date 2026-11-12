@@ -1,5 +1,6 @@
 import { images } from '../config/site.js';
 import { Icon, Img } from './ui.jsx';
+import { sections } from '../config/copy.js';
 
 export default function FinalCTA() {
   return (
@@ -38,22 +39,21 @@ export default function FinalCTA() {
               id="final-cta-heading"
               className="text-[2.2rem] sm:text-4xl lg:text-[3.1rem] leading-[1.08]"
             >
-              Explore Isosha
+              {sections.finalCta.headlineLead}
               <br />
-              <span className="text-leaf-soft">Herbal Capsules.</span>
+              <span className="text-leaf-soft">{sections.finalCta.headlineAccent}</span>
             </h2>
             <p className="mt-6 text-white/72 leading-relaxed max-w-md">
-              Discover the ingredients, compare the available packages and take
-              the next step with confidence.
+{sections.finalCta.body}
             </p>
 
             <div className="mt-9 flex flex-col sm:flex-row gap-3">
               <a href="#packages" className="btn btn-gold">
-                Select Your Package
+                {sections.finalCta.primaryCta}
                 <Icon name="arrow" className="w-4 h-4" />
               </a>
               <a href="#product-information" className="btn btn-ghost-light">
-                View Product Information
+                {sections.finalCta.secondaryCta}
               </a>
             </div>
           </div>

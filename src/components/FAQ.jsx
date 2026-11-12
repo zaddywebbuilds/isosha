@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { faqs } from '../config/faqs.js';
 import { Eyebrow, Icon } from './ui.jsx';
+import { sections } from '../config/copy.js';
 
 function Item({ item, index, open, onToggle }) {
   const buttonId = `faq-q-${index}`;
@@ -65,19 +66,18 @@ export default function FAQ() {
     >
       <div className="shell grid lg:grid-cols-[0.8fr_1.2fr] gap-8 lg:gap-12 items-start">
         <div className="reveal lg:sticky lg:top-28">
-          <Eyebrow>Questions</Eyebrow>
+          <Eyebrow>{sections.faq.eyebrow}</Eyebrow>
           <h2
             id="faq-heading"
             className="mt-5 text-[2.1rem] sm:text-4xl lg:text-[2.9rem] text-forest"
           >
-            Frequently asked questions
+            {sections.faq.headline}
           </h2>
           <p className="mt-5 text-ink-soft leading-relaxed">
-            Straight answers about what Isosha is, how it is taken, and what it
-            does not replace.
+{sections.faq.body}
           </p>
           <a href="#order" className="btn btn-forest mt-7">
-            Order Isosha
+            {sections.faq.cta}
             <Icon name="arrow" className="w-4 h-4" />
           </a>
         </div>

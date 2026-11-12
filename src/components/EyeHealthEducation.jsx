@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { images } from '../config/site.js';
+import { sections } from '../config/copy.js';
 import { Eyebrow, Icon, Img } from './ui.jsx';
+
+const { eyeHealth } = sections;
 
 /**
  * General eye-health education.
@@ -169,17 +172,14 @@ export default function EyeHealthEducation() {
     >
       <div className="shell">
         <div className="reveal max-w-2xl">
-          <Eyebrow>Eye health</Eyebrow>
+          <Eyebrow>{eyeHealth.eyebrow}</Eyebrow>
           <h2
             id="eye-health-heading"
-            className="mt-5 text-[2.1rem] sm:text-4xl lg:text-[2.9rem] text-forest"
+            className="mt-5 text-[2.1rem] sm:text-4xl lg:text-[2.9rem] leading-[1.08] text-forest"
           >
-            Understanding your eye health
+            {eyeHealth.headline}
           </h2>
-          <p className="mt-5 text-ink-soft leading-relaxed">
-            Your eyes deserve regular attention. Understanding common vision
-            conditions is an important part of taking care of your sight.
-          </p>
+          <p className="mt-5 text-ink-soft leading-relaxed">{eyeHealth.body}</p>
         </div>
 
         {/* Opening band */}
@@ -221,8 +221,7 @@ export default function EyeHealthEducation() {
 
         <p className="reveal mt-7 flex items-start gap-2.5 text-[0.82rem] text-ink-soft/90 max-w-3xl">
           <Icon name="doc" className="w-4 h-4 mt-0.5 shrink-0 text-forest-line" />
-          Educational information only. Consult a qualified eye-care
-          professional for diagnosis and treatment.
+          {eyeHealth.note}
         </p>
       </div>
     </section>

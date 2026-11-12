@@ -1,5 +1,6 @@
 import { regulatory, contact } from '../config/site.js';
 import { Eyebrow, Icon, Pending } from './ui.jsx';
+import { sections } from '../config/copy.js';
 
 /**
  * No badge, seal, certification logo or government endorsement is rendered
@@ -117,17 +118,15 @@ export default function TrustInformation() {
     >
       <div className="shell">
         <div className="reveal max-w-2xl">
-          <Eyebrow>Transparency</Eyebrow>
+          <Eyebrow>{sections.trust.eyebrow}</Eyebrow>
           <h2
             id="trust-heading"
             className="mt-5 text-[2.1rem] sm:text-4xl lg:text-[2.9rem] text-forest"
           >
-            Product information you can review
+            {sections.trust.headline}
           </h2>
           <p className="mt-5 text-ink-soft leading-relaxed">
-            Everything stated about Isosha on this website comes from the
-            manufacturer. Where something has not been confirmed, this page says
-            so rather than filling the gap.
+{sections.trust.body}
           </p>
         </div>
 

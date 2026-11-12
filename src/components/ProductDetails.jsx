@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { product, productInfoPanels } from '../config/product.js';
 import { images } from '../config/site.js';
 import { Eyebrow, Icon, Img, Pending } from './ui.jsx';
+import { sections } from '../config/copy.js';
 
 const facts = [
   { label: 'Product', value: product.name },
@@ -66,12 +67,12 @@ export default function ProductDetails() {
         </figure>
 
         <div className="reveal">
-          <Eyebrow>Product information</Eyebrow>
+          <Eyebrow>{sections.details.eyebrow}</Eyebrow>
           <h2
             id="details-heading"
             className="mt-5 text-[2.1rem] sm:text-4xl lg:text-[2.9rem] text-forest"
           >
-            Simple product information
+            {sections.details.headline}
           </h2>
           <p className="mt-5 text-ink-soft leading-relaxed max-w-xl">
             Each bottle contains {product.capsulesPerBottle} capsules. The

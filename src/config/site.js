@@ -86,9 +86,9 @@ export const formIntegration = {
 /* --------------------------------------------------------------------- */
 
 export const seo = {
-  title: 'Isosha Herbal Capsules | Netwill Herbals',
+  title: 'Isosha Herbal Capsules | Eye Wellness Supplement Nigeria',
   description:
-    'Isosha Herbal Capsules by Netwill Herbals: a herbal wellness supplement made with selected botanical ingredients and vitamins A, B2, C and E. 30 capsules per bottle. Available in Nigeria.',
+    'Isosha Herbal Capsules: a daily eye-wellness supplement with turmeric, clove, ginger and black pepper, plus vitamins A and B2, which contribute to the maintenance of normal vision. 30 capsules per bottle. Delivery across Nigeria.',
   // Set this to the live domain before launch, e.g. 'https://isosha.ng'
   canonical: '',
   ogImage: 'assets/images/isosha-bottle-display-1200.webp',
