@@ -19,6 +19,9 @@ export const singleBottlePrice = 21500;
 export const packages = [
   {
     id: 'essential',
+    // The CRM's own package id. The order is rejected or mis-recorded if
+    // this does not match an option in the Xurge package list.
+    crmId: '27',
     title: 'Essential Pack',
     bottles: 1,
     price: 21500,
@@ -30,6 +33,7 @@ export const packages = [
   },
   {
     id: 'double',
+    crmId: '28',
     title: 'Double Pack',
     bottles: 2,
     price: 40000,
@@ -41,6 +45,7 @@ export const packages = [
   },
   {
     id: 'best-value',
+    crmId: '29',
     title: 'Best Value Pack',
     bottles: 3,
     price: 55000,

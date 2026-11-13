@@ -1,55 +1,62 @@
 import { useEffect, useRef, useState } from 'react';
-import {
-  packages,
-  getPackage,
-  formatPrice,
-  maxQuantity,
-  currency,
-} from '../config/pricing.js';
+import { packages, getPackage, formatPrice } from '../config/pricing.js';
 import { product } from '../config/product.js';
-import { nigerianStates } from '../config/states.js';
-import { contact, formIntegration } from '../config/site.js';
-import { useOrderSubmission } from '../hooks/useOrderSubmission.js';
+import { crm, crmStates } from '../config/crm.js';
+import { contact } from '../config/site.js';
 import { sections } from '../config/copy.js';
 import { Eyebrow, Icon } from './ui.jsx';
 
-const EMPTY = {
-  fullName: '',
-  phone: '',
-  whatsapp: '',
-  state: '',
-  city: '',
-  address: '',
-  notes: '',
-  consent: false,
-};
+/**
+ * ORDER FORM
+ *
+ * This posts natively to Netwill Herbals' Xurge CRM. See src/config/crm.js
+ * for why it is a native form POST rather than fetch(): the endpoint sends
+ * no CORS headers, so a scripted request would be blocked and orders would
+ * fail silently.
+ *
+ * Because it is a native POST, the browser leaves this page on submit and
+ * lands on the CRM's own confirmation. That is the CRM's normal behaviour.
+ *
+ * Validation here runs before the native submit and blocks it on failure,
+ * so the customer sees errors in the site's own styling rather than the
+ * browser's default bubbles. Every `name` attribute is fixed by the CRM.
+ */
 
 const REQUIRED = {
-  fullName: 'Please enter your full name.',
-  phone: 'Please enter a phone number we can reach you on.',
-  state: 'Please choose your state.',
-  city: 'Please enter your city or town.',
+  full_name: 'Please enter your full name.',
+  phone_number: 'Please enter a phone number we can reach you on.',
+  whatsapp_number: 'Please enter the WhatsApp number to reach you on.',
+  [crm.conditionField]: 'Please choose the option that applies to you.',
+  state: 'Please choose your delivery state.',
   address: 'Please enter the delivery address.',
 };
 
-/** Accepts 10 to 15 digits, allowing +, spaces, dashes and brackets. */
+const EMPTY = {
+  full_name: '',
+  phone_number: '',
+  whatsapp_number: '',
+  [crm.conditionField]: '',
+  state: '',
+  address: '',
+  consent: false,
+};
+
+/** 10 to 20 characters of digits, spaces, dashes, brackets and a leading +. */
 const phonePattern = /^[+()\-\s\d]{10,20}$/;
 
 export default function OrderForm({ selected, onSelect }) {
   const [values, setValues] = useState(EMPTY);
   const [errors, setErrors] = useState({});
-  const [quantity, setQuantity] = useState(1);
-  const { status, message, submit, reset, STATUS } = useOrderSubmission();
-  const feedbackRef = useRef(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [sourceUrl, setSourceUrl] = useState('');
+  const formRef = useRef(null);
 
   const pkg = getPackage(selected);
-  const total = pkg.price * quantity;
-  const isDemo = formIntegration.mode === 'demo';
 
-  // Move focus to the feedback message once there is something to read.
+  // The CRM records which page the order came from, without the query string.
   useEffect(() => {
-    if (status !== STATUS.idle) feedbackRef.current?.focus();
-  }, [status, STATUS.idle]);
+    setSourceUrl(window.location.href.split('?')[0]);
+  }, []);
 
   const update = (field) => (event) => {
     const value =
@@ -58,75 +65,51 @@ export default function OrderForm({ selected, onSelect }) {
         : event.target.value;
     setValues((v) => ({ ...v, [field]: value }));
     setErrors((e) => (e[field] ? { ...e, [field]: undefined } : e));
-    if (status !== STATUS.idle) reset();
   };
 
   const validate = () => {
     const next = {};
-    for (const [field, msg] of Object.entries(REQUIRED)) {
-      if (!values[field].trim()) next[field] = msg;
+    for (const [field, message] of Object.entries(REQUIRED)) {
+      if (!String(values[field] ?? '').trim()) next[field] = message;
     }
-    if (values.phone.trim() && !phonePattern.test(values.phone.trim())) {
-      next.phone = 'Please check this phone number.';
+    if (
+      values.phone_number.trim() &&
+      !phonePattern.test(values.phone_number.trim())
+    ) {
+      next.phone_number = 'Please check this phone number.';
     }
-    if (values.whatsapp.trim() && !phonePattern.test(values.whatsapp.trim())) {
-      next.whatsapp = 'Please check this WhatsApp number.';
+    if (
+      values.whatsapp_number.trim() &&
+      !phonePattern.test(values.whatsapp_number.trim())
+    ) {
+      next.whatsapp_number = 'Please check this WhatsApp number.';
     }
     if (!values.consent) {
       next.consent =
-        'Please confirm you are happy for us to use these details to contact you about this order.';
+        'Please confirm you are happy for Netwill Herbals to use these details to deliver your order.';
     }
     return next;
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  /**
+   * Runs before the native submit. Returning without preventDefault lets the
+   * browser POST to the CRM as normal.
+   */
+  const handleSubmit = (event) => {
     const found = validate();
     setErrors(found);
 
     if (Object.keys(found).length > 0) {
-      const first = document.querySelector('[aria-invalid="true"]');
+      event.preventDefault();
+      const first = formRef.current?.querySelector('[aria-invalid="true"]');
       first?.focus();
+      first?.scrollIntoView({ block: 'center', behavior: 'smooth' });
       return;
     }
 
-    const payload = {
-      product: product.name,
-      package: {
-        id: pkg.id,
-        title: pkg.title,
-        bottles: pkg.bottles,
-        unitPrice: pkg.price,
-      },
-      quantity,
-      total,
-      currency: currency.code,
-      customer: {
-        fullName: values.fullName.trim(),
-        phone: values.phone.trim(),
-        whatsapp: values.whatsapp.trim(),
-        state: values.state,
-        city: values.city.trim(),
-        address: values.address.trim(),
-        notes: values.notes.trim(),
-      },
-      consent: true,
-      submittedAt: new Date().toISOString(),
-    };
-
-    const result = await submit(payload);
-    if (result.ok && formIntegration.mode === 'endpoint') {
-      setValues(EMPTY);
-      setQuantity(1);
-    }
+    // Valid: let the POST through and stop double submissions.
+    setSubmitting(true);
   };
-
-  const feedbackTone =
-    status === STATUS.success
-      ? 'border-leaf/50 bg-leaf-wash text-forest'
-      : status === STATUS.error
-        ? 'border-red-300 bg-red-50 text-red-900'
-        : 'border-gold/60 bg-[#fdf8e3] text-[#5b4a05]';
 
   return (
     <section
@@ -148,33 +131,37 @@ export default function OrderForm({ selected, onSelect }) {
           </p>
         </div>
 
-        {isDemo && (
-          <p className="reveal mt-8 flex items-start gap-3 rounded-xl border border-dashed border-gold-deep bg-[#fdf8e3] p-4 text-[0.87rem] text-[#5b4a05] leading-relaxed">
-            <Icon name="doc" className="w-5 h-5 mt-0.5 shrink-0" />
-            <span>
-              <strong className="font-bold">
-                Demonstration form, not yet connected.
-              </strong>{' '}
-              This form is fully built and validates your entries, but it has no
-              order destination configured, so nothing is sent and nothing is
-              stored. Set <code className="font-mono text-[0.82em]">formIntegration.mode</code>{' '}
-              in <code className="font-mono text-[0.82em]">src/config/site.js</code>{' '}
-              to connect WhatsApp or a form endpoint.
-            </span>
-          </p>
-        )}
-
-        <div className="mt-10 grid lg:grid-cols-[1.25fr_0.75fr] gap-8 lg:gap-10 items-start">
+        <div className="mt-8 grid lg:grid-cols-[1.25fr_0.75fr] gap-8 lg:gap-10 items-start">
           {/* ---------------------------------------------------------- */}
-          {/* Form                                                       */}
+          {/* Form: posts natively to the CRM                            */}
           {/* ---------------------------------------------------------- */}
           <form
+            ref={formRef}
+            /*
+              The CRM scripts find the form with
+              querySelector('[id^="orderForm"]'), so the id prefix is load
+              bearing. Without it both scripts log "Form not found" and
+              abandoned-order capture never runs.
+            */
+            id={`orderForm_${crm.schemaName}_${crm.formId}`}
+            method="POST"
+            action={crm.endpoint}
             onSubmit={handleSubmit}
             noValidate
             className="reveal card p-6 sm:p-8"
           >
+            {/* Routing and attribution. Names fixed by the CRM. */}
+            <input type="hidden" name="form_id" value={crm.formId} />
+            <input type="hidden" name="schema_name" value={crm.schemaName} />
+            <input type="hidden" name="source_url" value={sourceUrl} readOnly />
+            <input
+              type="hidden"
+              name="media_buyer_id"
+              value={crm.mediaBuyerId}
+            />
+
             <fieldset className="border-0 p-0 m-0">
-              <legend className="eyebrow text-[0.7rem] text-forest-line mb-4">
+              <legend className="eyebrow text-forest-line mb-4">
                 Your package
               </legend>
 
@@ -199,7 +186,7 @@ export default function OrderForm({ selected, onSelect }) {
                       }`}
                     >
                       <span className="flex items-center justify-between gap-2">
-                        <span className="text-[0.82rem] font-bold text-forest">
+                        <span className="text-[0.85rem] font-bold text-forest">
                           {p.bottles} bottle{p.bottles > 1 ? 's' : ''}
                         </span>
                         {active && (
@@ -217,104 +204,101 @@ export default function OrderForm({ selected, onSelect }) {
                 })}
               </div>
 
-              <div className="mt-5 max-w-[12rem]">
-                <label htmlFor="quantity" className="field-label">
-                  Quantity
-                </label>
-                <select
-                  id="quantity"
-                  name="quantity"
-                  className="field"
-                  value={quantity}
-                  onChange={(e) => setQuantity(Number(e.target.value))}
-                >
-                  {Array.from({ length: maxQuantity }, (_, i) => i + 1).map(
-                    (n) => (
-                      <option key={n} value={n}>
-                        {n} &times; {pkg.title}
-                      </option>
-                    ),
-                  )}
-                </select>
-                <p className="mt-1.5 text-[0.8rem] text-ink-soft">
-                  Each unit is one whole {pkg.title.toLowerCase()}. Package
-                  prices are not recombined.
-                </p>
-              </div>
+              {/*
+                A real <select>, not a hidden input. cart_abandonment.js
+                reads the package with querySelector('select[name="package"]'),
+                so a hidden input would post correctly but silently break
+                abandoned-order capture.
+
+                The buttons above are the control people actually use and
+                carry the accessible semantics, so this is hidden from both
+                the screen and the accessibility tree.
+              */}
+              <select
+                name="package"
+                value={pkg.crmId}
+                onChange={(e) => {
+                  const match = packages.find((p) => p.crmId === e.target.value);
+                  if (match) onSelect(match.id);
+                }}
+                tabIndex={-1}
+                aria-hidden="true"
+                className="sr-only"
+              >
+                {packages.map((p) => (
+                  <option key={p.id} value={p.crmId}>
+                    {p.bottles} Bottle{p.bottles > 1 ? 's' : ''} -{' '}
+                    {formatPrice(p.price)}
+                  </option>
+                ))}
+              </select>
             </fieldset>
 
             <hr className="my-7 border-forest/10" />
 
             <fieldset className="border-0 p-0 m-0">
-              <legend className="eyebrow text-[0.7rem] text-forest-line mb-4">
+              <legend className="eyebrow text-forest-line mb-4">
                 Your details
               </legend>
 
               <div className="grid sm:grid-cols-2 gap-x-5 gap-y-4">
                 <Field
-                  id="fullName"
+                  id="full_name"
                   label="Full name"
                   required
                   autoComplete="name"
-                  value={values.fullName}
-                  onChange={update('fullName')}
-                  error={errors.fullName}
+                  placeholder="First name and last name"
+                  value={values.full_name}
+                  onChange={update('full_name')}
+                  error={errors.full_name}
                   className="sm:col-span-2"
                 />
                 <Field
-                  id="phone"
+                  id="phone_number"
                   label="Phone number"
                   type="tel"
+                  inputMode="tel"
                   required
                   autoComplete="tel"
-                  placeholder="0801 234 5678"
-                  value={values.phone}
-                  onChange={update('phone')}
-                  error={errors.phone}
+                  placeholder="0803 123 4567"
+                  value={values.phone_number}
+                  onChange={update('phone_number')}
+                  error={errors.phone_number}
                 />
                 <Field
-                  id="whatsapp"
+                  id="whatsapp_number"
                   label="WhatsApp number"
                   type="tel"
-                  hint="Optional"
-                  placeholder="If different from above"
-                  value={values.whatsapp}
-                  onChange={update('whatsapp')}
-                  error={errors.whatsapp}
+                  inputMode="tel"
+                  required
+                  placeholder="0803 123 4567"
+                  value={values.whatsapp_number}
+                  onChange={update('whatsapp_number')}
+                  error={errors.whatsapp_number}
                 />
 
-                <div>
-                  <label htmlFor="state" className="field-label">
-                    State <Req />
-                  </label>
-                  <select
-                    id="state"
-                    name="state"
-                    className="field"
-                    autoComplete="address-level1"
-                    value={values.state}
-                    onChange={update('state')}
-                    aria-invalid={errors.state ? 'true' : undefined}
-                    aria-describedby={errors.state ? 'state-error' : undefined}
-                  >
-                    <option value="">Select your state</option>
-                    {nigerianStates.map((s) => (
-                      <option key={s} value={s}>
-                        {s}
-                      </option>
-                    ))}
-                  </select>
-                  <FieldError id="state-error" message={errors.state} />
-                </div>
-
-                <Field
-                  id="city"
-                  label="City or town"
+                <Select
+                  id={crm.conditionField}
+                  label={crm.conditionLabel}
                   required
-                  autoComplete="address-level2"
-                  value={values.city}
-                  onChange={update('city')}
-                  error={errors.city}
+                  placeholder="Select the option that applies"
+                  options={crm.conditions}
+                  value={values[crm.conditionField]}
+                  onChange={update(crm.conditionField)}
+                  error={errors[crm.conditionField]}
+                  hint="So the team can answer your questions properly"
+                />
+
+                <Select
+                  id="state"
+                  label="Delivery state"
+                  required
+                  autoComplete="address-level1"
+                  placeholder="Select your state"
+                  options={crmStates}
+                  value={values.state}
+                  onChange={update('state')}
+                  error={errors.state}
                 />
 
                 <div className="sm:col-span-2">
@@ -327,7 +311,7 @@ export default function OrderForm({ selected, onSelect }) {
                     rows={3}
                     className="field resize-y"
                     autoComplete="street-address"
-                    placeholder="House number, street, area and any landmark"
+                    placeholder="House number, street, area, city and any landmark"
                     value={values.address}
                     onChange={update('address')}
                     aria-invalid={errors.address ? 'true' : undefined}
@@ -337,37 +321,16 @@ export default function OrderForm({ selected, onSelect }) {
                   />
                   <FieldError id="address-error" message={errors.address} />
                 </div>
-
-                <div className="sm:col-span-2">
-                  <label htmlFor="notes" className="field-label">
-                    Additional notes{' '}
-                    <span className="font-normal normal-case tracking-normal text-ink-soft">
-                      (optional)
-                    </span>
-                  </label>
-                  <textarea
-                    id="notes"
-                    name="notes"
-                    rows={2}
-                    className="field resize-y"
-                    placeholder="Delivery preferences or anything else we should know"
-                    value={values.notes}
-                    onChange={update('notes')}
-                  />
-                  <p className="mt-1.5 text-[0.8rem] text-ink-soft">
-                    Please do not include medical or health information here.
-                  </p>
-                </div>
               </div>
             </fieldset>
 
-            {/* Privacy and consent */}
+            {/* Consent. The wording names the health question explicitly,
+                because that answer is sensitive personal data. */}
             <div className="mt-7 rounded-xl bg-mist border border-forest/10 p-4">
               <label className="flex items-start gap-3 cursor-pointer">
                 <input
                   type="checkbox"
                   id="consent"
-                  name="consent"
                   checked={values.consent}
                   onChange={update('consent')}
                   aria-invalid={errors.consent ? 'true' : undefined}
@@ -376,17 +339,20 @@ export default function OrderForm({ selected, onSelect }) {
                   }
                   className="mt-1 w-5 h-5 shrink-0 accent-[#60B609]"
                 />
-                <span className="text-[0.85rem] text-ink leading-relaxed">
-                  I agree that Netwill Herbals may use the details above to
-                  contact me about this order and to arrange delivery. <Req />
+                <span className="text-[0.88rem] text-ink leading-relaxed">
+                  I agree that Netwill Herbals may use the details above,
+                  including my answer about my eye condition, to contact me
+                  about this order and arrange delivery. <Req />
                 </span>
               </label>
               <p
                 id="consent-note"
-                className="mt-2.5 pl-8 text-[0.8rem] text-ink-soft leading-relaxed"
+                className="mt-2.5 pl-8 text-[0.78rem] text-ink-soft leading-relaxed"
               >
-                Your details are used only to process this order enquiry. See
-                the Privacy Policy for how information is handled.
+                Your answer about your eye condition is health information. It
+                is used to handle your order and answer your questions, and
+                nothing on this page is a diagnosis. See the Privacy Policy in
+                the footer for how your details are handled.
               </p>
               <FieldError
                 id="consent-error"
@@ -395,25 +361,19 @@ export default function OrderForm({ selected, onSelect }) {
               />
             </div>
 
-            <button type="submit" className="btn btn-gold mt-7 w-full sm:w-auto">
-              {status === STATUS.sending ? 'Sending…' : 'Submit Order Enquiry'}
-              {status !== STATUS.sending && (
-                <Icon name="arrow" className="w-4 h-4" />
-              )}
+            <button
+              type="submit"
+              disabled={submitting}
+              className="btn btn-gold mt-7 w-full disabled:opacity-70"
+            >
+              {submitting ? 'Placing your order…' : crm.submitLabel}
             </button>
 
-            {/* Feedback. Never claims success unless something really was sent. */}
-            <div aria-live="polite">
-              {status !== STATUS.idle && message && (
-                <p
-                  ref={feedbackRef}
-                  tabIndex={-1}
-                  className={`mt-5 rounded-xl border p-4 text-[0.88rem] leading-relaxed ${feedbackTone}`}
-                >
-                  {message}
-                </p>
-              )}
-            </div>
+            <p className="mt-3.5 text-[0.78rem] text-ink-soft text-center leading-relaxed">
+              Your order goes straight to the Netwill Herbals team, who will
+              call you on the number above to confirm it and the delivery
+              charge for your state.
+            </p>
           </form>
 
           {/* ---------------------------------------------------------- */}
@@ -422,36 +382,33 @@ export default function OrderForm({ selected, onSelect }) {
           <aside className="reveal lg:sticky lg:top-28">
             <div className="rounded-[1.25rem] bg-forest text-white p-6 sm:p-7">
               <h3 className="text-[1.4rem]">Order summary</h3>
-              <div className="mt-5 space-y-3 text-[0.9rem]">
+              <div className="mt-5 space-y-3 text-[0.92rem]">
                 <Row label="Product" value={product.name} />
                 <Row label="Package" value={pkg.title} />
-                <Row
-                  label="Bottles"
-                  value={String(pkg.bottles * quantity)}
-                />
+                <Row label="Bottles" value={String(pkg.bottles)} />
                 <Row
                   label="Capsules"
-                  value={String(
-                    pkg.bottles * quantity * product.capsulesPerBottle,
-                  )}
+                  value={String(pkg.bottles * product.capsulesPerBottle)}
                 />
-                <Row label="Unit price" value={formatPrice(pkg.price)} />
-                <Row label="Quantity" value={String(quantity)} />
+                <Row
+                  label="Days at one daily"
+                  value={String(pkg.bottles * product.capsulesPerBottle)}
+                />
               </div>
 
               <div className="mt-5 pt-5 border-t border-white/20">
-                <p className="eyebrow text-[0.7rem] text-gold">Total</p>
+                <p className="eyebrow text-gold">Total</p>
                 <p className="mt-1.5 font-serif text-[2.4rem] leading-none">
-                  {formatPrice(total)}
+                  {formatPrice(pkg.price)}
                 </p>
                 <p className="mt-2.5 text-[0.8rem] text-white/60 leading-relaxed">
-                  Delivery is not included. The delivery charge for your
-                  location is confirmed by the seller before dispatch.
+                  Delivery is not included. The charge for your location is
+                  confirmed by the team when they call.
                 </p>
               </div>
             </div>
 
-            {contact.whatsapp ? (
+            {contact.whatsapp && (
               <a
                 href={`https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(
                   contact.whatsappMessage.replace('{package}', pkg.title),
@@ -461,17 +418,8 @@ export default function OrderForm({ selected, onSelect }) {
                 className="btn btn-leaf mt-4 w-full"
               >
                 <Icon name="whatsapp" className="w-5 h-5" />
-                Order on WhatsApp
+                Order on WhatsApp instead
               </a>
-            ) : (
-              <p className="mt-4 rounded-xl border border-dashed border-gold-deep bg-[#fdf8e3] p-3.5 text-[0.8rem] text-[#5b4a05] leading-relaxed">
-                A WhatsApp ordering button appears here once the client&rsquo;s
-                real WhatsApp number is added to{' '}
-                <code className="font-mono text-[0.92em]">contact.whatsapp</code>{' '}
-                in <code className="font-mono text-[0.92em]">src/config/site.js</code>.
-                No placeholder number is shown, so no stranger is called by
-                mistake.
-              </p>
             )}
           </aside>
         </div>
@@ -495,7 +443,10 @@ function Req() {
 function FieldError({ id, message, className = '' }) {
   if (!message) return null;
   return (
-    <p id={id} className={`mt-1.5 text-[0.8rem] font-medium text-red-700 ${className}`}>
+    <p
+      id={id}
+      className={`mt-1.5 text-[0.8rem] font-medium text-red-700 ${className}`}
+    >
       {message}
     </p>
   );
@@ -531,6 +482,47 @@ function Field({
         aria-describedby={error ? `${id}-error` : undefined}
         {...rest}
       />
+      <FieldError id={`${id}-error`} message={error} />
+    </div>
+  );
+}
+
+function Select({
+  id,
+  label,
+  options,
+  placeholder,
+  required = false,
+  hint,
+  error,
+  className = '',
+  ...rest
+}) {
+  return (
+    <div className={className}>
+      <label htmlFor={id} className="field-label">
+        {label} {required ? <Req /> : null}
+        {hint && (
+          <span className="block font-normal normal-case tracking-normal text-ink-soft">
+            {hint}
+          </span>
+        )}
+      </label>
+      <select
+        id={id}
+        name={id}
+        className="field"
+        aria-invalid={error ? 'true' : undefined}
+        aria-describedby={error ? `${id}-error` : undefined}
+        {...rest}
+      >
+        <option value="">{placeholder}</option>
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
       <FieldError id={`${id}-error`} message={error} />
     </div>
   );

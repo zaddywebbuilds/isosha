@@ -23,6 +23,7 @@ import LegalDialog from './components/LegalDialog.jsx';
 import { useReveal } from './hooks/useReveal.js';
 import { useStructuredData } from './hooks/useStructuredData.js';
 import { useSeoHead } from './hooks/useSeoHead.js';
+import { useCrmScripts } from './hooks/useCrmScripts.js';
 
 export default function App() {
   /**
@@ -37,6 +38,7 @@ export default function App() {
   useReveal();
   useStructuredData();
   useSeoHead();
+  useCrmScripts();
 
   const choosePackage = useCallback((id) => {
     setSelectedPackage(id);

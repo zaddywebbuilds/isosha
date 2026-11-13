@@ -72,5 +72,11 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+
+    <!--
+      The Xurge CRM scripts are not loaded here. They look for the order
+      form on DOMContentLoaded, which fires before React renders it, so
+      they are injected after mount by src/hooks/useCrmScripts.js instead.
+    -->
   </body>
 </html>

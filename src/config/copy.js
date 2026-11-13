@@ -207,7 +207,7 @@ export const sections = {
   order: {
     eyebrow: 'Order',
     headline: 'Order Isosha with delivery across Nigeria.',
-    body: 'Fill in your details and a member of the team will call to confirm your order, the delivery charge for your location and how you would like to pay. Nothing is dispatched until you have agreed all three.',
+    body: 'Fill in your details and the Netwill Herbals team will call you to confirm your order and the delivery charge for your state before anything is dispatched. Orders go straight to the team, so there is no account to create and nothing to pay on this page.',
   },
 
   trust: {

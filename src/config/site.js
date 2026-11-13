@@ -52,34 +52,11 @@ export const regulatory = {
 /* ORDER FORM INTEGRATION                                                */
 /* --------------------------------------------------------------------- */
 
-export const formIntegration = {
-  /**
-   * Integration mode. One of:
-   *
-   *  'demo'     Nothing is sent anywhere. The form validates, shows the order
-   *             summary and tells the visitor plainly that ordering is not yet
-   *             live. No personal data leaves the browser and none is stored.
-   *             This is the safe default and must stay until the client has
-   *             chosen and tested a real destination.
-   *
-   *  'whatsapp' The completed details open as a pre-filled WhatsApp message to
-   *             `contact.whatsapp`. Requires a real WhatsApp number above.
-   *
-   *  'endpoint' The details are POSTed as JSON to `endpointUrl`. Use this for
-   *             Formspree, Getform, Basin, a Google Apps Script web app, a
-   *             Netlify/Vercel function, or the client's own CRM endpoint.
-   */
-  mode: 'demo',
-
-  endpointUrl: '',
-  // Extra headers for the endpoint, e.g. { 'X-Api-Key': '...' }
-  endpointHeaders: {},
-
-  successMessage:
-    'Thank you. Your order enquiry has been received. A member of the Netwill Herbals team will contact you to confirm your order and delivery details.',
-  errorMessage:
-    'Your enquiry could not be sent. Please check your connection and try again, or contact us directly.',
-};
+/**
+ * Order submission now goes to Netwill Herbals' Xurge CRM. The endpoint,
+ * hidden fields, package ids and state list all live in src/config/crm.js,
+ * and the form posts natively because the CRM sends no CORS headers.
+ */
 
 /* --------------------------------------------------------------------- */
 /* SEO                                                                   */

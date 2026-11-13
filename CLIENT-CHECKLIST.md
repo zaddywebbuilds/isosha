@@ -12,7 +12,7 @@ guess. Each row says exactly which file to edit.
 | --- | --- | --- | --- |
 | 1 | **WhatsApp number** (international format, digits only, e.g. `2348012345678`) | `contact.whatsapp` in `src/config/site.js` | The WhatsApp order button is hidden and a note explains why. No placeholder number is shown, so no stranger gets called. |
 | 2 | **Phone number, email, business address** | `contact.*` in `src/config/site.js` | Footer shows "To be supplied by the client" against each one. |
-| 3 | **Order destination** — WhatsApp, a form provider, or the company CRM endpoint | `formIntegration.mode` in `src/config/site.js` | The form validates fully but sends nothing, stores nothing, and tells the visitor plainly that ordering is not yet live. |
+| 3 | ~~Order destination~~ **Done.** Orders post to Xurge CRM. | `src/config/crm.js` | Live. A completed form creates a real order record. |
 | 4 | **Live domain** | `<link rel="canonical">` in `index.html`, `seo.canonical` in `src/config/site.js`, `Sitemap:` in `public/robots.txt` | Canonical URL and sitemap are left out rather than pointing somewhere wrong. |
 
 ## 2. Regulatory and product facts
@@ -34,7 +34,9 @@ guess. Each row says exactly which file to edit.
 | 12 | Delivery coverage, charges and timelines | `legalDocuments` → Terms, in `src/config/legal.js` |
 | 13 | Accepted payment methods and when payment is due | same |
 | 14 | Refund and returns position (this is a business decision, not a drafting gap) | `legalDocuments` → Refund and Returns Policy |
-| 15 | Whether the delivery details may also be used for marketing | `legalDocuments` → Privacy Policy |
+| 15 | Whether the delivery details may also be used for marketing. **The CRM's cart-abandonment script already follows up incomplete orders, so this needs an answer before launch.** | `legalDocuments` → Privacy Policy |
+| 15b | Where Xurge CRM stores order data, for how long, and under what agreement | `legalDocuments` → Privacy Policy |
+| 15c | Who inside the business can see the eye-condition answer, and whether it is used for anything beyond handling the order | `legalDocuments` → Privacy Policy |
 
 ## 4. Content
 
@@ -126,5 +128,6 @@ headings stay real HTML for accessibility and search.
 - Reduced-motion support, keyboard navigation, focus management.
 - Structured data, Open Graph and X preview metadata, built from confirmed
   facts only. No rating or review markup.
-- No cookies, no analytics, no third-party requests. Fonts are served from the
-  build.
+- Fonts are served from the build. The only third-party code is the two Xurge
+  CRM scripts that belong with the order form, and the Privacy Policy now
+  describes both rather than claiming the site is tracker-free.

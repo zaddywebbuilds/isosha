@@ -57,25 +57,32 @@ the order summary and the structured data all follow automatically. The
 "savings" line is `bottles × singleBottlePrice − price`, so it can never
 disagree with the prices shown.
 
-### Connecting the order form
+### The order form
 
-`src/hooks/useOrderSubmission.js` is the only place customer details leave the
-page. Set `formIntegration.mode` in `src/config/site.js`:
+Orders post natively to Netwill Herbals' Xurge CRM. Everything about that
+integration lives in `src/config/crm.js`: the endpoint, the hidden routing
+fields, the package ids, the eye-condition options and the state list.
 
-- `'demo'` — **the current setting.** Nothing is sent, nothing is stored, and
-  the form tells the visitor plainly that ordering is not yet live. It never
-  reports a successful order that nobody received.
-- `'whatsapp'` — opens WhatsApp with the order pre-filled. Needs a real
-  `contact.whatsapp` number (international format, digits only, e.g.
-  `2348012345678`).
-- `'endpoint'` — POSTs JSON to `formIntegration.endpointUrl`. Works with
-  Formspree, Getform, Basin, a Google Apps Script web app, a serverless
-  function or the client's own CRM. The exact payload shape is documented at
-  the top of `useOrderSubmission.js`.
+Three things are easy to break and worth knowing:
 
-Empty values in `site.js` are treated as "not supplied": the site renders a
-clearly marked placeholder rather than a fake phone number, address or link.
-Fill the value in and the real thing appears.
+1. **It is a native form POST, not `fetch()`.** The CRM sends no CORS
+   headers, so a scripted request is blocked by the browser and the order
+   fails silently. The browser therefore leaves the page on submit and lands
+   on the CRM's confirmation, which is this CRM's normal behaviour.
+2. **Field names are fixed by the CRM.** Renaming one does not error; it
+   quietly drops that value from the order. The package is a real `<select>`
+   rather than a hidden input because `cart_abandonment.js` reads it with
+   `querySelector('select[name="package"]')`.
+3. **The form id prefix is load bearing.** Both CRM scripts find the form
+   with `querySelector('[id^="orderForm"]')` and bind on `DOMContentLoaded`,
+   which fires before React renders. They are therefore injected after mount
+   by `src/hooks/useCrmScripts.js`, which also re-dispatches
+   `DOMContentLoaded` because `click_control.js` has no `readyState` check.
+
+Package ids map through `crmId` in `src/config/pricing.js`
+(1 bottle = 27, 2 = 28, 3 = 29). Change a price there and the card, the
+summary and the structured data all follow, but the `crmId` must keep
+matching the CRM's own package list.
 
 ---
 
@@ -113,8 +120,9 @@ actually shows, and the section says so in full underneath.
 - `prefers-reduced-motion` disables every reveal, transition and smooth
   scroll. The page is fully usable with JavaScript animation off.
 - Images carry width and height, so nothing shifts as they load.
-- No external fonts, scripts or trackers. Fonts are subset to latin and
-  latin-ext and served from the build.
+- Fonts are subset to latin and latin-ext and served from the build, with no
+  external font request. The only third-party code is the two Xurge CRM
+  scripts that belong with the order form.
 
 ---
 

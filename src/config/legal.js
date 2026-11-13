@@ -25,15 +25,19 @@ export const legalDocuments = [
       },
       {
         heading: 'What we collect',
-        body: 'If you complete the order enquiry form, we collect the details you type into it: your name, phone number, optional WhatsApp number, state, city or town, delivery address, the package you selected, and any notes you add. We do not ask for medical information and you should not include any in the notes field.',
+        body: 'When you place an order we collect your name, phone number, WhatsApp number, delivery state, delivery address, the package you selected, and your answer to the question about your eye condition. That last answer is health information, which is sensitive personal data under the Nigeria Data Protection Act. We collect it only because you chose to give it when ordering, we use it to handle your order and answer your questions, and it is never a diagnosis.',
       },
       {
         heading: 'Why we collect it',
-        body: 'We use these details for one purpose: to contact you about the order enquiry you submitted, to confirm the delivery charge for your location, and to arrange delivery. [Confirm whether Netwill Herbals also intends to use these details for marketing. If so, a separate opt-in is required and this policy must say so.]',
+        body: 'We use your details to contact you about the order you placed, to confirm the delivery charge for your location, and to arrange delivery. [Confirm whether Netwill Herbals also uses these details for marketing, including follow-up on orders that were started but not completed. The cart-abandonment script described below exists for exactly that, so this must be answered before launch, and a separate opt-in is likely required.]',
       },
       {
         heading: 'Where it goes',
-        body: '[Name the service that receives the completed form, for example WhatsApp, a form provider such as Formspree, or the company CRM, and say where that service stores the data. Name any courier or delivery partner that receives a customer address in order to deliver an order.]',
+        body: 'Your order is submitted directly to Netwill Herbals’ customer management system, hosted by Xurge CRM at netwillherbal.xurgecrm.com, where the order record is created and stored. [Confirm where Xurge stores this data, for how long, and under what agreement with Netwill Herbals. Name any courier or delivery partner that receives a customer address in order to deliver an order.]',
+      },
+      {
+        heading: 'Your answer about your eye condition',
+        body: 'The order form asks which of glaucoma, cataract, myopia or diabetic retinopathy applies to you. Answering is required to complete the order through our system. We treat that answer as sensitive personal data: it is used to handle your order and to answer your questions, it is not a diagnosis, and no one at Netwill Herbals is in a position to give you medical advice about it. [Confirm who inside the business can see this field, and whether it may be used for anything beyond handling the order. If it is used to target marketing, that requires its own explicit consent.]',
       },
       {
         heading: 'How long we keep it',
@@ -45,7 +49,7 @@ export const legalDocuments = [
       },
       {
         heading: 'Cookies and tracking',
-        body: 'This website does not set cookies, does not use analytics and does not load any third-party scripts, fonts or trackers. Nothing you do on this page is recorded or shared with anyone. [If an advertising pixel, analytics tool or chat widget is added later, this section must be updated before that goes live, and a consent banner will be required.]',
+        body: 'This website loads two scripts from Xurge CRM, the system that receives orders. One records clicks on the page. The other watches the order form and reports orders that were started but not completed, so that the team can follow them up. Both observe what you do on this page and may set identifiers in your browser. Fonts are served from this site and there is no advertising pixel or general analytics tool. [Confirm what the Xurge scripts store, for how long, and whether Nigerian or other data-protection rules require a consent banner before they load. If an advertising pixel is added later, this section must be updated before that goes live.]',
       },
     ],
   },
