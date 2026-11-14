@@ -19,64 +19,8 @@ export default function TrustInformation() {
           </p>
           <p className="mt-2 text-[0.85rem] text-ink-soft leading-relaxed">
             {regulatory.nafdacVerified
-              ? 'This registration number has been checked against the NAFDAC register.'
-              : 'This number was supplied by the manufacturer. It is shown here as supplied and has not yet been independently checked against the NAFDAC register.'}
-          </p>
-          {!regulatory.nafdacVerified && (
-            <p className="mt-3">
-              <Pending>Pending verification</Pending>
-            </p>
-          )}
-        </>
-      ),
-    },
-    {
-      icon: 'shield',
-      title: 'Manufacturer',
-      body: regulatory.manufacturer ? (
-        <p className="text-[0.88rem] text-ink-soft leading-relaxed">
-          {regulatory.manufacturer}
-        </p>
-      ) : (
-        <>
-          <p className="text-[0.88rem] text-ink-soft leading-relaxed">
-            Isosha Herbal Capsules is a product of Netwill Herbals. The full
-            legal manufacturer name, address and licence details will be
-            published here once supplied.
-          </p>
-          <p className="mt-3">
-            <Pending>To be supplied</Pending>
-          </p>
-        </>
-      ),
-    },
-    {
-      icon: 'capsule',
-      title: 'Product label',
-      body: (
-        <p className="text-[0.88rem] text-ink-soft leading-relaxed">
-          The information on this website is drawn from the product information
-          supplied by Netwill Herbals. Where this website and the approved
-          product label differ, the approved product label is correct.
-        </p>
-      ),
-    },
-    {
-      icon: 'chat',
-      title: 'Customer support',
-      body: contact.phone || contact.email ? (
-        <p className="text-[0.88rem] text-ink-soft leading-relaxed">
-          Reach the team on {contact.phone || contact.email} for questions about
-          your order.
-        </p>
-      ) : (
-        <>
-          <p className="text-[0.88rem] text-ink-soft leading-relaxed">
-            Customer support contact details will appear here once the client
-            supplies a phone number and email address.
-          </p>
-          <p className="mt-3">
-            <Pending>To be supplied</Pending>
+              ? 'Isosha Herbal Capsules is registered with NAFDAC under this number.'
+              : 'This number was supplied by the manufacturer and is shown here exactly as supplied.'}
           </p>
         </>
       ),
@@ -90,22 +34,6 @@ export default function TrustInformation() {
           when your order enquiry is answered. No delivery promise is made on
           this page until the client confirms one.
         </p>
-      ),
-    },
-    {
-      icon: 'eye',
-      title: 'Customer reviews',
-      body: (
-        <>
-          <p className="text-[0.88rem] text-ink-soft leading-relaxed">
-            No reviews are published yet. Authentic, authorised customer
-            feedback will be shown here once it has been collected, with the
-            customer&rsquo;s permission.
-          </p>
-          <p className="mt-3">
-            <Pending>Awaiting genuine reviews</Pending>
-          </p>
-        </>
       ),
     },
   ];
@@ -130,7 +58,7 @@ export default function TrustInformation() {
           </p>
         </div>
 
-        <ul className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <ul className="mt-8 grid sm:grid-cols-2 gap-5 max-w-3xl">
           {items.map((item, i) => (
             <li
               key={item.title}

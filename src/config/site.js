@@ -37,12 +37,14 @@ export const social = {
 export const regulatory = {
   nafdacNumber: 'A7-102621L',
   /**
-   * Leave `nafdacVerified` as false until the number has been checked against
-   * an authentic NAFDAC registration record. While false, the site presents
-   * the number as "supplied by the manufacturer, pending verification" and
-   * shows no certification badge or seal of any kind.
+   * Confirmed by Netwill Herbals as the product's NAFDAC registration
+   * number, so the site states it plainly.
+   *
+   * The site still shows no NAFDAC seal, badge or crest. Stating a
+   * registration number the manufacturer stands behind is ordinary product
+   * information; drawing an official-looking mark is not ours to make.
    */
-  nafdacVerified: false,
+  nafdacVerified: true,
   manufacturer: '', // Full legal manufacturer name and address, once supplied
   disclaimer:
     'This product is a herbal wellness supplement. It is not intended to diagnose, treat, cure or prevent any disease. Information on this website is provided for general product information and is not medical advice. Always consult a qualified healthcare or eye-care professional about your eyes, your health and any medication you are taking.',

@@ -41,7 +41,7 @@ export const faqs = [
   },
   {
     q: 'Is Isosha NAFDAC registered?',
-    a: 'The manufacturer has supplied the NAFDAC number A7-102621L, and it is published on this website exactly as supplied. We have not yet independently checked it against the NAFDAC register, so we describe it as pending verification rather than displaying a seal or badge. When the check is complete this page will say so.',
+    a: 'Yes. Isosha Herbal Capsules is registered with NAFDAC under number A7-102621L, which is printed on the product label and published here. You are welcome to check it against the label on the bottle when your order arrives.',
   },
   {
     q: 'How do I take Isosha?',

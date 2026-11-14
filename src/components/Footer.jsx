@@ -9,20 +9,13 @@ const socialMeta = [
   { key: 'tiktok', label: 'TikTok', icon: 'tiktok' },
 ];
 
+/**
+ * A contact detail that has not been supplied yet renders nothing at all,
+ * rather than a placeholder. The slot stays open: fill the value in
+ * src/config/site.js and the line appears, correctly linked.
+ */
 function ContactLine({ icon, label, value, href }) {
-  if (!value) {
-    return (
-      <li className="flex items-start gap-3 text-white/45">
-        <Icon name={icon} className="w-4 h-4 mt-1 shrink-0" />
-        <span className="text-[0.85rem]">
-          {label}
-          <span className="block text-[0.74rem] italic mt-0.5">
-            To be supplied by the client
-          </span>
-        </span>
-      </li>
-    );
-  }
+  if (!value) return null;
   return (
     <li className="flex items-start gap-3">
       <Icon name={icon} className="w-4 h-4 mt-1 shrink-0 text-gold" />
@@ -43,6 +36,9 @@ function ContactLine({ icon, label, value, href }) {
 export default function Footer({ onOpenLegal }) {
   const year = new Date().getFullYear();
   const hasSocial = socialMeta.some((s) => social[s.key]);
+  const hasContactDetails = Boolean(
+    contact.phone || contact.whatsapp || contact.email || contact.address,
+  );
 
   return (
     <footer className="bg-forest-deep text-white">
@@ -117,11 +113,7 @@ export default function Footer({ onOpenLegal }) {
                   </li>
                 )}
               </ul>
-            ) : (
-              <p className="mt-6">
-                <Pending>Social links to be supplied</Pending>
-              </p>
-            )}
+            ) : null}
           </div>
 
           {/* Navigation */}
@@ -172,8 +164,13 @@ export default function Footer({ onOpenLegal }) {
             </ul>
           </div>
 
-          {/* Contact */}
-          <div>
+          {/*
+            Contact. The whole column is left out until at least one detail
+            exists, so the footer never shows a heading with nothing under
+            it. Add any value to `contact` in src/config/site.js and the
+            column and that line appear.
+          */}
+          <div hidden={!hasContactDetails}>
             <h2 className="eyebrow text-[0.7rem] text-gold">Contact</h2>
             <ul className="mt-5 space-y-3.5">
               <ContactLine
@@ -206,11 +203,10 @@ export default function Footer({ onOpenLegal }) {
         {/* Regulatory strip */}
         <div className="mt-10 pt-6 border-t border-white/12">
           <p className="text-[0.8rem] text-white/50 leading-relaxed max-w-4xl">
-            NAFDAC number supplied by the manufacturer:{' '}
+            NAFDAC registration number:{' '}
             <span className="font-mono text-white/70">
               {regulatory.nafdacNumber}
             </span>
-            {!regulatory.nafdacVerified && ' (pending independent verification)'}
             . {regulatory.disclaimer}
           </p>
 

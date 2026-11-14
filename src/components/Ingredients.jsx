@@ -55,12 +55,6 @@ function BotanicalCard({ item, index }) {
         <p className="mt-4 text-[0.88rem] leading-relaxed text-ink-soft">
           {item.description}
         </p>
-
-        {!item.confirmed && (
-          <p className="mt-5">
-            <Pending>{item.pendingNote}</Pending>
-          </p>
-        )}
       </div>
     </li>
   );
@@ -211,14 +205,13 @@ export default function Ingredients() {
 
         {/* Tier 3: the plant-compound classes */}
         <div className="mt-10">
-          <div className="reveal flex flex-wrap items-end justify-between gap-x-8 gap-y-3">
-            <div className="max-w-xl">
+          <div className="reveal max-w-xl">
+            <div>
               <Eyebrow tone="forest">Listed plant compounds</Eyebrow>
               <h3 className="mt-4 text-[1.6rem] sm:text-[2rem] text-forest">
                 Classes of compounds, not single plants
               </h3>
             </div>
-            <Pending>Specification pending</Pending>
           </div>
 
           <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">

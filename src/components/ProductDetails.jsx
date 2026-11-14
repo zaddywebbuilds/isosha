@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { product, productInfoPanels } from '../config/product.js';
 import { images } from '../config/site.js';
-import { Eyebrow, Icon, Img, Pending } from './ui.jsx';
+import { Eyebrow, Icon, Img } from './ui.jsx';
 import { sections } from '../config/copy.js';
 
 const facts = [
@@ -25,11 +25,8 @@ function Panel({ panel }) {
           aria-controls={`panel-${panel.id}`}
           className="flex w-full items-center justify-between gap-4 py-4 text-left"
         >
-          <span className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-            <span className="font-sans font-bold text-[0.95rem] text-forest">
-              {panel.title}
-            </span>
-            {panel.pending && <Pending>To be supplied</Pending>}
+          <span className="font-sans font-bold text-[0.95rem] text-forest">
+            {panel.title}
           </span>
           <Icon
             name="plus"
@@ -49,6 +46,8 @@ function Panel({ panel }) {
 }
 
 export default function ProductDetails() {
+  const readyPanels = productInfoPanels.filter((panel) => !panel.pending);
+
   return (
     <section
       id="product-information"
@@ -109,14 +108,22 @@ export default function ProductDetails() {
             existing eye condition or take prescription medication.
           </p>
 
-          <div className="mt-10">
-            <h3 className="eyebrow text-[0.7rem] text-forest-line mb-1">
-              Further label information
-            </h3>
-            {productInfoPanels.map((panel) => (
-              <Panel key={panel.id} panel={panel} />
-            ))}
-          </div>
+          {/*
+            Label panels appear only once they carry real wording from the
+            approved product label. Fill a panel's `body` in
+            src/config/product.js and set `pending: false`, and both the
+            heading and that panel appear.
+          */}
+          {readyPanels.length > 0 && (
+            <div className="mt-10">
+              <h3 className="eyebrow text-[0.7rem] text-forest-line mb-1">
+                Further label information
+              </h3>
+              {readyPanels.map((panel) => (
+                <Panel key={panel.id} panel={panel} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>

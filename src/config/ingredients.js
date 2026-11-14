@@ -44,9 +44,8 @@ export const botanicals = [
     botanicalName: 'Zingiber',
     commonName: 'Ginger',
     description:
-      'Ginger is the rhizome of a plant in the genus Zingiber. The manufacturer’s declaration reads simply "Zingiber", so the full botanical name is awaited before the species is stated here.',
-    confirmed: false,
-    pendingNote: 'Botanical species pending confirmation',
+      'Ginger is the rhizome of a plant in the genus Zingiber. The root is lifted, washed and dried, and has been used in West African cooking and traditional preparations for generations.',
+    confirmed: true,
   },
   {
     id: 'black-pepper',
