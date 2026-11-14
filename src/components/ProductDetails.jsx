@@ -25,7 +25,7 @@ function Panel({ panel }) {
           aria-controls={`panel-${panel.id}`}
           className="flex w-full items-center justify-between gap-4 py-4 text-left"
         >
-          <span className="font-sans font-bold text-[0.95rem] text-forest">
+          <span className="font-sans font-bold text-[1.08rem] text-forest">
             {panel.title}
           </span>
           <Icon
@@ -86,14 +86,14 @@ export default function ProductDetails() {
                 key={fact.label}
                 className="py-4 border-b border-forest/10"
               >
-                <dt className="eyebrow text-[0.7rem] text-forest-line">
+                <dt className="eyebrow text-[0.76rem] text-forest-line">
                   {fact.label}
                 </dt>
-                <dd className="mt-1.5 text-[1rem] text-ink font-medium">
+                <dd className="mt-1.5 text-[1.06rem] text-ink font-medium">
                   {fact.value}
                 </dd>
                 {fact.note && (
-                  <dd className="text-[0.8rem] text-ink-soft mt-0.5">
+                  <dd className="text-[0.86rem] text-ink-soft mt-0.5">
                     {fact.note}
                   </dd>
                 )}
@@ -101,7 +101,7 @@ export default function ProductDetails() {
             ))}
           </dl>
 
-          <p className="mt-8 flex items-start gap-2.5 rounded-xl bg-leaf-wash border border-leaf/25 p-4 text-[0.88rem] text-forest leading-relaxed">
+          <p className="mt-8 flex items-start gap-2.5 rounded-xl bg-leaf-wash border border-leaf/25 p-4 text-[0.96rem] text-forest leading-relaxed">
             <Icon name="shield" className="w-5 h-5 mt-0.5 shrink-0 text-forest" />
             Follow the approved product label and consult a qualified
             healthcare professional before use, especially if you have an
@@ -116,7 +116,7 @@ export default function ProductDetails() {
           */}
           {readyPanels.length > 0 && (
             <div className="mt-10">
-              <h3 className="eyebrow text-[0.7rem] text-forest-line mb-1">
+              <h3 className="eyebrow text-[0.76rem] text-forest-line mb-1">
                 Further label information
               </h3>
               {readyPanels.map((panel) => (

@@ -43,7 +43,7 @@ export default function FinalCTA() {
               <br />
               <span className="text-leaf-soft">{sections.finalCta.headlineAccent}</span>
             </h2>
-            <p className="mt-6 text-white/72 leading-relaxed max-w-md">
+            <p className="mt-6 text-white/88 leading-relaxed max-w-md">
 {sections.finalCta.body}
             </p>
 

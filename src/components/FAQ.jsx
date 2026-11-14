@@ -18,7 +18,7 @@ function Item({ item, index, open, onToggle }) {
           aria-controls={panelId}
           className="flex w-full items-start justify-between gap-5 py-5 text-left group"
         >
-          <span className="font-sans font-bold text-[1.02rem] text-forest group-hover:text-leaf transition-colors duration-200">
+          <span className="font-sans font-bold text-[1.08rem] text-forest group-hover:text-leaf transition-colors duration-200">
             {item.q}
           </span>
           <span
@@ -45,7 +45,7 @@ function Item({ item, index, open, onToggle }) {
             id={panelId}
             role="region"
             aria-labelledby={buttonId}
-            className="pb-6 pr-10 text-[0.93rem] text-ink-soft leading-relaxed"
+            className="pb-6 pr-10 text-[1.06rem] text-ink-soft leading-relaxed"
           >
             {item.a}
           </div>

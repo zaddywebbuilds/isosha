@@ -59,10 +59,19 @@
   --color-leaf-wash: #eef6e3;
   --color-gold: #f2d13d;
   --color-gold-deep: #c9a516;
+  /* Gold used as TEXT on a light background. #C9A516 reads as gold but only
+     reaches 2.37:1 on white, which this audience cannot be asked to read.
+     This hits 5.4:1 on cream and still reads as gold rather than brown.
+     Keep --color-gold-deep for borders and dashes, where contrast is not a
+     legibility question. */
+  --color-gold-ink: #7e650b;
   --color-cream: #fbfcf8;
   --color-mist: #f1f5ec;
-  --color-ink: #14241a;
-  --color-ink-soft: #46584c;
+  --color-ink: #10201a;
+  /* Secondary body colour. Darkened from #46584C: this product is sold to
+     people who have told us their sight is not what it was, so body copy is
+     held well above the 4.5:1 minimum rather than at it. */
+  --color-ink-soft: #33443a;
 
   --font-serif: 'DM Serif Display', Georgia, 'Times New Roman', serif;
   --font-sans: 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
@@ -88,10 +97,23 @@
     background-color: var(--color-cream);
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: 1rem;
-    line-height: 1.65;
+    /* Larger and heavier than a typical marketing site. The audience for an
+       eye-wellness product is, by definition, more likely to struggle with
+       small light type, so 17.6px at weight 500 is the floor for body copy
+       and the scale is built up from there. */
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.68;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+  }
+
+  p,
+  li,
+  dd,
+  label,
+  blockquote {
+    font-weight: 500;
   }
 
   h1,
@@ -150,10 +172,10 @@
   }
 
   .eyebrow {
-    /* 11.5px. The smallest tracked uppercase size that stays legible on a
-       phone; anything under 11px fails a mobile readability check. */
-    font-size: 0.72rem;
-    font-weight: 700;
+    /* Raised from 0.72rem. Tracked uppercase is the hardest thing on the
+       page to read, so it gets the largest proportional increase. */
+    font-size: 0.78rem;
+    font-weight: 800;
     letter-spacing: 0.22em;
     text-transform: uppercase;
   }
@@ -166,8 +188,8 @@
     min-height: 3rem;
     padding: 0.85rem 1.75rem;
     border-radius: 999px;
-    font-weight: 700;
-    font-size: 0.95rem;
+    font-weight: 800;
+    font-size: 1.02rem;
     letter-spacing: 0.01em;
     text-align: center;
     cursor: pointer;
@@ -244,8 +266,8 @@
 
   .field-label {
     display: block;
-    font-size: 0.78rem;
-    font-weight: 700;
+    font-size: 0.84rem;
+    font-weight: 800;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-forest);
@@ -260,14 +282,16 @@
     border-radius: 0.75rem;
     background: #fff;
     color: var(--color-ink);
-    font-size: 1rem;
+    font-size: 1.05rem;
+    font-weight: 500;
     font-family: inherit;
     transition:
       border-color 0.2s,
       box-shadow 0.2s;
   }
   .field::placeholder {
-    color: #9aa8a0;
+    /* Lifted from #9AA8A0, which was too faint to read as a hint. */
+    color: #6b7a71;
   }
   .field:focus {
     outline: none;

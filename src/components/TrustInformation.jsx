@@ -17,7 +17,7 @@ export default function TrustInformation() {
           <p className="font-mono text-[1.05rem] font-bold text-forest tracking-wide">
             {regulatory.nafdacNumber}
           </p>
-          <p className="mt-2 text-[0.85rem] text-ink-soft leading-relaxed">
+          <p className="mt-2 text-[1.06rem] text-ink-soft leading-relaxed">
             {regulatory.nafdacVerified
               ? 'Isosha Herbal Capsules is registered with NAFDAC under this number.'
               : 'This number was supplied by the manufacturer and is shown here exactly as supplied.'}
@@ -29,7 +29,7 @@ export default function TrustInformation() {
       icon: 'truck',
       title: 'Delivery',
       body: (
-        <p className="text-[0.88rem] text-ink-soft leading-relaxed">
+        <p className="text-[0.96rem] text-ink-soft leading-relaxed">
           Delivery coverage, charges and timelines are confirmed by the seller
           when your order enquiry is answered. No delivery promise is made on
           this page until the client confirms one.
@@ -77,7 +77,7 @@ export default function TrustInformation() {
           ))}
         </ul>
 
-        <p className="reveal mt-7 rounded-xl border border-forest/12 bg-white p-5 text-[0.84rem] text-ink-soft leading-relaxed max-w-4xl">
+        <p className="reveal mt-7 rounded-xl border border-forest/12 bg-white p-5 text-[0.98rem] text-ink-soft leading-relaxed max-w-4xl">
           {regulatory.disclaimer}
         </p>
       </div>

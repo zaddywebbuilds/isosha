@@ -43,10 +43,10 @@ export default function Hero() {
               <span className="text-leaf-soft">{hero.headlineAccent}</span>
             </h1>
 
-            <p className="mt-6 text-white/80 text-[1.08rem] leading-relaxed max-w-lg">
+            <p className="mt-6 text-white/90 text-[1.08rem] leading-relaxed max-w-lg">
               {hero.body}
             </p>
-            <p className="mt-3.5 text-white/60 text-[1.02rem] leading-relaxed max-w-lg">
+            <p className="mt-3.5 text-white/92 text-[1.08rem] leading-relaxed max-w-lg">
               {hero.bodyTwo}
             </p>
 
@@ -62,22 +62,22 @@ export default function Hero() {
 
             <dl className="mt-8 grid grid-cols-3 gap-4 max-w-md border-t border-white/15 pt-6">
               <div>
-                <dt className="eyebrow text-[0.7rem] text-gold/80">Per bottle</dt>
+                <dt className="eyebrow text-[0.76rem] text-gold/80">Per bottle</dt>
                 <dd className="mt-1.5 font-serif text-2xl">
                   {product.capsulesPerBottle}
-                  <span className="text-sm font-sans text-white/60 ml-1.5">
+                  <span className="text-sm font-sans text-white/92 ml-1.5">
                     capsules
                   </span>
                 </dd>
               </div>
               <div>
-                <dt className="eyebrow text-[0.7rem] text-gold/80">Dosage</dt>
+                <dt className="eyebrow text-[0.76rem] text-gold/80">Dosage</dt>
                 <dd className="mt-1.5 font-serif text-2xl">
-                  1<span className="text-sm font-sans text-white/60 ml-1.5">daily</span>
+                  1<span className="text-sm font-sans text-white/92 ml-1.5">daily</span>
                 </dd>
               </div>
               <div>
-                <dt className="eyebrow text-[0.7rem] text-gold/80">Vitamins</dt>
+                <dt className="eyebrow text-[0.76rem] text-gold/80">Vitamins</dt>
                 <dd className="mt-1.5 font-serif text-2xl leading-none">
                   A<span className="text-white/35">·</span>B2
                   <span className="text-white/35">·</span>C

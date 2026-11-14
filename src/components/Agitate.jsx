@@ -47,10 +47,10 @@ export default function Agitate() {
               >
                 <Icon name={item.icon} className="w-5 h-5" />
               </span>
-              <h3 className="mt-4 font-sans font-bold text-[1rem] leading-snug text-forest">
+              <h3 className="mt-4 font-sans font-bold text-[1.06rem] leading-snug text-forest">
                 {item.title}
               </h3>
-              <p className="mt-2.5 text-[0.88rem] leading-relaxed text-ink-soft">
+              <p className="mt-2.5 text-[0.96rem] leading-relaxed text-ink-soft">
                 {item.body}
               </p>
             </li>
@@ -85,7 +85,7 @@ export default function Agitate() {
                         className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold"
                         aria-hidden="true"
                       />
-                      <span className="text-[0.95rem] leading-relaxed text-white/75">
+                      <span className="text-[1.08rem] leading-relaxed text-white/90">
                         {point}
                       </span>
                     </li>
@@ -96,7 +96,7 @@ export default function Agitate() {
                   <p className="font-serif text-[1.3rem] sm:text-[1.5rem] leading-snug text-leaf-soft">
                     {agitate.turn.closing}
                   </p>
-                  <p className="mt-3 text-[0.88rem] text-white/50">
+                  <p className="mt-3 text-[0.96rem] text-white/90">
                     {agitate.turn.cta}
                   </p>
                 </div>

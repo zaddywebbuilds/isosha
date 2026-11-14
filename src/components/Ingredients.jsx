@@ -43,7 +43,7 @@ function BotanicalCard({ item, index }) {
         <h3 className="text-[1.5rem] leading-tight text-forest">
           {item.commonName}
         </h3>
-        <p className="mt-1 font-sans text-[0.8rem] italic tracking-wide text-gold-deep">
+        <p className="mt-1 font-sans text-[0.86rem] italic tracking-wide text-gold-ink">
           {item.botanicalName}
         </p>
 
@@ -52,7 +52,7 @@ function BotanicalCard({ item, index }) {
           className="mt-4 block h-px w-10 bg-gold transition-[width] duration-500 group-hover:w-20"
         />
 
-        <p className="mt-4 text-[0.88rem] leading-relaxed text-ink-soft">
+        <p className="mt-4 text-[0.96rem] leading-relaxed text-ink-soft">
           {item.description}
         </p>
       </div>
@@ -80,7 +80,7 @@ function VitaminBand() {
               Four vitamins
             </h3>
           </div>
-          <p className="max-w-sm text-[0.82rem] leading-relaxed text-white/55">
+          <p className="max-w-sm text-[0.96rem] leading-relaxed text-white/82">
             The notes below are general nutritional information about each
             vitamin. Amounts are not stated, because none has been supplied.
           </p>
@@ -115,11 +115,11 @@ function VitaminBand() {
                   className="w-4 h-4 text-leaf opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                 />
               </div>
-              <p className="mt-3 font-semibold text-[0.95rem]">{v.name}</p>
-              <p className="eyebrow mt-1 text-[0.7rem] text-leaf-soft">
+              <p className="mt-3 font-semibold text-[1.08rem]">{v.name}</p>
+              <p className="eyebrow mt-1 text-[0.76rem] text-leaf-soft">
                 {v.role}
               </p>
-              <p className="mt-3 text-[0.84rem] leading-relaxed text-white/60">
+              <p className="mt-3 text-[0.98rem] leading-relaxed text-white/92">
                 {v.description}
               </p>
             </li>
@@ -145,13 +145,13 @@ function CompoundCard({ item, index }) {
       </div>
 
       <div className="min-w-0 sm:px-5 sm:pt-5 sm:pb-6">
-        <h4 className="font-sans font-bold text-[0.98rem] leading-snug text-forest">
+        <h4 className="font-sans font-bold text-[1.04rem] leading-snug text-forest">
           {item.name}
         </h4>
-        <p className="mt-1 text-[0.74rem] font-medium uppercase tracking-[0.1em] text-gold-deep">
+        <p className="mt-1 text-[0.98rem] font-medium uppercase tracking-[0.1em] text-gold-ink">
           Shown: {item.shows}
         </p>
-        <p className="mt-2.5 text-[0.82rem] leading-relaxed text-ink-soft">
+        <p className="mt-2.5 text-[0.96rem] leading-relaxed text-ink-soft">
           {item.note}
         </p>
       </div>

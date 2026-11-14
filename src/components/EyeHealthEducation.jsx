@@ -71,7 +71,7 @@ function ConditionCard({ item, index }) {
         </span>
 
         <h3 className="mt-4 text-[1.4rem] text-forest">{item.title}</h3>
-        <p className="mt-3 text-[0.93rem] text-ink-soft leading-relaxed">
+        <p className="mt-3 text-[1.06rem] text-ink-soft leading-relaxed">
           {item.summary}
         </p>
 
@@ -80,7 +80,7 @@ function ConditionCard({ item, index }) {
           hidden={!open}
           className="mt-4 pt-4 border-t border-forest/10"
         >
-          <p className="text-[0.9rem] text-ink-soft leading-relaxed">
+          <p className="text-[0.98rem] text-ink-soft leading-relaxed">
             {item.more}
           </p>
           <Img
@@ -95,7 +95,7 @@ function ConditionCard({ item, index }) {
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-controls={panelId}
-          className="btn-inline mt-6 self-start text-[0.85rem] font-bold text-forest hover:text-leaf transition-colors"
+          className="btn-inline mt-6 self-start text-[1.06rem] font-bold text-forest hover:text-leaf transition-colors"
         >
           {open ? 'Show less' : 'Learn more'}
           <Icon
@@ -121,10 +121,10 @@ function AnatomyFigure() {
         className="w-full"
       />
       <figcaption className="p-6 sm:p-8 border-t border-forest/10">
-        <p className="eyebrow text-[0.7rem] text-forest-line">
+        <p className="eyebrow text-[0.76rem] text-forest-line">
           The eye, labelled
         </p>
-        <p className="mt-2.5 text-[0.9rem] text-ink-soft leading-relaxed">
+        <p className="mt-2.5 text-[0.98rem] text-ink-soft leading-relaxed">
           Light passes through the cornea and the lens and is focused onto the
           retina. The optic nerve carries that signal to the brain. The
           conditions described above affect different parts of this pathway,
@@ -136,7 +136,7 @@ function AnatomyFigure() {
           onClick={() => setDetail((v) => !v)}
           aria-expanded={detail}
           aria-controls="anatomy-detail"
-          className="btn-inline mt-6 text-[0.85rem] font-bold text-forest hover:text-leaf transition-colors"
+          className="btn-inline mt-6 text-[1.06rem] font-bold text-forest hover:text-leaf transition-colors"
         >
           {detail ? 'Hide the detailed diagram' : 'See the detailed diagram'}
           <Icon
@@ -153,7 +153,7 @@ function AnatomyFigure() {
             sizes="(min-width: 1024px) 50vw, 92vw"
             className="w-full rounded-xl border border-forest/10"
           />
-          <p className="mt-3 text-[0.82rem] text-ink-soft">
+          <p className="mt-3 text-[0.96rem] text-ink-soft">
             The same cross-section with the conjunctiva, ciliary body, vitreous
             body and choroid also labelled.
           </p>
@@ -219,7 +219,7 @@ export default function EyeHealthEducation() {
           </div>
         </div>
 
-        <p className="reveal mt-7 flex items-start gap-2.5 text-[0.82rem] text-ink-soft/90 max-w-3xl">
+        <p className="reveal mt-7 flex items-start gap-2.5 text-[0.96rem] text-ink-soft/90 max-w-3xl">
           <Icon name="doc" className="w-4 h-4 mt-0.5 shrink-0 text-forest-line" />
           {eyeHealth.note}
         </p>

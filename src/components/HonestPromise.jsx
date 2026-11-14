@@ -46,7 +46,7 @@ export default function HonestPromise() {
 
           {/* The argument */}
           <div className="reveal">
-            <div className="space-y-4 text-[1rem] leading-relaxed text-white/75">
+            <div className="space-y-4 text-[1.06rem] leading-relaxed text-white/90">
               {promise.paragraphs.map((text, i) => (
                 <p
                   key={i}
@@ -68,10 +68,10 @@ export default function HonestPromise() {
               {promise.points.map((point, i) => (
                 <li key={point.title} style={{ transitionDelay: `${i * 70}ms` }}>
                   <Icon name={point.icon} className="w-6 h-6 text-gold" />
-                  <p className="mt-3 font-semibold text-[0.95rem]">
+                  <p className="mt-3 font-semibold text-[1.08rem]">
                     {point.title}
                   </p>
-                  <p className="mt-1.5 text-[0.84rem] leading-relaxed text-white/55">
+                  <p className="mt-1.5 text-[0.98rem] leading-relaxed text-white/82">
                     {point.body}
                   </p>
                 </li>

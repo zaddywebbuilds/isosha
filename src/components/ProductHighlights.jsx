@@ -28,10 +28,10 @@ export default function ProductHighlights() {
             >
               <Icon name={icons[i]} className="w-7 h-7 text-leaf shrink-0" />
               <div className="min-w-0">
-                <p className="font-semibold text-[0.9rem] sm:text-[0.95rem] leading-snug">
+                <p className="font-semibold text-[0.98rem] sm:text-[1.08rem] leading-snug">
                   {item.label}
                 </p>
-                <p className="text-[0.8rem] sm:text-[0.8rem] text-white/55 leading-snug mt-0.5">
+                <p className="text-[0.86rem] sm:text-[0.86rem] text-white/82 leading-snug mt-0.5">
                   {item.detail}
                 </p>
               </div>

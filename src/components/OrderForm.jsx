@@ -186,7 +186,7 @@ export default function OrderForm({ selected, onSelect }) {
                       }`}
                     >
                       <span className="flex items-center justify-between gap-2">
-                        <span className="text-[0.85rem] font-bold text-forest">
+                        <span className="text-[1.06rem] font-bold text-forest">
                           {p.bottles} bottle{p.bottles > 1 ? 's' : ''}
                         </span>
                         {active && (
@@ -196,7 +196,7 @@ export default function OrderForm({ selected, onSelect }) {
                       <span className="block mt-1 font-serif text-[1.3rem] text-forest leading-none">
                         {formatPrice(p.price)}
                       </span>
-                      <span className="block mt-1 text-[0.74rem] text-ink-soft">
+                      <span className="block mt-1 text-[0.98rem] text-ink-soft">
                         {p.title}
                       </span>
                     </button>
@@ -339,7 +339,7 @@ export default function OrderForm({ selected, onSelect }) {
                   }
                   className="mt-1 w-5 h-5 shrink-0 accent-[#60B609]"
                 />
-                <span className="text-[0.88rem] text-ink leading-relaxed">
+                <span className="text-[0.96rem] text-ink leading-relaxed">
                   I agree that Netwill Herbals may use the details above,
                   including my answer about my eye condition, to contact me
                   about this order and arrange delivery. <Req />
@@ -347,7 +347,7 @@ export default function OrderForm({ selected, onSelect }) {
               </label>
               <p
                 id="consent-note"
-                className="mt-2.5 pl-8 text-[0.78rem] text-ink-soft leading-relaxed"
+                className="mt-2.5 pl-8 text-[0.98rem] text-ink-soft leading-relaxed"
               >
                 Your answer about your eye condition is health information. It
                 is used to handle your order and answer your questions, and
@@ -369,7 +369,7 @@ export default function OrderForm({ selected, onSelect }) {
               {submitting ? 'Placing your order…' : crm.submitLabel}
             </button>
 
-            <p className="mt-3.5 text-[0.78rem] text-ink-soft text-center leading-relaxed">
+            <p className="mt-3.5 text-[0.98rem] text-ink-soft text-center leading-relaxed">
               Your order goes straight to the Netwill Herbals team, who will
               call you on the number above to confirm it and the delivery
               charge for your state.
@@ -382,7 +382,7 @@ export default function OrderForm({ selected, onSelect }) {
           <aside className="reveal lg:sticky lg:top-28">
             <div className="rounded-[1.25rem] bg-forest text-white p-6 sm:p-7">
               <h3 className="text-[1.4rem]">Order summary</h3>
-              <div className="mt-5 space-y-3 text-[0.92rem]">
+              <div className="mt-5 space-y-3 text-[1.06rem]">
                 <Row label="Product" value={product.name} />
                 <Row label="Package" value={pkg.title} />
                 <Row label="Bottles" value={String(pkg.bottles)} />
@@ -401,7 +401,7 @@ export default function OrderForm({ selected, onSelect }) {
                 <p className="mt-1.5 font-serif text-[2.4rem] leading-none">
                   {formatPrice(pkg.price)}
                 </p>
-                <p className="mt-2.5 text-[0.8rem] text-white/60 leading-relaxed">
+                <p className="mt-2.5 text-[0.86rem] text-white/92 leading-relaxed">
                   Delivery is not included. The charge for your location is
                   confirmed by the team when they call.
                 </p>
@@ -445,7 +445,7 @@ function FieldError({ id, message, className = '' }) {
   return (
     <p
       id={id}
-      className={`mt-1.5 text-[0.8rem] font-medium text-red-700 ${className}`}
+      className={`mt-1.5 text-[0.86rem] font-medium text-red-700 ${className}`}
     >
       {message}
     </p>
@@ -531,7 +531,7 @@ function Select({
 function Row({ label, value }) {
   return (
     <div className="flex items-baseline justify-between gap-4 border-b border-white/12 pb-2.5">
-      <span className="text-white/60">{label}</span>
+      <span className="text-white/92">{label}</span>
       <span className="font-semibold text-right">{value}</span>
     </div>
   );

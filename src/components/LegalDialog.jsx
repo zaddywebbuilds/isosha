@@ -116,10 +116,10 @@ export default function LegalDialog({ openId, onClose }) {
 
           {doc.sections.map((section) => (
             <section key={section.heading} className="mb-6 last:mb-0">
-              <h3 className="font-sans font-bold text-[0.95rem] text-forest">
+              <h3 className="font-sans font-bold text-[1.08rem] text-forest">
                 {section.heading}
               </h3>
-              <p className="mt-2 text-[0.9rem] text-ink-soft leading-relaxed">
+              <p className="mt-2 text-[0.98rem] text-ink-soft leading-relaxed">
                 {section.body}
               </p>
             </section>

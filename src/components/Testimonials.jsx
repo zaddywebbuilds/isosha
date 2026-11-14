@@ -45,10 +45,10 @@ export default function Testimonials() {
             ? reviews.map((r, i) => (
                 <li key={i} className="reveal card p-6 flex flex-col">
                   <Icon name="chat" className="w-6 h-6 text-leaf" />
-                  <blockquote className="mt-4 flex-1 text-[0.95rem] text-ink leading-relaxed">
+                  <blockquote className="mt-4 flex-1 text-[1.08rem] text-ink leading-relaxed">
                     {r.quote}
                   </blockquote>
-                  <figcaption className="mt-5 pt-4 border-t border-forest/10 text-[0.82rem]">
+                  <figcaption className="mt-5 pt-4 border-t border-forest/10 text-[0.96rem]">
                     <span className="font-bold text-forest">{r.name}</span>
                     {r.location && (
                       <span className="text-ink-soft"> &middot; {r.location}</span>
@@ -70,7 +70,7 @@ export default function Testimonials() {
                     <span className="block h-2.5 rounded-full bg-forest/8 w-[78%]" />
                     <span className="block h-2.5 rounded-full bg-forest/8 w-[55%]" />
                   </div>
-                  <p className="mt-5 pt-4 border-t border-forest/10 text-[0.8rem] text-ink-soft">
+                  <p className="mt-5 pt-4 border-t border-forest/10 text-[0.86rem] text-ink-soft">
                     {i === 0
                       ? 'A verified customer review will appear here.'
                       : 'Reserved for a verified review.'}

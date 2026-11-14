@@ -30,7 +30,7 @@ export default function ProductIntroduction() {
             <span className="font-serif text-3xl leading-none">
               {product.capsulesPerBottle}
             </span>
-            <span className="eyebrow text-[0.7rem] text-gold mt-1">
+            <span className="eyebrow text-[0.76rem] text-gold mt-1">
               Capsules
             </span>
           </div>
@@ -59,7 +59,7 @@ export default function ProductIntroduction() {
                 >
                   <Icon name="check" className="w-3 h-3" />
                 </span>
-                <span className="text-[0.95rem] text-ink">{point}</span>
+                <span className="text-[1.08rem] text-ink">{point}</span>
               </li>
             ))}
           </ul>

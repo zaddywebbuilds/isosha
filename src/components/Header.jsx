@@ -11,7 +11,7 @@ function Logo({ compact = false }) {
       aria-label={`${brand.name} home`}
     >
       <span
-        className="grid place-items-center w-10 h-10 rounded-full border border-gold/60 bg-forest-deep"
+        className="grid place-items-center w-9 h-9 min-[400px]:w-10 min-[400px]:h-10 shrink-0 rounded-full border border-gold/60 bg-forest-deep"
         aria-hidden="true"
       >
         <svg viewBox="0 0 64 64" className="w-6 h-6">
@@ -29,8 +29,10 @@ function Logo({ compact = false }) {
         </svg>
       </span>
       <span className="leading-none">
-        <span className="block font-serif text-lg text-white">Netwill</span>
-        <span className="block eyebrow text-[0.7rem] text-gold mt-0.5">
+        <span className="block font-serif text-[1.05rem] min-[400px]:text-lg text-white">
+          Netwill
+        </span>
+        <span className="block eyebrow text-[0.68rem] min-[400px]:text-[0.76rem] text-gold mt-0.5">
           Herbals
         </span>
       </span>
@@ -81,7 +83,7 @@ export default function Header() {
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="text-[0.92rem] text-white/80 hover:text-gold transition-colors duration-200"
+                  className="text-[1.06rem] text-white/90 hover:text-gold transition-colors duration-200"
                 >
                   {link.label}
                 </a>
@@ -91,9 +93,14 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
+          {/*
+            The header row is logo + this button + the menu toggle. At the
+            larger body size that overflowed a 320px screen, so the button
+            steps down below 400px rather than letting the row scroll.
+          */}
           <a
             href="#order"
-            className="btn btn-gold !min-h-11 !px-5 !text-[0.85rem] shrink-0"
+            className="btn btn-gold !min-h-11 !px-3.5 !text-[0.95rem] min-[400px]:!px-5 min-[400px]:!text-[1.06rem] shrink-0"
           >
             Order Now
           </a>
@@ -140,7 +147,7 @@ export default function Header() {
                 <a
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="flex items-center justify-between py-3.5 text-white/85 border-b border-white/10 hover:text-gold transition-colors"
+                  className="flex items-center justify-between py-3.5 text-white/92 border-b border-white/10 hover:text-gold transition-colors"
                 >
                   {link.label}
                   <Icon name="arrow" className="w-4 h-4 text-gold/70" />

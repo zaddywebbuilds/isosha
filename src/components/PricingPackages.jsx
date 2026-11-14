@@ -25,7 +25,7 @@ function PackArt({ bottles }) {
       />
       <p className="absolute bottom-3 left-3 inline-flex items-baseline gap-1.5 rounded-full border border-gold/60 bg-forest-deep/85 px-3.5 py-1.5 text-white backdrop-blur-[2px]">
         <span className="font-serif text-lg leading-none">&times;{bottles}</span>
-        <span className="text-[0.7rem] font-bold tracking-[0.12em] uppercase text-gold">
+        <span className="text-[0.76rem] font-bold tracking-[0.12em] uppercase text-gold">
           bottle{bottles > 1 ? 's' : ''}
         </span>
       </p>
@@ -51,7 +51,7 @@ function PackageCard({ pkg, selected, onSelect }) {
       } ${isSelected ? 'ring-2 ring-leaf ring-offset-2 ring-offset-mist' : ''}`}
     >
       {pkg.badge && (
-        <p className="absolute top-4 right-4 z-10 rounded-full bg-gold px-3 py-1 text-[0.7rem] font-extrabold tracking-[0.18em] text-forest-deep">
+        <p className="absolute top-4 right-4 z-10 rounded-full bg-gold px-3 py-1 text-[0.76rem] font-extrabold tracking-[0.18em] text-forest-deep">
           {pkg.badge}
         </p>
       )}
@@ -64,9 +64,9 @@ function PackageCard({ pkg, selected, onSelect }) {
         <h3 className="text-[1.55rem] text-forest leading-tight">
           {pkg.title}
         </h3>
-        <p className="mt-1.5 text-[0.85rem] text-ink-soft">{pkg.blurb}</p>
+        <p className="mt-1.5 text-[1.06rem] text-ink-soft">{pkg.blurb}</p>
 
-        <dl className="mt-5 space-y-2 text-[0.86rem]">
+        <dl className="mt-5 space-y-2 text-[1.06rem]">
           <div className="flex justify-between gap-4 border-b border-forest/8 pb-2">
             <dt className="text-ink-soft">Contents</dt>
             <dd className="font-semibold text-ink">
@@ -92,12 +92,12 @@ function PackageCard({ pkg, selected, onSelect }) {
             {formatPrice(pkg.price)}
           </p>
           {savings > 0 ? (
-            <p className="mt-2 inline-flex items-center gap-1.5 text-[0.82rem] font-bold text-forest-line">
+            <p className="mt-2 inline-flex items-center gap-1.5 text-[0.96rem] font-bold text-forest-line">
               <Icon name="check" className="w-3.5 h-3.5" />
               Save {formatPrice(savings)} against {pkg.bottles} single bottles
             </p>
           ) : (
-            <p className="mt-2 text-[0.82rem] text-ink-soft">
+            <p className="mt-2 text-[0.96rem] text-ink-soft">
               Single bottle price
             </p>
           )}
@@ -168,7 +168,7 @@ export default function PricingPackages({ selected, onSelect }) {
           {copy.valueFraming.replace('{perDay}', formatPrice(perDay))}
         </p>
 
-        <p className="reveal mt-4 text-[0.8rem] text-ink-soft">
+        <p className="reveal mt-4 text-[0.86rem] text-ink-soft">
           {copy.footnote.replace('{single}', formatPrice(singleBottlePrice))}
         </p>
       </div>
