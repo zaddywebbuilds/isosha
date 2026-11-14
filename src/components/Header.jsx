@@ -7,7 +7,7 @@ function Logo({ compact = false }) {
   return (
     <a
       href="#top"
-      className="flex items-center gap-3 shrink-0"
+      className="flex min-h-11 items-center gap-2.5 min-[400px]:gap-3 shrink-0"
       aria-label={`${brand.name} home`}
     >
       <span
@@ -32,7 +32,7 @@ function Logo({ compact = false }) {
         <span className="block font-serif text-[1.05rem] min-[400px]:text-lg text-white">
           Netwill
         </span>
-        <span className="block eyebrow text-[0.68rem] min-[400px]:text-[0.76rem] text-gold mt-0.5">
+        <span className="block eyebrow text-[0.7rem] min-[400px]:text-[0.76rem] text-gold mt-0.5">
           Herbals
         </span>
       </span>
