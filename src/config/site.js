@@ -80,10 +80,18 @@ export const regulatory = {
  * og:image paths, so a relative one means link previews show no picture at
  * all, which matters here because WhatsApp is the main sharing channel.
  *
- * Change this one line when a custom domain is connected and the canonical
- * URL, the Open Graph tags, the sitemap and the structured data all follow.
+ * Change this one line when the domain changes and the canonical URL, the
+ * Open Graph tags and the structured data all follow. Three files carry the
+ * same origin literally, because they are read before any JavaScript runs,
+ * and they have to be changed with it: the four absolute URLs in the <head>
+ * of index.html, the Sitemap line in public/robots.txt, and the <loc> in
+ * public/sitemap.xml.
+ *
+ * This is the live home of the site. The GitHub Pages copy at
+ * zaddywebbuilds.github.io/isosha is a build mirror, not the destination,
+ * and its canonical therefore points here.
  */
-export const siteUrl = 'https://zaddywebbuilds.github.io/isosha';
+export const siteUrl = 'https://eyesosharp.com';
 
 /** Turns any site-relative asset path into an absolute URL. */
 export const absoluteUrl = (path = '') =>

@@ -13,7 +13,7 @@ guess. Each row says exactly which file to edit.
 | 1 | **WhatsApp number** (international format, digits only, e.g. `2348012345678`) | `contact.whatsapp` in `src/config/site.js` | The WhatsApp order button is hidden and a note explains why. No placeholder number is shown, so no stranger gets called. |
 | 2 | **Phone number, email, business address** | `contact.*` in `src/config/site.js` | Footer shows "To be supplied by the client" against each one. |
 | 3 | ~~Order destination~~ **Done.** Orders post to Xurge CRM. | `src/config/crm.js` | Live. A completed form creates a real order record. |
-| 4 | **Live domain** | `<link rel="canonical">` in `index.html`, `seo.canonical` in `src/config/site.js`, `Sitemap:` in `public/robots.txt` | Canonical URL and sitemap are left out rather than pointing somewhere wrong. |
+| 4 | ~~Live domain~~ **Done.** `https://eyesosharp.com`. | `siteUrl` in `src/config/site.js`, plus the four absolute URLs in the `<head>` of `index.html`, `public/robots.txt` and `public/sitemap.xml` | Canonical, Open Graph, Twitter card, sitemap and structured data all point at eyesosharp.com. |
 
 ## 2. Regulatory and product facts
 
