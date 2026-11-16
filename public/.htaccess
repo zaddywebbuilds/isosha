@@ -1,0 +1,134 @@
+# =====================================================================
+# Isosha — Apache configuration for eyesosharp.com
+# =====================================================================
+#
+# This file ships inside the build. It belongs in the web root, beside
+# index.html, on an Apache host (which is what nearly every shared
+# WordPress host runs). On Nginx it does nothing and the equivalent
+# rules have to go in the server block instead.
+#
+# BACK UP THE EXISTING .htaccess BEFORE REPLACING IT. The WordPress
+# install at this domain has its own, and overwriting it without a copy
+# is the one step here that cannot be undone from the file manager.
+# Rename it to .htaccess.wordpress-backup rather than deleting it.
+#
+# ---------------------------------------------------------------------
+# 1. Serve the static site, not WordPress
+# ---------------------------------------------------------------------
+#
+# index.html goes first. Most WordPress hosts set the directory index to
+# index.php, so without this line the visitor gets the blog at "/" and
+# never sees this site at all.
+
+DirectoryIndex index.html index.php
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # -------------------------------------------------------------------
+  # 2. Keep WordPress reachable
+  # -------------------------------------------------------------------
+  #
+  # The catch-all at the bottom would otherwise swallow /wp-admin and
+  # lock whoever owns this domain out of their own dashboard. These
+  # paths are handed to Apache untouched so the WordPress install still
+  # answers on them, even though no visitor is being sent there.
+  #
+  # Delete this block only once WordPress itself has been removed.
+
+  RewriteRule ^wp-admin(/|$) - [L]
+  RewriteRule ^wp-login\.php$ - [L]
+  RewriteRule ^wp-(content|includes|json)(/|$) - [L]
+  RewriteRule ^(index\.php|xmlrpc\.php|wp-cron\.php)$ - [L]
+
+  # -------------------------------------------------------------------
+  # 3. Real files win
+  # -------------------------------------------------------------------
+
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # -------------------------------------------------------------------
+  # 4. Everything else is this one page
+  # -------------------------------------------------------------------
+  #
+  # The site is a single page with in-page anchors, not a router, so
+  # there are no real sub-paths. A mistyped or stale URL lands on the
+  # page rather than on a WordPress 404 for a blog nobody is running.
+
+  RewriteRule . /index.html [L]
+</IfModule>
+
+# ---------------------------------------------------------------------
+# 5. Caching
+# ---------------------------------------------------------------------
+#
+# This product is sold to people on Nigerian mobile data, so the large
+# files are worth caching hard. Two different rules, for a reason.
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # index.html is never cached. It names the current JS and CSS bundle,
+  # so a cached copy would keep serving yesterday's site.
+  <FilesMatch "\.(html|xml|txt)$">
+    ExpiresDefault "access plus 0 seconds"
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+
+  # Fonts and the bundles carry a content hash in the filename, so a
+  # changed file is a changed name and a year is safe.
+  <FilesMatch "\.(js|css|woff2)$">
+    ExpiresDefault "access plus 1 year"
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Product and section photography: stable, but the names are not
+  # hashed, so a month rather than a year.
+  <FilesMatch "\.(webp|jpg|jpeg|png|svg|ico)$">
+    ExpiresDefault "access plus 1 month"
+  </FilesMatch>
+</IfModule>
+
+# Customer review material is deliberately cached for one day only.
+#
+# These are real customers' messages and voices, published under a
+# permission they can withdraw. If one of them asks to be taken down,
+# the review is pulled by setting `publish: false` and rebuilding, and
+# it then has to actually disappear. A one-year cache would leave a
+# withdrawn review sitting in CDNs and browsers long after the site
+# stopped serving it. A day is the difference between honouring that
+# request and only appearing to.
+<IfModule mod_expires.c>
+  <LocationMatch "^/assets/reviews/">
+    ExpiresDefault "access plus 1 day"
+    Header set Cache-Control "public, max-age=86400"
+  </LocationMatch>
+</IfModule>
+
+# ---------------------------------------------------------------------
+# 6. Compression
+# ---------------------------------------------------------------------
+#
+# WebP, Ogg and M4A are already compressed; squeezing them again only
+# burns CPU, so they are left out.
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml font/woff2
+</IfModule>
+
+# ---------------------------------------------------------------------
+# 7. Media types
+# ---------------------------------------------------------------------
+#
+# Older Apache builds do not know these, and a voice note served as
+# the wrong type simply will not play.
+
+AddType audio/ogg .ogg
+AddType audio/mp4 .m4a
+AddType image/webp .webp
+AddType font/woff2 .woff2
