@@ -2,67 +2,62 @@
 # Isosha — Apache configuration for eyesosharp.com
 # =====================================================================
 #
-# This file ships inside the build. It belongs in the web root, beside
-# index.html, on an Apache host (which is what nearly every shared
-# WordPress host runs). On Nginx it does nothing and the equivalent
-# rules have to go in the server block instead.
+# This file ships inside the build and belongs in the web root, beside
+# index.html. The host is Namecheap, so Apache and cPanel: these rules
+# apply. On Nginx they do nothing and the equivalent goes in the server
+# block instead.
 #
-# BACK UP THE EXISTING .htaccess BEFORE REPLACING IT. The WordPress
-# install at this domain has its own, and overwriting it without a copy
-# is the one step here that cannot be undone from the file manager.
-# Rename it to .htaccess.wordpress-backup rather than deleting it.
+# BACK UP THE EXISTING .htaccess BEFORE REPLACING IT. Rename it to
+# .htaccess.wordpress-backup rather than deleting it. It is the one
+# step here that cannot be undone from the file manager.
 #
 # ---------------------------------------------------------------------
-# 1. Serve the static site, not WordPress
+# WHAT THIS DOES, AND WHY IT IS NOT A CATCH-ALL
 # ---------------------------------------------------------------------
 #
-# index.html goes first. Most WordPress hosts set the directory index to
-# index.php, so without this line the visitor gets the blog at "/" and
-# never sees this site at all.
+# WordPress stays installed and keeps running. It has to.
+#
+# The order form posts to the Xurge CRM, and the CRM then sends the
+# customer to the thank-you page, which is an Elementor page served by
+# WordPress at /thank-you/. That page is a real WordPress permalink,
+# not a file on disk. A rule that sent every unmatched path to
+# index.html would therefore swallow it, and every customer who placed
+# an order would land back on the product page with no confirmation
+# that the order went through. The orders would still reach the CRM, so
+# nothing would look broken from the outside, which is the worst way
+# for this to fail.
+#
+# So the split is:
+#
+#   /                  the static Isosha site     (index.html)
+#   /assets/...        static files               (served directly)
+#   /thank-you/        WordPress                  (Elementor page)
+#   /wp-admin, /wp-*   WordPress                  (dashboard, uploads)
+#   anything else      WordPress                  (its own 404)
+#
+# Only the homepage is taken from WordPress. Everything else it used to
+# answer, it still answers.
 
+# This single line is what hands the homepage to the static site.
+# Without it the host's default index serves WordPress at "/" and no
+# visitor ever reaches the Isosha page.
 DirectoryIndex index.html index.php
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
 
-  # -------------------------------------------------------------------
-  # 2. Keep WordPress reachable
-  # -------------------------------------------------------------------
-  #
-  # The catch-all at the bottom would otherwise swallow /wp-admin and
-  # lock whoever owns this domain out of their own dashboard. These
-  # paths are handed to Apache untouched so the WordPress install still
-  # answers on them, even though no visitor is being sent there.
-  #
-  # Delete this block only once WordPress itself has been removed.
-
-  RewriteRule ^wp-admin(/|$) - [L]
-  RewriteRule ^wp-login\.php$ - [L]
-  RewriteRule ^wp-(content|includes|json)(/|$) - [L]
-  RewriteRule ^(index\.php|xmlrpc\.php|wp-cron\.php)$ - [L]
-
-  # -------------------------------------------------------------------
-  # 3. Real files win
-  # -------------------------------------------------------------------
-
-  RewriteCond %{REQUEST_FILENAME} -f [OR]
-  RewriteCond %{REQUEST_FILENAME} -d
-  RewriteRule ^ - [L]
-
-  # -------------------------------------------------------------------
-  # 4. Everything else is this one page
-  # -------------------------------------------------------------------
-  #
-  # The site is a single page with in-page anchors, not a router, so
-  # there are no real sub-paths. A mistyped or stale URL lands on the
-  # page rather than on a WordPress 404 for a blog nobody is running.
-
-  RewriteRule . /index.html [L]
+  # Standard WordPress rules, unchanged. A request for a real file or
+  # directory is served as-is, which covers index.html, /assets/ and
+  # everything in the build. Anything else goes to WordPress.
+  RewriteRule ^index\.php$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.php [L]
 </IfModule>
 
 # ---------------------------------------------------------------------
-# 5. Caching
+# Caching
 # ---------------------------------------------------------------------
 #
 # This product is sold to people on Nigerian mobile data, so the large
@@ -75,14 +70,12 @@ DirectoryIndex index.html index.php
   # so a cached copy would keep serving yesterday's site.
   <FilesMatch "\.(html|xml|txt)$">
     ExpiresDefault "access plus 0 seconds"
-    Header set Cache-Control "no-cache, must-revalidate"
   </FilesMatch>
 
-  # Fonts and the bundles carry a content hash in the filename, so a
-  # changed file is a changed name and a year is safe.
+  # Bundles and fonts carry a content hash in the filename, so a changed
+  # file is a changed name and a year is safe.
   <FilesMatch "\.(js|css|woff2)$">
     ExpiresDefault "access plus 1 year"
-    Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
 
   # Product and section photography: stable, but the names are not
@@ -92,24 +85,41 @@ DirectoryIndex index.html index.php
   </FilesMatch>
 </IfModule>
 
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|xml|txt)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "\.(js|css|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
 # Customer review material is deliberately cached for one day only.
 #
 # These are real customers' messages and voices, published under a
 # permission they can withdraw. If one of them asks to be taken down,
 # the review is pulled by setting `publish: false` and rebuilding, and
 # it then has to actually disappear. A one-year cache would leave a
-# withdrawn review sitting in CDNs and browsers long after the site
+# withdrawn review sitting in browsers and CDNs long after the site
 # stopped serving it. A day is the difference between honouring that
 # request and only appearing to.
+#
+# LocationMatch is not allowed in .htaccess, so this is scoped by the
+# directory the file sits in instead.
 <IfModule mod_expires.c>
-  <LocationMatch "^/assets/reviews/">
+  <Files ~ "^(voice-note|review)-">
     ExpiresDefault "access plus 1 day"
+  </Files>
+</IfModule>
+
+<IfModule mod_headers.c>
+  <Files ~ "^(voice-note|review)-">
     Header set Cache-Control "public, max-age=86400"
-  </LocationMatch>
+  </Files>
 </IfModule>
 
 # ---------------------------------------------------------------------
-# 6. Compression
+# Compression
 # ---------------------------------------------------------------------
 #
 # WebP, Ogg and M4A are already compressed; squeezing them again only
@@ -122,11 +132,11 @@ DirectoryIndex index.html index.php
 </IfModule>
 
 # ---------------------------------------------------------------------
-# 7. Media types
+# Media types
 # ---------------------------------------------------------------------
 #
-# Older Apache builds do not know these, and a voice note served as
-# the wrong type simply will not play.
+# Older Apache builds do not know these, and a voice note served as the
+# wrong type simply will not play.
 
 AddType audio/ogg .ogg
 AddType audio/mp4 .m4a
