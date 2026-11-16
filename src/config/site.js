@@ -9,6 +9,15 @@
  * address or link. Fill the value in and the real thing appears automatically.
  */
 
+/**
+ * The only import in this file. The review screenshots are cropped and
+ * resized by `npm run images`, so their finished paths and pixel sizes are
+ * not knowable here. That script writes them out and this reads them back,
+ * rather than anyone typing a guess that the next rebuild quietly breaks.
+ * The alt text stays below, with all the other alt text.
+ */
+import { reviewImages } from './review-images.js';
+
 /* --------------------------------------------------------------------- */
 /* CONTACT                                                               */
 /* --------------------------------------------------------------------- */
@@ -103,6 +112,14 @@ export const seo = {
 /* --------------------------------------------------------------------- */
 
 const base = 'assets/images';
+
+/**
+ * Review screenshots and voice notes sit apart from the marketing image set,
+ * under public/assets/reviews/. They are customer material, republished
+ * under a permission the client has to hold, and they are the first thing to
+ * pull if that permission is ever withdrawn, so they live in their own
+ * folder rather than scattered through the product photography.
+ */
 
 /**
  * Every image served by the site. Each entry carries its own srcSet,
@@ -297,6 +314,31 @@ export const images = {
     alt: 'Gardenia and honeysuckle flowers with noni fruit and goji berries, shown as an illustration of iridoid glycosides',
   },
 
+  /* ----------------------------------------------------------------- */
+  /* Customer reviews                                                  */
+  /*                                                                   */
+  /* Cropped WhatsApp screenshots. Masters live in                     */
+  /* original-assets/reviews/ and the crops are declared in            */
+  /* src/config/reviews.js, so the reason for each crop sits next to   */
+  /* the review it belongs to. Rebuilt by `npm run images`.            */
+  /* ----------------------------------------------------------------- */
+  reviewCafergotMigraine: {
+    ...reviewImages['review-cafergot-migraine'],
+    alt: 'A WhatsApp conversation in which a customer says the capsule is the magic he wanted, that he had constant migraines from glaucoma and always took Cafergot for them, and that three weeks into using the product he has not taken it again because the migraine is not coming back',
+  },
+  reviewConfidenceReturned: {
+    ...reviewImages['review-confidence-returned'],
+    alt: 'A photograph of a bottle of Isosha on an office desk, followed by messages in which the customer says the capsule has brought his confidence back, that he is starting his third bottle, and that his ophthalmologist confirmed his eye pressure is stable and asked him to stop using two of his three eyedrops',
+  },
+  reviewEzeAwka: {
+    ...reviewImages['review-eze-awka'],
+    alt: 'A WhatsApp conversation in which a customer writes that he is Eze from Awka, that he had tried all sorts of treatments for his eye challenge without success, and that he has seen a great improvement in his eyesight since using Isosha',
+  },
+  reviewAnitaAbuja: {
+    ...reviewImages['review-anita-abuja'],
+    alt: 'A WhatsApp message reading “This is the third bottle and it has really been helpful”, followed by the photograph the customer sent of a bottle of Isosha Herbal Capsules held in her hand',
+  },
+
   coupleDecision: {
     src: `${base}/lifestyle-couple-decision-1400.webp`,
     srcSet: `${base}/lifestyle-couple-decision-800.webp 800w, ${base}/lifestyle-couple-decision-1400.webp 1400w`,
@@ -313,6 +355,7 @@ export const navLinks = [
   { label: 'Ingredients', href: '#ingredients' },
   { label: 'Eye Health', href: '#eye-health' },
   { label: 'Packages', href: '#packages' },
+  { label: 'Reviews', href: '#reviews' },
   { label: 'FAQs', href: '#faqs' },
 ];
 

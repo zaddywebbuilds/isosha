@@ -12,7 +12,7 @@ no cookie).
 
 ```bash
 npm install
-npm run dev      # http://localhost:5178
+npm run dev      # http://localhost:5173
 npm run build    # static site in dist/
 npm run preview  # serve the built site
 npm run images   # rebuild the optimised image set from original-assets/
@@ -49,6 +49,7 @@ number, ingredient or FAQ is hardcoded anywhere else.
 | `src/config/site.js` | Contact details, social links, NAFDAC status, SEO, image paths, **order form integration**. |
 | `src/config/legal.js` | Draft Privacy, Terms, Refunds and Disclaimer text. |
 | `src/config/states.js` | The state dropdown. |
+| `src/config/reviews.js` | Customer reviews: the quotes, the screenshot crops and the voice-note transcripts. |
 
 ### Changing a price
 
@@ -92,6 +93,9 @@ matching the CRM's own package list.
 | --- | --- |
 | Masters (client-supplied) | `original-assets/*.png` |
 | Served, optimised | `public/assets/images/*.webp` |
+| Review screenshot masters | `original-assets/reviews/*.jpeg` |
+| Review screenshots, cropped | `public/assets/reviews/*.webp` |
+| Review voice notes | `public/assets/reviews/*.ogg` |
 
 `npm run images` regenerates the served set from the masters with `sharp`.
 Drop a corrected render into `original-assets/` under the same filename and
@@ -105,6 +109,43 @@ deliberate. The compound photographs illustrate a class of compound and are
 not photographs of the source material used in Isosha, so they do not carry
 the same weight as a confirmed ingredient. Each one is labelled with what it
 actually shows, and the section says so in full underneath.
+
+### Review screenshots
+
+`screenshots` on a review is a list, because one customer's conversation can
+run across more than one picture; they stack inside a single card so three
+customers do not read as four. Each crop is declared in
+`src/config/reviews.js` next to a comment saying why, and `npm run images`
+reads those values, so a crop and its reason never drift apart.
+
+One crop is a policy rather than tidying: the Anita screenshot starts below
+the Netwill reply promising to "totally clear the cataract cloudiness". A
+Netwill message inside a screenshot is the site's own body copy by another
+route, and the site does not claim to cure a named disease. What a
+*customer* says is a decision for Netwill Herbals, who on 16 November 2026
+chose to publish the `offshore-customer` conversation in full. See
+`CLIENT-CHECKLIST.md` §16d.
+
+`npm run images` also writes `src/config/review-images.js`, which holds the
+real `src`, `srcSet` and pixel size of each finished screenshot. That file is
+generated: edit `reviews.js` and re-run, never the generated file. It exists
+because a cropped height is not knowable until the crop has run, and a
+requested width wider than the master gets clamped rather than upscaled — a
+hand-written `srcSet` would eventually claim a width the file does not have
+and the browser would pick the wrong file because of it. The alt text is not
+in there; it stays with the rest of the alt text in `site.js`.
+
+The voice notes are served exactly as recorded, with no trim applied. Each
+one ships twice: the original Ogg Opus from WhatsApp, and an AAC `.m4a`
+transcode for Safari, which cannot play Ogg. Ogg is listed first in
+`audio.formats`, so every browser that can play it does — it is about a
+third the size, which is the difference that matters on mobile data. To add
+a fourth voice note, drop both files in `public/assets/reviews/` as
+`voice-note-4.ogg` and `.m4a` and add an entry to `reviews.js`:
+
+```bash
+ffmpeg -i voice-note-4.ogg -vn -ac 1 -ar 32000 -c:a aac -b:a 40k -movflags +faststart voice-note-4.m4a
+```
 
 ---
 
@@ -133,7 +174,11 @@ out because publishing it without evidence would be false:
 
 - No claim that Isosha treats, cures, prevents or manages glaucoma, cataracts,
   myopia or any other disease.
-- No fake reviews, star ratings, sales counts or professional endorsements.
+- No invented reviews, star ratings, sales counts or professional
+  endorsements. The reviews on the page are real WhatsApp messages and voice
+  notes, quoted in the customer's own words. There is no rating, no review
+  count and no `AggregateRating` markup, because five reviews are not a score
+  and nothing verifies one.
 - No NAFDAC badge, certification seal or government endorsement graphic. The
   registration number is shown as supplied, marked pending verification.
 - No invented ingredient quantities or percentages.

@@ -134,6 +134,13 @@ export function Icon({ name, className = 'w-6 h-6' }) {
         <path d="M21 11.5a7.5 7.5 0 0 1-10.9 6.7L4 19.5l1.4-5A7.5 7.5 0 1 1 21 11.5z" />
       </>
     ),
+    mic: (
+      <>
+        <rect x="9" y="2.8" width="6" height="11" rx="3" />
+        <path d="M5.5 11.5a6.5 6.5 0 0 0 13 0" />
+        <path d="M12 18v3.2M9 21.2h6" />
+      </>
+    ),
     plus: <path d="M12 5.5v13M5.5 12h13" />,
     arrow: <path d="M5 12h13M13 6.5l5.5 5.5L13 17.5" />,
     check: <path d="M5 12.5l4.5 4.5L19 7" />,

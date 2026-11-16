@@ -1,83 +1,274 @@
-import { Eyebrow, Icon, Pending } from './ui.jsx';
+import { useId, useState } from 'react';
+import { Eyebrow, Icon, Img, Pending } from './ui.jsx';
+import { images } from '../config/site.js';
+import { publishedReviews, reviewsNote } from '../config/reviews.js';
 
 /**
- * REVIEW PLACEHOLDERS
- * -------------------
- * No review, rating, star count or customer name is invented here.
- * When the client supplies authentic, authorised feedback, add it to the
- * `reviews` array below and the section switches from placeholder cards to
- * real quotes automatically.
+ * CUSTOMER REVIEWS
+ * ----------------
+ * The content lives in src/config/reviews.js. Nothing is written on a
+ * customer's behalf here and nothing is invented: a review only appears
+ * because a real WhatsApp message or voice note exists behind it.
  *
- * Each review object: { quote, name, location, date }
- * Only publish a review the customer has agreed to have published.
+ * Two things this section does differently from a normal review wall:
+ *
+ * 1. The customer's words are real text, not a picture of text. The
+ *    screenshot is kept as supporting evidence behind a disclosure, because
+ *    this product is sold to people who have told us their sight is not
+ *    what it was. Asking them to read a phone screenshot of a chat is
+ *    asking the one thing they cannot do.
+ *
+ * 2. No rating, star count or aggregate score is shown, and no review
+ *    structured data is emitted. Review markup asks a search engine to
+ *    vouch for a score, and there is no verified score to vouch for.
  */
-const reviews = [];
+
+const AUDIO_TYPES = {
+  m4a: 'audio/mp4',
+  ogg: 'audio/ogg',
+  mp3: 'audio/mpeg',
+};
+
+const assetBase = 'assets/reviews';
+
+/** The disclosure pattern used across the site: button + hidden panel. */
+function Disclosure({ showLabel, hideLabel, children }) {
+  const [open, setOpen] = useState(false);
+  const panelId = useId();
+
+  return (
+    <>
+      <div id={panelId} hidden={!open} className="mt-4">
+        {children}
+      </div>
+
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-controls={panelId}
+        className="btn-inline mt-5 self-start text-[1.02rem] font-bold text-forest hover:text-leaf transition-colors"
+      >
+        {open ? hideLabel : showLabel}
+        <Icon
+          name="arrow"
+          className={`w-4 h-4 transition-transform duration-300 ${
+            open ? '-rotate-90' : ''
+          }`}
+        />
+      </button>
+    </>
+  );
+}
+
+function MessageReview({ review, index }) {
+  // One conversation can run across several screenshots. They stack in the
+  // order they were sent, so the disclosure reads as the chat did.
+  const shots = (review.screenshots ?? [])
+    .map((s) => images[s.image])
+    .filter(Boolean);
+
+  return (
+    <li
+      className="reveal card p-6 sm:p-7 flex flex-col"
+      style={{ transitionDelay: `${index * 90}ms` }}
+    >
+      <span
+        className="grid place-items-center w-11 h-11 rounded-full bg-leaf-wash text-forest"
+        aria-hidden="true"
+      >
+        <Icon name="chat" className="w-5 h-5" />
+      </span>
+
+      {/*
+        A quote and its attribution are a <figure>. A bare <figcaption>
+        next to a <blockquote> is invalid HTML, and assistive technology
+        then has nothing tying the name to the words it belongs to.
+      */}
+      <figure className="mt-4 flex flex-col flex-1">
+        <blockquote className="flex-1 text-[1.08rem] text-ink leading-relaxed">
+          {review.quote}
+        </blockquote>
+
+        {/*
+          The chat header is cropped off some screenshots, so no name is
+          known. That is said plainly rather than filled in with "a happy
+          customer", which would be inventing an attribution nobody gave.
+        */}
+        <figcaption className="mt-5 pt-4 border-t border-forest/10 text-[0.96rem]">
+          {review.name ? (
+            <>
+              <span className="font-bold text-forest">{review.name}</span>
+              {review.location && (
+                <span className="text-ink-soft"> &middot; {review.location}</span>
+              )}
+              {review.date && (
+                <span className="text-ink-soft"> &middot; {review.date}</span>
+              )}
+            </>
+          ) : (
+            <Pending>Sender to be confirmed</Pending>
+          )}
+        </figcaption>
+      </figure>
+
+      {shots.length > 0 && (
+        <Disclosure
+          showLabel={
+            shots.length > 1
+              ? 'See the original messages'
+              : 'See the original message'
+          }
+          hideLabel={
+            shots.length > 1
+              ? 'Hide the original messages'
+              : 'Hide the original message'
+          }
+        >
+          <figure>
+            <div className="flex flex-col gap-3">
+              {shots.map((shot) => (
+                <Img
+                  key={shot.src}
+                  image={shot}
+                  sizes="(min-width: 640px) 320px, 80vw"
+                  className="w-full max-w-[20rem] rounded-xl border border-forest/10"
+                />
+              ))}
+            </div>
+            <figcaption className="mt-3 text-[0.9rem] text-ink-soft leading-relaxed">
+              {shots.length > 1
+                ? 'The WhatsApp conversation, in the order the messages were sent.'
+                : 'The WhatsApp conversation, cropped to the customer’s own message and the photograph they sent.'}
+            </figcaption>
+          </figure>
+        </Disclosure>
+      )}
+    </li>
+  );
+}
+
+function VoiceReview({ review, index }) {
+  const { file, transcript, formats = ['ogg'] } = review.audio;
+  const labelId = `voice-note-${index + 1}-label`;
+  const lastFormat = formats[formats.length - 1];
+
+  return (
+    <li
+      className="reveal card p-6 sm:p-7 flex flex-col"
+      style={{ transitionDelay: `${index * 90}ms` }}
+    >
+      <div className="flex items-center gap-3">
+        <span
+          className="grid place-items-center w-11 h-11 shrink-0 rounded-full bg-leaf-wash text-forest"
+          aria-hidden="true"
+        >
+          <Icon name="mic" className="w-5 h-5" />
+        </span>
+        <p id={labelId} className="text-[1.06rem] font-bold text-forest">
+          Voice note {index + 1}
+        </p>
+      </div>
+
+      {/*
+        preload="metadata" so three players do not pull three recordings down
+        on every visit. The browser fetches enough to draw the duration and
+        nothing more until someone presses play.
+      */}
+      <audio
+        controls
+        preload="metadata"
+        aria-labelledby={labelId}
+        className="mt-5 w-full"
+      >
+        {formats.map((ext) => (
+          <source
+            key={ext}
+            src={`${assetBase}/${file}.${ext}`}
+            type={AUDIO_TYPES[ext]}
+          />
+        ))}
+        <a href={`${assetBase}/${file}.${lastFormat}`}>
+          Download this voice note
+        </a>
+      </audio>
+
+      {transcript ? (
+        <Disclosure showLabel="Read the transcript" hideLabel="Hide the transcript">
+          <blockquote className="text-[1.02rem] text-ink leading-relaxed">
+            {transcript}
+          </blockquote>
+        </Disclosure>
+      ) : (
+        <p className="mt-5">
+          <Pending>Transcript pending</Pending>
+        </p>
+      )}
+
+      {review.name && (
+        <p className="mt-5 pt-4 border-t border-forest/10 text-[0.96rem]">
+          <span className="font-bold text-forest">{review.name}</span>
+          {review.location && (
+            <span className="text-ink-soft"> &middot; {review.location}</span>
+          )}
+        </p>
+      )}
+    </li>
+  );
+}
 
 export default function Testimonials() {
-  const hasReviews = reviews.length > 0;
+  const written = publishedReviews.filter((r) => r.kind === 'message');
+  const voice = publishedReviews.filter((r) => r.kind === 'voice');
+
+  if (written.length === 0 && voice.length === 0) return null;
 
   return (
     <section
+      id="reviews"
       className="bg-cream py-12 md:py-16"
       aria-labelledby="reviews-heading"
     >
       <div className="shell">
-        <div className="reveal flex flex-wrap items-end justify-between gap-6">
-          <div className="max-w-xl">
-            <Eyebrow>Customer feedback</Eyebrow>
-            <h2
-              id="reviews-heading"
-              className="mt-5 text-[clamp(1.65rem,7.4vw,2.1rem)] sm:text-4xl text-forest"
-            >
-              {hasReviews ? 'What customers say' : 'Reviews, once they are real'}
-            </h2>
-            <p className="mt-4 text-ink-soft leading-relaxed">
-              {hasReviews
-                ? 'Feedback published with the permission of the customer.'
-                : 'This space is reserved for verified customer feedback. Nothing has been written here on a customer’s behalf.'}
-            </p>
-          </div>
-          {!hasReviews && <Pending>Awaiting genuine reviews</Pending>}
+        <div className="reveal max-w-2xl">
+          <Eyebrow>Customer feedback</Eyebrow>
+          <h2
+            id="reviews-heading"
+            className="mt-5 text-[clamp(1.65rem,7.4vw,2.1rem)] sm:text-4xl text-forest"
+          >
+            What customers say
+          </h2>
+          <p className="mt-4 text-ink-soft leading-relaxed">{reviewsNote}</p>
         </div>
 
-        <ul className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {hasReviews
-            ? reviews.map((r, i) => (
-                <li key={i} className="reveal card p-6 flex flex-col">
-                  <Icon name="chat" className="w-6 h-6 text-leaf" />
-                  <blockquote className="mt-4 flex-1 text-[1.08rem] text-ink leading-relaxed">
-                    {r.quote}
-                  </blockquote>
-                  <figcaption className="mt-5 pt-4 border-t border-forest/10 text-[0.96rem]">
-                    <span className="font-bold text-forest">{r.name}</span>
-                    {r.location && (
-                      <span className="text-ink-soft"> &middot; {r.location}</span>
-                    )}
-                  </figcaption>
-                </li>
-              ))
-            : [0, 1, 2].map((i) => (
-                <li
-                  key={i}
-                  style={{ transitionDelay: `${i * 80}ms` }}
-                  className="reveal rounded-[1.25rem] border border-dashed border-forest/20 bg-white/60 p-6 flex flex-col"
-                  aria-hidden={i > 0 ? 'true' : undefined}
-                >
-                  <Icon name="chat" className="w-6 h-6 text-forest/25" />
-                  <div className="mt-4 flex-1 space-y-2.5" aria-hidden="true">
-                    <span className="block h-2.5 rounded-full bg-forest/8 w-full" />
-                    <span className="block h-2.5 rounded-full bg-forest/8 w-[92%]" />
-                    <span className="block h-2.5 rounded-full bg-forest/8 w-[78%]" />
-                    <span className="block h-2.5 rounded-full bg-forest/8 w-[55%]" />
-                  </div>
-                  <p className="mt-5 pt-4 border-t border-forest/10 text-[0.86rem] text-ink-soft">
-                    {i === 0
-                      ? 'A verified customer review will appear here.'
-                      : 'Reserved for a verified review.'}
-                  </p>
-                </li>
+        {written.length > 0 && (
+          <ul className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {written.map((review, i) => (
+              <MessageReview key={review.id} review={review} index={i} />
+            ))}
+          </ul>
+        )}
+
+        {voice.length > 0 && (
+          <div className="mt-12">
+            <div className="reveal flex flex-wrap items-center justify-between gap-4">
+              <h3 className="text-[clamp(1.3rem,5.6vw,1.6rem)] text-forest">
+                Voice notes customers sent us
+              </h3>
+              <Pending>Senders to be confirmed</Pending>
+            </div>
+            <p className="reveal mt-3 max-w-2xl text-ink-soft leading-relaxed">
+              Recordings exactly as they arrived, with nothing cut. A written
+              transcript of each one will be published beside the audio.
+            </p>
+
+            <ul className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {voice.map((review, i) => (
+                <VoiceReview key={review.id} review={review} index={i} />
               ))}
-        </ul>
+            </ul>
+          </div>
+        )}
       </div>
     </section>
   );

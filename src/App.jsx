@@ -12,10 +12,10 @@ import ProductDetails from './components/ProductDetails.jsx';
 import PricingPackages from './components/PricingPackages.jsx';
 import OrderForm from './components/OrderForm.jsx';
 import TrustInformation from './components/TrustInformation.jsx';
-// Reviews are not on the page while there are none to show: the placeholder
-// cards were empty skeletons that only added height. Re-add <Testimonials />
-// below <TrustInformation /> once real, authorised customer feedback exists,
-// and fill the `reviews` array in src/components/Testimonials.jsx.
+// Real customer feedback now exists, so the section is back on the page. It
+// renders itself away again if src/config/reviews.js ever has nothing left
+// to publish, rather than showing empty skeleton cards.
+import Testimonials from './components/Testimonials.jsx';
 import FAQ from './components/FAQ.jsx';
 import FinalCTA from './components/FinalCTA.jsx';
 import Footer from './components/Footer.jsx';
@@ -92,6 +92,7 @@ export default function App() {
           onSelect={setSelectedPackage}
         />
         <TrustInformation />
+        <Testimonials />
         <FAQ />
         <FinalCTA />
       </main>

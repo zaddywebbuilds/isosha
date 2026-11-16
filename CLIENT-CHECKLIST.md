@@ -42,9 +42,74 @@ guess. Each row says exactly which file to edit.
 
 | # | Needed | Where it goes | What the site does meanwhile |
 | --- | --- | --- | --- |
-| 16 | **Genuine customer reviews**, published with the customer's permission | `reviews` array in `src/components/Testimonials.jsx` | Empty review placeholders, labelled as reserved for verified feedback. Nothing is written on a customer's behalf. |
+| 16 | ~~Genuine customer reviews~~ **Partly done.** Two WhatsApp messages and three voice notes are now published. Three things are still outstanding, listed below. | `src/config/reviews.js` | The reviews section is back on the page, under the trust section. |
 | 17 | **Social profile URLs** (Facebook, Instagram, TikTok) | `social.*` in `src/config/site.js` | Icons are hidden rather than linked to a dead profile. |
 | 18 | **Legal review** of the four draft documents | `src/config/legal.js`, then set `draft: false` | Each draft is labelled "Draft for client review" and bracketed text marks every outstanding decision. |
+
+### Outstanding on the reviews now published
+
+Everything here lives in `src/config/reviews.js`, one entry per review.
+
+| # | Needed | What the site does meanwhile |
+| --- | --- | --- |
+| 16a | **Permission from each customer** to publish their words, and for the two screenshots, their message. Nigerian data-protection law treats a WhatsApp message as the sender's personal data; a customer praising a product in a private chat has not thereby agreed to appear on a sales page. Get it in writing, including for the three voice notes. | Published. Set `publish: false` on an entry to pull it immediately. |
+| 16b | **Transcripts of the three voice notes.** An audio-only review with no text alternative fails WCAG 1.2.1, and this product is sold to people whose sight is not what it was, so the written version matters more here, not less. | Each player shows a "Transcript pending" chip. Fill `audio.transcript` and the transcript appears behind a "Read the transcript" disclosure. |
+| 16c | **Who sent each voice note, and when each message was sent.** | Voice notes are shown unattributed under "Senders to be confirmed". No date is shown on any review. |
+
+### 16d. Published on your instruction, over a flagged objection
+
+On 16 November 2026 Netwill Herbals instructed that **everything supplied go
+on the page**, and it has. That includes the `offshore-customer` entry,
+whose two screenshots are now published whole.
+
+The objection was raised before publishing and was overruled. It is written
+down here because it is still live, not because the decision is open:
+
+1. The customer says he has stopped taking **Cafergot, a prescription
+   medicine**. Later in the same conversation his **ophthalmologist takes
+   him off two of the three glaucoma eyedrops** he had used for over four
+   years. A visitor with glaucoma can read that as a reason to stop their
+   own drops. That is the part with a real injury behind it.
+2. It attributes **glaucoma and its symptoms** to the capsule, which the
+   rest of the site states plainly it does not treat.
+3. The Netwill reply tells him to "complete the 3 bottles **as
+   prescribed**". Netwill does not prescribe.
+
+**What this changes for the items above.** 16a stops being paperwork. A
+testimonial about someone's glaucoma and their medication is health data
+about an identifiable person, and it is now on a public page. Get his
+written permission, specifically for these two screenshots, before anyone
+starts sending traffic here. If he objects later, this is the entry that
+costs the most to have published.
+
+It is one edit to take down: `publish: false` on `offshore-customer` in
+`src/config/reviews.js`. The masters stay in `original-assets/reviews/`
+either way.
+
+**Two judgement calls still standing, both reversible:**
+
+1. The Anita screenshot is **cropped** so it starts at her own message. The
+   part cut off is the Netwill reply saying the capsule "will help you
+   totally clear the cataract cloudiness". That is the seller promising to
+   cure a named eye disease, which is the one thing this whole site is built
+   not to do, and putting it on the page inside a screenshot publishes it
+   just as surely as typing it. Her words and the photograph she sent are
+   kept. The crop is one line in `src/config/reviews.js`.
+2. Every screenshot is published as **supporting evidence behind a
+   disclosure**, not as the review itself. The review on the page is the
+   customer's words as real text. A screenshot of a phone chat is small,
+   low-contrast type that cannot be enlarged, read aloud by a screen reader
+   or found by a search engine, and this site's visitors are the people
+   least able to read it. The written quote therefore carries everything the
+   pictures show, including the medication passages in `offshore-customer`.
+
+**Three customers, not four cards.** The two screenshots from the offshore
+worker are one conversation, so they sit in one card. Splitting them would
+have made three customers look like four.
+
+**Not done:** no star rating, review count or `AggregateRating` markup has
+been added. Three written reviews are not a rating, and review markup asks
+Google to vouch for a score that nothing verifies.
 
 ## 5. Images
 
