@@ -13,7 +13,7 @@ export default function HonestPromise() {
   return (
     <section
       id="promise"
-      className="relative overflow-hidden bg-forest-deep text-white py-12 md:py-16"
+      className="relative overflow-hidden bg-forest-deep text-white py-8 md:py-12"
       aria-labelledby="promise-heading"
     >
       <div
@@ -26,7 +26,7 @@ export default function HonestPromise() {
       />
 
       <div className="shell relative">
-        <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-14 items-start">
+        <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-6 lg:gap-14 items-start">
           {/* Heading and pull quote */}
           <div className="reveal lg:sticky lg:top-28">
             <Eyebrow tone="gold">{promise.eyebrow}</Eyebrow>
@@ -37,7 +37,7 @@ export default function HonestPromise() {
               {promise.headline}
             </h2>
 
-            <figure className="mt-7 border-l-2 border-gold pl-5">
+            <figure className="mt-5 border-l-2 border-gold pl-5">
               <blockquote className="font-serif text-[1.25rem] leading-snug text-leaf-soft">
                 {promise.pullQuote}
               </blockquote>
@@ -64,7 +64,7 @@ export default function HonestPromise() {
               ))}
             </div>
 
-            <ul className="mt-8 grid sm:grid-cols-3 gap-5 border-t border-white/12 pt-7">
+            <ul className="mt-6 grid sm:grid-cols-3 gap-4 border-t border-white/12 pt-7">
               {promise.points.map((point, i) => (
                 <li key={point.title} style={{ transitionDelay: `${i * 70}ms` }}>
                   <Icon name={point.icon} className="w-6 h-6 text-gold" />

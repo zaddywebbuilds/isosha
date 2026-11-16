@@ -10,10 +10,10 @@ export default function ProductIntroduction() {
   return (
     <section
       id="about"
-      className="bg-cream py-12 md:py-16"
+      className="bg-cream py-8 md:py-12"
       aria-labelledby="about-heading"
     >
-      <div className="shell grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <div className="shell grid lg:grid-cols-2 gap-6 lg:gap-12 items-center">
         {/* Image */}
         <figure className="reveal relative">
           <div className="overflow-hidden rounded-[1.5rem] border border-forest/10 bg-mist">
@@ -50,7 +50,7 @@ export default function ProductIntroduction() {
 
           <p className="mt-6 text-ink-soft leading-relaxed">{about.body}</p>
 
-          <ul className="mt-8 grid sm:grid-cols-2 gap-x-6 gap-y-3.5">
+          <ul className="mt-6 grid sm:grid-cols-2 gap-x-6 gap-y-3.5">
             {about.points.map((point) => (
               <li key={point} className="flex items-start gap-2.5">
                 <span
@@ -64,7 +64,7 @@ export default function ProductIntroduction() {
             ))}
           </ul>
 
-          <a href="#packages" className="btn btn-forest mt-9">
+          <a href="#packages" className="btn btn-forest mt-6">
             {about.cta}
             <Icon name="arrow" className="w-4 h-4" />
           </a>

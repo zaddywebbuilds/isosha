@@ -62,7 +62,7 @@ function ConditionCard({ item, index }) {
         className="w-full aspect-[16/10] object-cover"
       />
 
-      <div className="flex flex-col flex-1 p-6 sm:p-7">
+      <div className="flex flex-col flex-1 p-5 sm:p-6">
         <span
           className="grid place-items-center w-11 h-11 rounded-full bg-leaf-wash text-forest"
           aria-hidden="true"
@@ -120,7 +120,7 @@ function AnatomyFigure() {
         sizes="(min-width: 1024px) 60vw, 92vw"
         className="w-full"
       />
-      <figcaption className="p-6 sm:p-8 border-t border-forest/10">
+      <figcaption className="p-5 sm:p-6 border-t border-forest/10">
         <p className="eyebrow text-[0.76rem] text-forest-line">
           The eye, labelled
         </p>
@@ -167,7 +167,7 @@ export default function EyeHealthEducation() {
   return (
     <section
       id="eye-health"
-      className="bg-mist py-12 md:py-16"
+      className="bg-mist py-8 md:py-12"
       aria-labelledby="eye-health-heading"
     >
       <div className="shell">
@@ -183,7 +183,7 @@ export default function EyeHealthEducation() {
         </div>
 
         {/* Opening band */}
-        <div className="reveal mt-8 overflow-hidden rounded-[1.5rem] border border-forest/10">
+        <div className="reveal mt-6 overflow-hidden rounded-[1.5rem] border border-forest/10">
           <Img
             image={images.examWide}
             sizes="(min-width: 1280px) 76rem, 92vw"
@@ -192,17 +192,17 @@ export default function EyeHealthEducation() {
         </div>
 
         {/* Conditions */}
-        <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
+        <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 items-start">
           {conditions.map((item, i) => (
             <ConditionCard key={item.id} item={item} index={i} />
           ))}
         </div>
 
         {/* Anatomy and eye care in practice */}
-        <div className="mt-6 grid lg:grid-cols-[1.35fr_0.65fr] gap-5 items-start">
+        <div className="mt-6 grid lg:grid-cols-[1.35fr_0.65fr] gap-4 items-start">
           <AnatomyFigure />
 
-          <div className="grid grid-cols-2 lg:grid-cols-1 gap-5">
+          <div className="grid grid-cols-2 lg:grid-cols-1 gap-4">
             {['carePortraitB', 'carePortraitA'].map((key, i) => (
               <div
                 key={key}
@@ -219,7 +219,7 @@ export default function EyeHealthEducation() {
           </div>
         </div>
 
-        <p className="reveal mt-7 flex items-start gap-2.5 text-[0.96rem] text-ink-soft/90 max-w-3xl">
+        <p className="reveal mt-5 flex items-start gap-2.5 text-[0.96rem] text-ink-soft/90 max-w-3xl">
           <Icon name="doc" className="w-4 h-4 mt-0.5 shrink-0 text-forest-line" />
           {eyeHealth.note}
         </p>

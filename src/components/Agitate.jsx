@@ -18,7 +18,7 @@ export default function Agitate() {
   return (
     <section
       id="why-now"
-      className="bg-mist py-12 md:py-16"
+      className="bg-mist py-8 md:py-12"
       aria-labelledby="agitate-heading"
     >
       <div className="shell">
@@ -34,12 +34,12 @@ export default function Agitate() {
           <p className="mt-5 leading-relaxed text-ink-soft">{agitate.body}</p>
         </div>
 
-        <ul className="mt-8 grid sm:grid-cols-2 xl:grid-cols-4 gap-5">
+        <ul className="mt-6 grid sm:grid-cols-2 xl:grid-cols-4 gap-4">
           {agitate.frictions.map((item, i) => (
             <li
               key={item.title}
               style={{ transitionDelay: `${i * 70}ms` }}
-              className="reveal card p-6"
+              className="reveal card p-5"
             >
               <span
                 className="grid place-items-center w-11 h-11 rounded-full bg-leaf-wash text-forest"
@@ -58,7 +58,7 @@ export default function Agitate() {
         </ul>
 
         {/* Movement two: why waiting costs more */}
-        <div className="reveal mt-8 overflow-hidden rounded-[1.5rem] bg-forest text-white">
+        <div className="reveal mt-6 overflow-hidden rounded-[1.5rem] bg-forest text-white">
           <div className="relative px-6 py-9 sm:px-10 sm:py-11">
             <div
               aria-hidden="true"
@@ -69,7 +69,7 @@ export default function Agitate() {
               }}
             />
 
-            <div className="relative grid lg:grid-cols-[0.85fr_1.15fr] gap-8 lg:gap-12 items-start">
+            <div className="relative grid lg:grid-cols-[0.85fr_1.15fr] gap-6 lg:gap-12 items-start">
               <div>
                 <Eyebrow tone="gold">{agitate.turn.eyebrow}</Eyebrow>
                 <h3 className="mt-4 text-[clamp(1.45rem,6.2vw,1.7rem)] sm:text-[2.1rem] leading-[1.1]">
@@ -92,7 +92,7 @@ export default function Agitate() {
                   ))}
                 </ul>
 
-                <div className="mt-7 border-t border-white/15 pt-6">
+                <div className="mt-5 border-t border-white/15 pt-6">
                   <p className="font-serif text-[1.3rem] sm:text-[1.5rem] leading-snug text-leaf-soft">
                     {agitate.turn.closing}
                   </p>

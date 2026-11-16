@@ -21,8 +21,8 @@ export default function FinalCTA() {
         className="pointer-events-none absolute left-1/2 -translate-x-1/2 top-10 w-[46rem] h-[46rem] rounded-full border border-gold/12"
       />
 
-      <div className="shell relative py-12 md:py-16">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <div className="shell relative py-8 md:py-12">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center">
           <div className="reveal order-last lg:order-first">
             <div className="rounded-[1.5rem] overflow-hidden border border-white/12">
               <Img
@@ -47,7 +47,7 @@ export default function FinalCTA() {
 {sections.finalCta.body}
             </p>
 
-            <div className="mt-9 flex flex-col sm:flex-row gap-3">
+            <div className="mt-6 flex flex-col sm:flex-row gap-3">
               <a href="#packages" className="btn btn-gold">
                 {sections.finalCta.primaryCta}
                 <Icon name="arrow" className="w-4 h-4" />

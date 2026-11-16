@@ -35,7 +35,14 @@ function BotanicalCard({ item, index }) {
         <Img
           image={images[`ingredient-${item.image}`]}
           sizes="(min-width: 1280px) 18rem, (min-width: 1024px) 23vw, (min-width: 640px) 45vw, 90vw"
-          className="w-full aspect-square object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.06]"
+          /*
+            Landscape on a phone, square from 640px up.
+            One card is full width on a phone, so a square crop was 350px
+            tall before a word of text — four of those is most of a screen
+            of scrolling spent on decoration. From 640px the grid is two or
+            more across, where squares tile properly and are much shorter.
+          */
+          className="w-full aspect-[16/10] sm:aspect-square object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.06]"
         />
       </div>
 
@@ -62,7 +69,7 @@ function BotanicalCard({ item, index }) {
 
 function VitaminBand() {
   return (
-    <div className="reveal relative mt-10 overflow-hidden rounded-[1.5rem] bg-forest text-white">
+    <div className="reveal relative mt-7 overflow-hidden rounded-[1.5rem] bg-forest text-white">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
@@ -88,10 +95,15 @@ function VitaminBand() {
 
         <div
           aria-hidden="true"
-          className="mt-8 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent"
+          className="mt-6 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent"
         />
 
-        <ul className="grid sm:grid-cols-2 lg:grid-cols-4">
+        {/*
+          Two across on a phone rather than four stacked. These are short
+          typographic items with no photograph, so they lose nothing at half
+          width, and stacking them cost about 600px of scrolling.
+        */}
+        <ul className="grid grid-cols-2 lg:grid-cols-4">
           {vitamins.map((v, i) => (
             <li
               key={v.id}
@@ -163,7 +175,7 @@ export default function Ingredients() {
   return (
     <section
       id="ingredients"
-      className="relative overflow-hidden border-y border-forest/8 bg-white py-12 md:py-16"
+      className="relative overflow-hidden border-y border-forest/8 bg-white py-8 md:py-12"
       aria-labelledby="ingredients-heading"
     >
       {/* Soft botanical wash, kept to the approved greens */}
@@ -194,7 +206,7 @@ export default function Ingredients() {
         </div>
 
         {/* Tier 1: the four botanicals */}
-        <ul className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4 xl:gap-6">
+        <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4 xl:gap-6">
           {botanicals.map((item, i) => (
             <BotanicalCard key={item.id} item={item} index={i} />
           ))}
@@ -204,7 +216,7 @@ export default function Ingredients() {
         <VitaminBand />
 
         {/* Tier 3: the plant-compound classes */}
-        <div className="mt-10">
+        <div className="mt-7">
           <div className="reveal max-w-xl">
             <div>
               <Eyebrow tone="forest">Listed plant compounds</Eyebrow>
@@ -214,6 +226,14 @@ export default function Ingredients() {
             </div>
           </div>
 
+          {/*
+            One per row on a phone, deliberately. Two across was tried and
+            measured: each card went from 272px to 344px tall because the
+            label and caption wrapped over more lines at half the width, so
+            halving the rows made the block 288px TALLER, not shorter. The
+            vitamins above survive two-up because they are a few words with
+            no caption. These are not.
+          */}
           <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {compounds.map((item, i) => (
               <CompoundCard key={item.id} item={item} index={i} />

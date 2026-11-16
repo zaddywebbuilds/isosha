@@ -16,7 +16,7 @@ function Item({ item, index, open, onToggle }) {
           onClick={onToggle}
           aria-expanded={open}
           aria-controls={panelId}
-          className="flex w-full items-start justify-between gap-5 py-5 text-left group"
+          className="flex w-full items-start justify-between gap-4 py-5 text-left group"
         >
           <span className="font-sans font-bold text-[1.08rem] text-forest group-hover:text-leaf transition-colors duration-200">
             {item.q}
@@ -61,10 +61,10 @@ export default function FAQ() {
   return (
     <section
       id="faqs"
-      className="bg-mist py-12 md:py-16"
+      className="bg-mist py-8 md:py-12"
       aria-labelledby="faq-heading"
     >
-      <div className="shell grid lg:grid-cols-[0.8fr_1.2fr] gap-8 lg:gap-12 items-start">
+      <div className="shell grid lg:grid-cols-[0.8fr_1.2fr] gap-6 lg:gap-12 items-start">
         <div className="reveal lg:sticky lg:top-28">
           <Eyebrow>{sections.faq.eyebrow}</Eyebrow>
           <h2
@@ -76,7 +76,7 @@ export default function FAQ() {
           <p className="mt-5 text-ink-soft leading-relaxed">
 {sections.faq.body}
           </p>
-          <a href="#order" className="btn btn-forest mt-7">
+          <a href="#order" className="btn btn-forest mt-5">
             {sections.faq.cta}
             <Icon name="arrow" className="w-4 h-4" />
           </a>

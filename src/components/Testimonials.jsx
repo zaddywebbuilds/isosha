@@ -70,7 +70,7 @@ function MessageReview({ review, index }) {
 
   return (
     <li
-      className="reveal card p-6 sm:p-7 flex flex-col"
+      className="reveal card p-5 sm:p-6 flex flex-col"
       style={{ transitionDelay: `${index * 90}ms` }}
     >
       <span
@@ -155,7 +155,7 @@ function VoiceReview({ review, index }) {
 
   return (
     <li
-      className="reveal card p-6 sm:p-7 flex flex-col"
+      className="reveal card p-5 sm:p-6 flex flex-col"
       style={{ transitionDelay: `${index * 90}ms` }}
     >
       <div className="flex items-center gap-3">
@@ -226,7 +226,7 @@ export default function Testimonials() {
   return (
     <section
       id="reviews"
-      className="bg-cream py-12 md:py-16"
+      className="bg-cream py-8 md:py-12"
       aria-labelledby="reviews-heading"
     >
       <div className="shell">
@@ -242,7 +242,7 @@ export default function Testimonials() {
         </div>
 
         {written.length > 0 && (
-          <ul className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <ul className="mt-7 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {written.map((review, i) => (
               <MessageReview key={review.id} review={review} index={i} />
             ))}
@@ -250,7 +250,7 @@ export default function Testimonials() {
         )}
 
         {voice.length > 0 && (
-          <div className="mt-12">
+          <div className="mt-8">
             <div className="reveal flex flex-wrap items-center justify-between gap-4">
               <h3 className="text-[clamp(1.3rem,5.6vw,1.6rem)] text-forest">
                 Voice notes customers sent us
@@ -262,7 +262,7 @@ export default function Testimonials() {
               transcript of each one will be published beside the audio.
             </p>
 
-            <ul className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <ul className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {voice.map((review, i) => (
                 <VoiceReview key={review.id} review={review} index={i} />
               ))}

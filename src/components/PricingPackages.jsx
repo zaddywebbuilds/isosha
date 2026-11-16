@@ -60,7 +60,7 @@ function PackageCard({ pkg, selected, onSelect }) {
         <PackArt bottles={pkg.bottles} />
       </div>
 
-      <div className="flex flex-col flex-1 p-6 sm:p-7">
+      <div className="flex flex-col flex-1 p-5 sm:p-6">
         <h3 className="text-[1.55rem] text-forest leading-tight">
           {pkg.title}
         </h3>
@@ -136,7 +136,7 @@ export default function PricingPackages({ selected, onSelect }) {
   return (
     <section
       id="packages"
-      className="bg-mist py-12 md:py-16"
+      className="bg-mist py-8 md:py-12"
       aria-labelledby="packages-heading"
     >
       <div className="shell">
@@ -151,7 +151,7 @@ export default function PricingPackages({ selected, onSelect }) {
           <p className="mt-5 text-ink-soft leading-relaxed">{copy.body}</p>
         </div>
 
-        <ul className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7 items-start">
+        <ul className="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-7 items-start">
           {packages.map((pkg) => (
             <PackageCard
               key={pkg.id}
@@ -164,7 +164,7 @@ export default function PricingPackages({ selected, onSelect }) {
 
         {/* Cost reframe. The per-day figure is derived from the same config
             as the cards, so it can never contradict the prices above. */}
-        <p className="reveal mt-8 max-w-3xl rounded-xl border border-forest/12 bg-white p-5 font-serif text-[1.15rem] leading-snug text-forest">
+        <p className="reveal mt-6 max-w-3xl rounded-xl border border-forest/12 bg-white p-5 font-serif text-[1.15rem] leading-snug text-forest">
           {copy.valueFraming.replace('{perDay}', formatPrice(perDay))}
         </p>
 

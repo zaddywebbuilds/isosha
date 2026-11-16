@@ -51,10 +51,10 @@ export default function ProductDetails() {
   return (
     <section
       id="product-information"
-      className="bg-cream py-12 md:py-16"
+      className="bg-cream py-8 md:py-12"
       aria-labelledby="details-heading"
     >
-      <div className="shell grid lg:grid-cols-[0.85fr_1.15fr] gap-8 lg:gap-12 items-start">
+      <div className="shell grid lg:grid-cols-[0.85fr_1.15fr] gap-6 lg:gap-12 items-start">
         <figure className="reveal lg:sticky lg:top-28">
           <div className="overflow-hidden rounded-[1.5rem] border border-forest/10">
             <Img
@@ -80,7 +80,7 @@ export default function ProductDetails() {
             dosage.
           </p>
 
-          <dl className="mt-9 grid sm:grid-cols-2 gap-x-8">
+          <dl className="mt-6 grid sm:grid-cols-2 gap-x-8">
             {facts.map((fact) => (
               <div
                 key={fact.label}
@@ -101,7 +101,7 @@ export default function ProductDetails() {
             ))}
           </dl>
 
-          <p className="mt-8 flex items-start gap-2.5 rounded-xl bg-leaf-wash border border-leaf/25 p-4 text-[0.96rem] text-forest leading-relaxed">
+          <p className="mt-6 flex items-start gap-2.5 rounded-xl bg-leaf-wash border border-leaf/25 p-4 text-[0.96rem] text-forest leading-relaxed">
             <Icon name="shield" className="w-5 h-5 mt-0.5 shrink-0 text-forest" />
             Follow the approved product label and consult a qualified
             healthcare professional before use, especially if you have an
@@ -115,7 +115,7 @@ export default function ProductDetails() {
             heading and that panel appear.
           */}
           {readyPanels.length > 0 && (
-            <div className="mt-10">
+            <div className="mt-7">
               <h3 className="eyebrow text-[0.76rem] text-forest-line mb-1">
                 Further label information
               </h3>

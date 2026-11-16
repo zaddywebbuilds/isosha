@@ -114,7 +114,7 @@ export default function OrderForm({ selected, onSelect }) {
   return (
     <section
       id="order"
-      className="bg-cream py-12 md:py-16"
+      className="bg-cream py-8 md:py-12"
       aria-labelledby="order-heading"
     >
       <div className="shell">
@@ -131,7 +131,7 @@ export default function OrderForm({ selected, onSelect }) {
           </p>
         </div>
 
-        <div className="mt-8 grid lg:grid-cols-[1.25fr_0.75fr] gap-8 lg:gap-10 items-start">
+        <div className="mt-6 grid lg:grid-cols-[1.25fr_0.75fr] gap-6 lg:gap-10 items-start">
           {/* ---------------------------------------------------------- */}
           {/* Form: posts natively to the CRM                            */}
           {/* ---------------------------------------------------------- */}
@@ -148,7 +148,7 @@ export default function OrderForm({ selected, onSelect }) {
             action={crm.endpoint}
             onSubmit={handleSubmit}
             noValidate
-            className="reveal card p-6 sm:p-8"
+            className="reveal card p-5 sm:p-6"
           >
             {/* Routing and attribution. Names fixed by the CRM. */}
             <input type="hidden" name="form_id" value={crm.formId} />
@@ -326,7 +326,7 @@ export default function OrderForm({ selected, onSelect }) {
 
             {/* Consent. The wording names the health question explicitly,
                 because that answer is sensitive personal data. */}
-            <div className="mt-7 rounded-xl bg-mist border border-forest/10 p-4">
+            <div className="mt-5 rounded-xl bg-mist border border-forest/10 p-4">
               <label className="flex items-start gap-3 cursor-pointer">
                 <input
                   type="checkbox"
@@ -364,7 +364,7 @@ export default function OrderForm({ selected, onSelect }) {
             <button
               type="submit"
               disabled={submitting}
-              className="btn btn-gold mt-7 w-full disabled:opacity-70"
+              className="btn btn-gold mt-5 w-full disabled:opacity-70"
             >
               {submitting ? 'Placing your order…' : crm.submitLabel}
             </button>
@@ -380,7 +380,7 @@ export default function OrderForm({ selected, onSelect }) {
           {/* Summary                                                    */}
           {/* ---------------------------------------------------------- */}
           <aside className="reveal lg:sticky lg:top-28">
-            <div className="rounded-[1.25rem] bg-forest text-white p-6 sm:p-7">
+            <div className="rounded-[1.25rem] bg-forest text-white p-5 sm:p-6">
               <h3 className="text-[1.4rem]">Order summary</h3>
               <div className="mt-5 space-y-3 text-[1.06rem]">
                 <Row label="Product" value={product.name} />

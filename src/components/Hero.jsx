@@ -28,8 +28,8 @@ export default function Hero() {
         className="pointer-events-none absolute -right-24 -top-24 w-[32rem] h-[32rem] rounded-full border border-gold/15"
       />
 
-      <div className="shell relative py-10 sm:py-14 md:py-20 lg:py-24">
-        <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 sm:gap-8 lg:gap-12 items-center">
+      <div className="shell relative py-10 sm:py-14 md:py-14 lg:py-24">
+        <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-6 sm:gap-8 lg:gap-12 items-center">
           {/* Copy */}
           <div className="reveal max-w-xl">
             <Eyebrow tone="gold">{hero.eyebrow}</Eyebrow>
@@ -50,7 +50,7 @@ export default function Hero() {
               {hero.bodyTwo}
             </p>
 
-            <div className="mt-9 flex flex-col sm:flex-row gap-3">
+            <div className="mt-6 flex flex-col sm:flex-row gap-3">
               <a href="#packages" className="btn btn-gold">
                 {hero.primaryCta}
                 <Icon name="arrow" className="w-4 h-4" />
@@ -60,7 +60,7 @@ export default function Hero() {
               </a>
             </div>
 
-            <dl className="mt-8 grid grid-cols-3 gap-4 max-w-md border-t border-white/15 pt-6">
+            <dl className="mt-6 grid grid-cols-3 gap-4 max-w-md border-t border-white/15 pt-6">
               <div>
                 <dt className="eyebrow text-[0.76rem] text-gold/80">Per bottle</dt>
                 <dd className="mt-1.5 font-serif text-2xl">
