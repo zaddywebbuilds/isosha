@@ -85,8 +85,14 @@ function MessageReview({ review, index }) {
         next to a <blockquote> is invalid HTML, and assistive technology
         then has nothing tying the name to the words it belongs to.
       */}
-      <figure className="mt-4 flex flex-col flex-1">
-        <blockquote className="flex-1 text-[1.08rem] text-ink leading-relaxed">
+      {/*
+        No flex-1 on either of these. Stretching the quote to fill the card
+        is what put a block of white space under the shorter reviews: the
+        grid made every card as tall as the longest one, and the blockquote
+        grew into the slack. The cards now end where their content ends.
+      */}
+      <figure className="mt-4 flex flex-col">
+        <blockquote className="text-[1.08rem] text-ink leading-relaxed">
           {review.quote}
         </blockquote>
 
@@ -148,11 +154,6 @@ function MessageReview({ review, index }) {
                 </a>
               ))}
             </div>
-            <figcaption className="mt-3 text-[0.9rem] text-ink-soft leading-relaxed">
-              {shots.length > 1
-                ? 'The WhatsApp conversation, in the order the messages were sent. Tap a screenshot to see it full size.'
-                : 'The WhatsApp conversation, cropped to the customer’s own message and the photograph they sent. Tap it to see it full size.'}
-            </figcaption>
           </figure>
         </>
       )}
@@ -264,7 +265,12 @@ export default function Testimonials() {
         </div>
 
         {written.length > 0 && (
-          <ul className="mt-7 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          /*
+            items-start, so each card is as tall as its own review. Grid
+            items stretch by default, which made all three match the
+            longest and left the short ones padded out with empty space.
+          */
+          <ul className="mt-7 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 items-start">
             {written.map((review, i) => (
               <MessageReview key={review.id} review={review} index={i} />
             ))}
@@ -280,7 +286,8 @@ export default function Testimonials() {
               Recordings exactly as they arrived, with nothing cut.
             </p>
 
-            <ul className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* items-start here too, for the same reason. */}
+            <ul className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 items-start">
               {voice.map((review, i) => (
                 <VoiceReview key={review.id} review={review} index={i} />
               ))}
