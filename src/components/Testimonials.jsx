@@ -69,32 +69,47 @@ function MessageReview({ review, index }) {
     .filter(Boolean);
 
   return (
+    /*
+      One full-width card per review, quote beside the screenshots.
+
+      Three columns of cards was the problem. These reviews are 1491px,
+      790px and 491px tall, and a grid row is as tall as its tallest cell,
+      so the two short ones sat in a hole the height of the long one.
+      items-start shrank the cards but left the hole, because the hole was
+      in the row. CSS columns were worse: the browser packed two cards into
+      one column and left the third empty.
+
+      A single column cannot have that fault. There is no row to match and
+      no column to balance, so nothing can be left empty. Putting the quote
+      and the pictures side by side inside each card is also what finally
+      uses the width, and it is shorter than stacking them.
+    */
     <li
-      className="reveal card p-5 sm:p-6 flex flex-col"
+      className="reveal card p-5 sm:p-6"
       style={{ transitionDelay: `${index * 90}ms` }}
     >
-      <span
-        className="grid place-items-center w-11 h-11 rounded-full bg-leaf-wash text-forest"
-        aria-hidden="true"
+      <div
+        className={`grid gap-5 lg:gap-8 items-start ${
+          shots.length > 0 ? 'lg:grid-cols-[1.05fr_0.95fr]' : ''
+        }`}
       >
-        <Icon name="chat" className="w-5 h-5" />
-      </span>
+        <div>
+          <span
+            className="grid place-items-center w-11 h-11 rounded-full bg-leaf-wash text-forest"
+            aria-hidden="true"
+          >
+            <Icon name="chat" className="w-5 h-5" />
+          </span>
 
-      {/*
-        A quote and its attribution are a <figure>. A bare <figcaption>
-        next to a <blockquote> is invalid HTML, and assistive technology
-        then has nothing tying the name to the words it belongs to.
-      */}
-      {/*
-        No flex-1 on either of these. Stretching the quote to fill the card
-        is what put a block of white space under the shorter reviews: the
-        grid made every card as tall as the longest one, and the blockquote
-        grew into the slack. The cards now end where their content ends.
-      */}
-      <figure className="mt-4 flex flex-col">
-        <blockquote className="text-[1.08rem] text-ink leading-relaxed">
-          {review.quote}
-        </blockquote>
+          {/*
+            A quote and its attribution are a <figure>. A bare <figcaption>
+            next to a <blockquote> is invalid HTML, and assistive technology
+            then has nothing tying the name to the words it belongs to.
+          */}
+          <figure className="mt-4 flex flex-col">
+            <blockquote className="text-[1.08rem] text-ink leading-relaxed">
+              {review.quote}
+            </blockquote>
 
         {/*
           No name, no caption. The chat header is cropped off some
@@ -104,59 +119,51 @@ function MessageReview({ review, index }) {
           would be inventing an attribution nobody gave. Put a real `name`
           in src/config/reviews.js and the byline appears.
         */}
-        {review.name && (
-          <figcaption className="mt-5 pt-4 border-t border-forest/10 text-[0.96rem]">
-            <span className="font-bold text-forest">{review.name}</span>
-            {review.location && (
-              <span className="text-ink-soft"> &middot; {review.location}</span>
+            {review.name && (
+              <figcaption className="mt-5 pt-4 border-t border-forest/10 text-[0.96rem]">
+                <span className="font-bold text-forest">{review.name}</span>
+                {review.location && (
+                  <span className="text-ink-soft"> &middot; {review.location}</span>
+                )}
+                {review.date && (
+                  <span className="text-ink-soft"> &middot; {review.date}</span>
+                )}
+              </figcaption>
             )}
-            {review.date && (
-              <span className="text-ink-soft"> &middot; {review.date}</span>
-            )}
-          </figcaption>
-        )}
-      </figure>
-
-      {/*
-        The screenshots are shown outright, not hidden behind a button.
-        Netwill Herbals asked for them on the page as supplied: the proof
-        is the point, and a click to reach it is a click most visitors
-        never make. The quote above still carries the same words as text,
-        so a screen reader and a search engine get the full account
-        without depending on the picture.
-      */}
-      {shots.length > 0 && (
-        <>
-          <figure className="mt-5">
-            <div className="flex flex-col gap-3">
-              {shots.map((shot) => (
-                /*
-                  Held to about 15rem rather than filling the card. These
-                  are tall portrait phone screenshots: at full card width
-                  the four of them cost roughly two extra phone screens of
-                  scrolling, and they are evidence beside the quote, not
-                  the quote itself. The words are already above as real
-                  text. Opening the file itself gives the full-size
-                  picture to anyone who wants to read the chat.
-                */
-                <a
-                  key={shot.src}
-                  href={shot.src}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full max-w-[15rem] sm:max-w-[17rem] overflow-hidden rounded-xl border border-forest/10 transition-opacity hover:opacity-90"
-                >
-                  <Img
-                    image={shot}
-                    sizes="(min-width: 640px) 17rem, 15rem"
-                    className="w-full"
-                  />
-                </a>
-              ))}
-            </div>
           </figure>
-        </>
-      )}
+        </div>
+
+        {/*
+          The screenshots are shown outright, not hidden behind a button,
+          and sit beside the quote rather than under it. Where a customer
+          sent two, they go side by side: stacking them is what made that
+          one card 1491px, three times the height of the others, which is
+          what the uneven layout was reacting to in the first place.
+          The quote carries the same words as text, so a screen reader and
+          a search engine get the full account without the picture.
+        */}
+        {shots.length > 0 && (
+          <figure
+            className={`grid gap-3 ${shots.length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}
+          >
+            {shots.map((shot) => (
+              <a
+                key={shot.src}
+                href={shot.src}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full overflow-hidden rounded-xl border border-forest/10 transition-opacity hover:opacity-90"
+              >
+                <Img
+                  image={shot}
+                  sizes="(min-width: 1024px) 15rem, (min-width: 640px) 22vw, 44vw"
+                  className="w-full"
+                />
+              </a>
+            ))}
+          </figure>
+        )}
+      </div>
     </li>
   );
 }
@@ -265,12 +272,8 @@ export default function Testimonials() {
         </div>
 
         {written.length > 0 && (
-          /*
-            items-start, so each card is as tall as its own review. Grid
-            items stretch by default, which made all three match the
-            longest and left the short ones padded out with empty space.
-          */
-          <ul className="mt-7 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 items-start">
+          /* One card per row. Nothing to balance, so nothing left empty. */
+          <ul className="mt-7 flex flex-col gap-4">
             {written.map((review, i) => (
               <MessageReview key={review.id} review={review} index={i} />
             ))}
