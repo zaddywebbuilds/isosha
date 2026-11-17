@@ -23,15 +23,25 @@ export default function Agitate() {
     >
       <div className="shell">
         {/* Movement one: the daily cost */}
-        <div className="reveal max-w-2xl">
-          <Eyebrow>{agitate.eyebrow}</Eyebrow>
-          <h2
-            id="agitate-heading"
-            className="mt-5 text-[clamp(1.6rem,7.2vw,2rem)] sm:text-4xl lg:text-[2.75rem] leading-[1.08] text-forest"
-          >
-            {agitate.headline}
-          </h2>
-          <p className="mt-5 leading-relaxed text-ink-soft">{agitate.body}</p>
+        {/*
+          Heading left, intro right from lg up. Capped at max-w-2xl it left
+          a 576px empty column on a desktop screen and stacked two blocks
+          that fit side by side. Line length stays readable because each
+          column is still about 45 characters wide, not the full shell.
+        */}
+        <div className="reveal grid gap-x-10 gap-y-4 lg:grid-cols-2 lg:items-end">
+          <div>
+            <Eyebrow>{agitate.eyebrow}</Eyebrow>
+            <h2
+              id="agitate-heading"
+              className="mt-5 text-[clamp(1.6rem,7.2vw,2rem)] sm:text-4xl lg:text-[2.75rem] leading-[1.08] text-forest"
+            >
+              {agitate.headline}
+            </h2>
+          </div>
+          <p className="mt-5 lg:mt-0 leading-relaxed text-ink-soft">
+            {agitate.body}
+          </p>
         </div>
 
         <ul className="mt-6 grid sm:grid-cols-2 xl:grid-cols-4 gap-4">

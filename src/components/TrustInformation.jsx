@@ -45,20 +45,28 @@ export default function TrustInformation() {
       aria-labelledby="trust-heading"
     >
       <div className="shell">
-        <div className="reveal max-w-2xl">
-          <Eyebrow>{sections.trust.eyebrow}</Eyebrow>
-          <h2
-            id="trust-heading"
-            className="mt-5 text-[clamp(1.65rem,7.4vw,2.1rem)] sm:text-4xl lg:text-[2.9rem] text-forest"
-          >
-            {sections.trust.headline}
-          </h2>
-          <p className="mt-5 text-ink-soft leading-relaxed">
-{sections.trust.body}
+        {/* Heading left, intro right from lg up. See Agitate.jsx for why. */}
+        <div className="reveal grid gap-x-10 gap-y-4 lg:grid-cols-2 lg:items-end">
+          <div>
+            <Eyebrow>{sections.trust.eyebrow}</Eyebrow>
+            <h2
+              id="trust-heading"
+              className="mt-5 text-[clamp(1.65rem,7.4vw,2.1rem)] sm:text-4xl lg:text-[2.9rem] text-forest"
+            >
+              {sections.trust.headline}
+            </h2>
+          </div>
+          <p className="mt-5 lg:mt-0 text-ink-soft leading-relaxed">
+            {sections.trust.body}
           </p>
         </div>
 
-        <ul className="mt-6 grid sm:grid-cols-2 gap-4 max-w-3xl">
+        {/*
+          No max-w cap. These are short cards, not prose, so there is no
+          reading-length reason to hold them to 768px in a 1248px shell —
+          it just left a 480px empty column beside them.
+        */}
+        <ul className="mt-6 grid sm:grid-cols-2 gap-4">
           {items.map((item, i) => (
             <li
               key={item.title}

@@ -1,5 +1,5 @@
 import { useId, useState } from 'react';
-import { Eyebrow, Icon, Img, Pending } from './ui.jsx';
+import { Eyebrow, Icon, Img } from './ui.jsx';
 import { images } from '../config/site.js';
 import { publishedReviews, reviewsNote } from '../config/reviews.js';
 
@@ -91,48 +91,44 @@ function MessageReview({ review, index }) {
         </blockquote>
 
         {/*
-          The chat header is cropped off some screenshots, so no name is
-          known. That is said plainly rather than filled in with "a happy
-          customer", which would be inventing an attribution nobody gave.
+          No name, no caption. The chat header is cropped off some
+          screenshots, so there is nothing to attribute, and an unnamed
+          review simply carries no byline rather than announcing the gap to
+          the visitor. Still never filled in with "a happy customer": that
+          would be inventing an attribution nobody gave. Put a real `name`
+          in src/config/reviews.js and the byline appears.
         */}
-        <figcaption className="mt-5 pt-4 border-t border-forest/10 text-[0.96rem]">
-          {review.name ? (
-            <>
-              <span className="font-bold text-forest">{review.name}</span>
-              {review.location && (
-                <span className="text-ink-soft"> &middot; {review.location}</span>
-              )}
-              {review.date && (
-                <span className="text-ink-soft"> &middot; {review.date}</span>
-              )}
-            </>
-          ) : (
-            <Pending>Sender to be confirmed</Pending>
-          )}
-        </figcaption>
+        {review.name && (
+          <figcaption className="mt-5 pt-4 border-t border-forest/10 text-[0.96rem]">
+            <span className="font-bold text-forest">{review.name}</span>
+            {review.location && (
+              <span className="text-ink-soft"> &middot; {review.location}</span>
+            )}
+            {review.date && (
+              <span className="text-ink-soft"> &middot; {review.date}</span>
+            )}
+          </figcaption>
+        )}
       </figure>
 
+      {/*
+        The screenshots are shown outright, not hidden behind a button.
+        Netwill Herbals asked for them on the page as supplied: the proof
+        is the point, and a click to reach it is a click most visitors
+        never make. The quote above still carries the same words as text,
+        so a screen reader and a search engine get the full account
+        without depending on the picture.
+      */}
       {shots.length > 0 && (
-        <Disclosure
-          showLabel={
-            shots.length > 1
-              ? 'See the original messages'
-              : 'See the original message'
-          }
-          hideLabel={
-            shots.length > 1
-              ? 'Hide the original messages'
-              : 'Hide the original message'
-          }
-        >
-          <figure>
+        <>
+          <figure className="mt-5">
             <div className="flex flex-col gap-3">
               {shots.map((shot) => (
                 <Img
                   key={shot.src}
                   image={shot}
-                  sizes="(min-width: 640px) 320px, 80vw"
-                  className="w-full max-w-[20rem] rounded-xl border border-forest/10"
+                  sizes="(min-width: 1024px) 22rem, (min-width: 640px) 45vw, 88vw"
+                  className="w-full rounded-xl border border-forest/10"
                 />
               ))}
             </div>
@@ -142,7 +138,7 @@ function MessageReview({ review, index }) {
                 : 'The WhatsApp conversation, cropped to the customer’s own message and the photograph they sent.'}
             </figcaption>
           </figure>
-        </Disclosure>
+        </>
       )}
     </li>
   );
@@ -193,16 +189,21 @@ function VoiceReview({ review, index }) {
         </a>
       </audio>
 
-      {transcript ? (
+      {/*
+        No transcript, nothing shown. The transcripts are still outstanding
+        and still belong here: an audio-only review with no text version is
+        a WCAG 1.2.1 failure, and this product is sold to people whose sight
+        is not what it was. But a visitor is not the right audience for that
+        status, so it is tracked in CLIENT-CHECKLIST.md instead of printed
+        on the card. Fill `audio.transcript` in src/config/reviews.js and it
+        appears here.
+      */}
+      {transcript && (
         <Disclosure showLabel="Read the transcript" hideLabel="Hide the transcript">
           <blockquote className="text-[1.02rem] text-ink leading-relaxed">
             {transcript}
           </blockquote>
         </Disclosure>
-      ) : (
-        <p className="mt-5">
-          <Pending>Transcript pending</Pending>
-        </p>
       )}
 
       {review.name && (
@@ -230,15 +231,20 @@ export default function Testimonials() {
       aria-labelledby="reviews-heading"
     >
       <div className="shell">
-        <div className="reveal max-w-2xl">
-          <Eyebrow>Customer feedback</Eyebrow>
-          <h2
-            id="reviews-heading"
-            className="mt-5 text-[clamp(1.65rem,7.4vw,2.1rem)] sm:text-4xl text-forest"
-          >
-            What customers say
-          </h2>
-          <p className="mt-4 text-ink-soft leading-relaxed">{reviewsNote}</p>
+        {/* Heading left, intro right from lg up. See Agitate.jsx for why. */}
+        <div className="reveal grid gap-x-10 gap-y-4 lg:grid-cols-2 lg:items-end">
+          <div>
+            <Eyebrow>Customer feedback</Eyebrow>
+            <h2
+              id="reviews-heading"
+              className="mt-5 text-[clamp(1.65rem,7.4vw,2.1rem)] sm:text-4xl text-forest"
+            >
+              What customers say
+            </h2>
+          </div>
+          <p className="mt-4 lg:mt-0 text-ink-soft leading-relaxed">
+            {reviewsNote}
+          </p>
         </div>
 
         {written.length > 0 && (
@@ -251,15 +257,11 @@ export default function Testimonials() {
 
         {voice.length > 0 && (
           <div className="mt-8">
-            <div className="reveal flex flex-wrap items-center justify-between gap-4">
-              <h3 className="text-[clamp(1.3rem,5.6vw,1.6rem)] text-forest">
-                Voice notes customers sent us
-              </h3>
-              <Pending>Senders to be confirmed</Pending>
-            </div>
+            <h3 className="reveal text-[clamp(1.3rem,5.6vw,1.6rem)] text-forest">
+              Voice notes customers sent us
+            </h3>
             <p className="reveal mt-3 max-w-2xl text-ink-soft leading-relaxed">
-              Recordings exactly as they arrived, with nothing cut. A written
-              transcript of each one will be published beside the audio.
+              Recordings exactly as they arrived, with nothing cut.
             </p>
 
             <ul className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">

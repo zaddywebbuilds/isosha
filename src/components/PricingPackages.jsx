@@ -56,7 +56,17 @@ function PackageCard({ pkg, selected, onSelect }) {
         </p>
       )}
 
-      <div className="aspect-[4/3] overflow-hidden border-b border-forest/8">
+      {/*
+        Shallower on a phone, 4:3 from 768px up.
+        Only one product photograph exists, so all three cards show the
+        same bottle. Stacked single-column on a phone that is the identical
+        picture three times at 260px each: roughly 780px of scrolling, most
+        of a screen, spent repeating one image. The quantity is stated in
+        type on the card, which is what actually differs between them.
+        Restore a single aspect-[4/3] here once real two-bottle and
+        three-bottle photographs are supplied.
+      */}
+      <div className="aspect-[2/1] md:aspect-[4/3] overflow-hidden border-b border-forest/8">
         <PackArt bottles={pkg.bottles} />
       </div>
 
@@ -140,15 +150,20 @@ export default function PricingPackages({ selected, onSelect }) {
       aria-labelledby="packages-heading"
     >
       <div className="shell">
-        <div className="reveal max-w-2xl">
-          <Eyebrow>{copy.eyebrow}</Eyebrow>
-          <h2
-            id="packages-heading"
-            className="mt-5 text-[clamp(1.65rem,7.4vw,2.1rem)] sm:text-4xl lg:text-[2.9rem] text-forest"
-          >
-            {copy.headline}
-          </h2>
-          <p className="mt-5 text-ink-soft leading-relaxed">{copy.body}</p>
+        {/* Heading left, intro right from lg up. See Agitate.jsx for why. */}
+        <div className="reveal grid gap-x-10 gap-y-4 lg:grid-cols-2 lg:items-end">
+          <div>
+            <Eyebrow>{copy.eyebrow}</Eyebrow>
+            <h2
+              id="packages-heading"
+              className="mt-5 text-[clamp(1.65rem,7.4vw,2.1rem)] sm:text-4xl lg:text-[2.9rem] text-forest"
+            >
+              {copy.headline}
+            </h2>
+          </div>
+          <p className="mt-5 lg:mt-0 text-ink-soft leading-relaxed">
+            {copy.body}
+          </p>
         </div>
 
         <ul className="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-7 items-start">

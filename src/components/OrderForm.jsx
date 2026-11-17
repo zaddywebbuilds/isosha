@@ -118,15 +118,18 @@ export default function OrderForm({ selected, onSelect }) {
       aria-labelledby="order-heading"
     >
       <div className="shell">
-        <div className="reveal max-w-2xl">
-          <Eyebrow>{sections.order.eyebrow}</Eyebrow>
-          <h2
-            id="order-heading"
-            className="mt-5 text-[clamp(1.65rem,7.4vw,2.1rem)] sm:text-4xl lg:text-[2.9rem] text-forest"
-          >
-            {sections.order.headline}
-          </h2>
-          <p className="mt-5 text-ink-soft leading-relaxed">
+        {/* Heading left, intro right from lg up. See Agitate.jsx for why. */}
+        <div className="reveal grid gap-x-10 gap-y-4 lg:grid-cols-2 lg:items-end">
+          <div>
+            <Eyebrow>{sections.order.eyebrow}</Eyebrow>
+            <h2
+              id="order-heading"
+              className="mt-5 text-[clamp(1.65rem,7.4vw,2.1rem)] sm:text-4xl lg:text-[2.9rem] text-forest"
+            >
+              {sections.order.headline}
+            </h2>
+          </div>
+          <p className="mt-5 lg:mt-0 text-ink-soft leading-relaxed">
             {sections.order.body}
           </p>
         </div>

@@ -190,16 +190,19 @@ export default function Ingredients() {
 
       <div className="shell relative">
         {/* Header */}
-        <div className="reveal max-w-2xl">
-          <Eyebrow>What&rsquo;s inside Isosha?</Eyebrow>
-          <h2
-            id="ingredients-heading"
-            className="mt-5 text-[clamp(1.65rem,7.4vw,2.1rem)] sm:text-4xl lg:text-[3rem] leading-[1.08] text-forest"
-          >
-            Nature-inspired ingredients,
-            <br className="hidden sm:block" /> thoughtfully combined.
-          </h2>
-          <p className="mt-5 leading-relaxed text-ink-soft">
+        {/* Heading left, intro right from lg up. See Agitate.jsx for why. */}
+        <div className="reveal grid gap-x-10 gap-y-4 lg:grid-cols-2 lg:items-end">
+          <div>
+            <Eyebrow>What&rsquo;s inside Isosha?</Eyebrow>
+            <h2
+              id="ingredients-heading"
+              className="mt-5 text-[clamp(1.65rem,7.4vw,2.1rem)] sm:text-4xl lg:text-[3rem] leading-[1.08] text-forest"
+            >
+              Nature-inspired ingredients,
+              <br className="hidden sm:block" /> thoughtfully combined.
+            </h2>
+          </div>
+          <p className="mt-5 lg:mt-0 leading-relaxed text-ink-soft">
             Explore the botanical ingredients, vitamins and naturally occurring
             plant compounds listed in the Isosha formulation.
           </p>

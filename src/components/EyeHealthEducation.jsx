@@ -171,15 +171,20 @@ export default function EyeHealthEducation() {
       aria-labelledby="eye-health-heading"
     >
       <div className="shell">
-        <div className="reveal max-w-2xl">
-          <Eyebrow>{eyeHealth.eyebrow}</Eyebrow>
-          <h2
-            id="eye-health-heading"
-            className="mt-5 text-[clamp(1.65rem,7.4vw,2.1rem)] sm:text-4xl lg:text-[2.9rem] leading-[1.08] text-forest"
-          >
-            {eyeHealth.headline}
-          </h2>
-          <p className="mt-5 text-ink-soft leading-relaxed">{eyeHealth.body}</p>
+        {/* Heading left, intro right from lg up. See Agitate.jsx for why. */}
+        <div className="reveal grid gap-x-10 gap-y-4 lg:grid-cols-2 lg:items-end">
+          <div>
+            <Eyebrow>{eyeHealth.eyebrow}</Eyebrow>
+            <h2
+              id="eye-health-heading"
+              className="mt-5 text-[clamp(1.65rem,7.4vw,2.1rem)] sm:text-4xl lg:text-[2.9rem] leading-[1.08] text-forest"
+            >
+              {eyeHealth.headline}
+            </h2>
+          </div>
+          <p className="mt-5 lg:mt-0 text-ink-soft leading-relaxed">
+            {eyeHealth.body}
+          </p>
         </div>
 
         {/* Opening band */}

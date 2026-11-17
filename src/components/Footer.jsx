@@ -43,7 +43,20 @@ export default function Footer({ onOpenLegal }) {
   return (
     <footer className="bg-forest-deep text-white">
       <div className="shell py-11 md:py-12">
-        <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-4">
+        {/*
+          Three columns, not four, while there are no contact details.
+          The fourth child below is the contact block, hidden until the
+          client supplies a phone number, email and address. Hard-coding
+          four columns reserved a quarter of the footer for something that
+          is not rendered, which is the empty space on the right. This
+          follows what is actually shown, and goes back to four on its own
+          the moment the details land in src/config/site.js.
+        */}
+        <div
+          className={`grid gap-7 md:grid-cols-2 ${
+            hasContactDetails ? 'lg:grid-cols-4' : 'lg:grid-cols-3'
+          }`}
+        >
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3">
