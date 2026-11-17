@@ -124,18 +124,34 @@ function MessageReview({ review, index }) {
           <figure className="mt-5">
             <div className="flex flex-col gap-3">
               {shots.map((shot) => (
-                <Img
+                /*
+                  Held to about 15rem rather than filling the card. These
+                  are tall portrait phone screenshots: at full card width
+                  the four of them cost roughly two extra phone screens of
+                  scrolling, and they are evidence beside the quote, not
+                  the quote itself. The words are already above as real
+                  text. Opening the file itself gives the full-size
+                  picture to anyone who wants to read the chat.
+                */
+                <a
                   key={shot.src}
-                  image={shot}
-                  sizes="(min-width: 1024px) 22rem, (min-width: 640px) 45vw, 88vw"
-                  className="w-full rounded-xl border border-forest/10"
-                />
+                  href={shot.src}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full max-w-[15rem] sm:max-w-[17rem] overflow-hidden rounded-xl border border-forest/10 transition-opacity hover:opacity-90"
+                >
+                  <Img
+                    image={shot}
+                    sizes="(min-width: 640px) 17rem, 15rem"
+                    className="w-full"
+                  />
+                </a>
               ))}
             </div>
             <figcaption className="mt-3 text-[0.9rem] text-ink-soft leading-relaxed">
               {shots.length > 1
-                ? 'The WhatsApp conversation, in the order the messages were sent.'
-                : 'The WhatsApp conversation, cropped to the customer’s own message and the photograph they sent.'}
+                ? 'The WhatsApp conversation, in the order the messages were sent. Tap a screenshot to see it full size.'
+                : 'The WhatsApp conversation, cropped to the customer’s own message and the photograph they sent. Tap it to see it full size.'}
             </figcaption>
           </figure>
         </>
