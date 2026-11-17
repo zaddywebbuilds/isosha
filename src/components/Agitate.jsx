@@ -79,7 +79,21 @@ export default function Agitate() {
               }}
             />
 
-            <div className="relative grid lg:grid-cols-[0.85fr_1.15fr] gap-6 lg:gap-12 items-start">
+            {/*
+              The heading is four words against a column of evidence, so
+              laid out items-start it left a 460px hole underneath itself.
+              Two changes close it. The heading now centres against the
+              list rather than hanging from the top, and the closing
+              statement has moved out of the right-hand column to sit full
+              width below both.
+
+              That second move is why the reading order still works on a
+              phone, where this all stacks: the facts come first and the
+              conclusion drawn from them comes last. Putting the closing
+              into the left column would have filled the hole just as well
+              and made a phone read the conclusion before the evidence.
+            */}
+            <div className="relative grid lg:grid-cols-[0.85fr_1.15fr] gap-6 lg:gap-12 lg:items-center">
               <div>
                 <Eyebrow tone="gold">{agitate.turn.eyebrow}</Eyebrow>
                 <h3 className="mt-4 text-[clamp(1.45rem,6.2vw,1.7rem)] sm:text-[2.1rem] leading-[1.1]">
@@ -87,30 +101,28 @@ export default function Agitate() {
                 </h3>
               </div>
 
-              <div>
-                <ul className="space-y-3.5">
-                  {agitate.turn.points.map((point) => (
-                    <li key={point} className="flex items-start gap-3">
-                      <span
-                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold"
-                        aria-hidden="true"
-                      />
-                      <span className="text-[1.08rem] leading-relaxed text-white/90">
-                        {point}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+              <ul className="space-y-3.5">
+                {agitate.turn.points.map((point) => (
+                  <li key={point} className="flex items-start gap-3">
+                    <span
+                      className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold"
+                      aria-hidden="true"
+                    />
+                    <span className="text-[1.08rem] leading-relaxed text-white/90">
+                      {point}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-                <div className="mt-5 border-t border-white/15 pt-6">
-                  <p className="font-serif text-[1.3rem] sm:text-[1.5rem] leading-snug text-leaf-soft">
-                    {agitate.turn.closing}
-                  </p>
-                  <p className="mt-3 text-[0.96rem] text-white/90">
-                    {agitate.turn.cta}
-                  </p>
-                </div>
-              </div>
+            <div className="mt-6 border-t border-white/15 pt-6">
+              <p className="font-serif text-[1.3rem] sm:text-[1.5rem] leading-snug text-leaf-soft max-w-4xl">
+                {agitate.turn.closing}
+              </p>
+              <p className="mt-3 text-[0.96rem] text-white/90">
+                {agitate.turn.cta}
+              </p>
             </div>
           </div>
         </div>
